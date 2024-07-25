@@ -1,4 +1,5 @@
-# Flask React Project
+# ApplySage
+"Where Job Applications Meet Insight"
 
 This is the starter for the Flask React project.
 
