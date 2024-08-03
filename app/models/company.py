@@ -12,3 +12,5 @@ class Company(db.Model):
     website = db.Column(db.String(2048))
     created_at = db.Column(db.DateTime, default=func.now())
     updated_at = db.Column(db.DateTime, default=func.now())
+
+    applications = db.relationship('Application', back_populates='company')

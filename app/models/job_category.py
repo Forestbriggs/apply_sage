@@ -11,3 +11,5 @@ class JobCategory(db.Model):
     name = db.Column(db.String(250), nullable=False)
     created_at = db.Column(db.DateTime, default=func.now())
     updated_at = db.Column(db.DateTime, default=func.now())
+
+    applications = db.relationship('Application', back_populates='category')
