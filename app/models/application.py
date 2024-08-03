@@ -23,7 +23,7 @@ class Application(db.Model):
 
     company = db.relationship('Company', back_populates='applications')
     
-    user = db.relationship('User')
+    user = db.relationship('User', back_populates='applications')
     
     category = db.relationship('JobCategory', back_populates='applications')
 
