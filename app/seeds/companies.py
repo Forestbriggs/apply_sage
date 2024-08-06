@@ -22,6 +22,15 @@ user_companies = [
                 'website': 'https://netflix.eightfold.ai/careers'
             }
         ]
+    },
+    {
+        'username': 'marnie',
+        'companies': [
+            {   
+                'name': 'Should Not See',
+                'website': 'https://somethingfake.com'
+            }
+        ]
     }
 ]
 
