@@ -17,3 +17,24 @@ class Company(db.Model):
     user = db.relationship('User', back_populates='companies')
 
     applications = db.relationship('Application', back_populates='company')
+
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'name': self.name,
+            'user': self.user.to_dict(),
+            'applications': [app.to_dict() for app in self.applications],
+            'website': self.website,
+            'created_at': self.created_at,
+            'updated_at': self.updated_at
+        }
+    
+    def to_dict_list_page(self):
+        return {
+            'id': self.id,
+            'name': self.name,
+            'user': self.user.to_dict(),
+            'website': self.website,
+            'created_at': self.created_at,
+            'updated_at': self.updated_at
+        }

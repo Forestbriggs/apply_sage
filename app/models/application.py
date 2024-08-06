@@ -33,6 +33,8 @@ class Application(db.Model):
         return {
             'id': self.id,
             'title': self.title,
+            'status': self.status.to_dict(),
+            'category': self.category.to_dict(),
             'salary_min': self.salary_min,
             'salary_max': self.salary_max,
             'resume': self.resume,

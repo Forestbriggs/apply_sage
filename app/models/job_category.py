@@ -13,3 +13,9 @@ class JobCategory(db.Model):
     updated_at = db.Column(db.DateTime, default=datetime.now())
 
     applications = db.relationship('Application', back_populates='category')
+
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'name': self.name
+        }
