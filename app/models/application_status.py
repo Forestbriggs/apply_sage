@@ -1,5 +1,5 @@
 from .db import db, environment, SCHEMA, add_prefix_for_prod
-from sqlalchemy.sql import func
+from datetime import datetime
 
 class ApplicationStatus(db.Model):
     __tablename__ = 'application_statuses'
@@ -9,7 +9,7 @@ class ApplicationStatus(db.Model):
         
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(50), nullable=False)
-    created_at = db.Column(db.DateTime, default=func.now())
-    updated_at = db.Column(db.DateTime, default=func.now())
+    created_at = db.Column(db.DateTime, default=datetime.now())
+    updated_at = db.Column(db.DateTime, default=datetime.now())
     
     applications = db.relationship('Application', back_populates='status')

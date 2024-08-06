@@ -1,5 +1,5 @@
 from .db import db, environment, SCHEMA, add_prefix_for_prod
-from sqlalchemy.sql import func
+from datetime import datetime
 
 class Application(db.Model):
     __tablename__ = 'job_applications'
@@ -18,8 +18,8 @@ class Application(db.Model):
     resume = db.Column(db.String(2048))
     cover_letter = db.Column(db.String(2048))
     applied_date = db.Column(db.DateTime)
-    created_at = db.Column(db.DateTime, default=func.now())
-    updated_at = db.Column(db.DateTime, default=func.now())
+    created_at = db.Column(db.DateTime, default=datetime.now())
+    updated_at = db.Column(db.DateTime, default=datetime.now())
 
     company = db.relationship('Company', back_populates='applications')
     

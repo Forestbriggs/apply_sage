@@ -1,5 +1,5 @@
 from .db import db, environment, SCHEMA, add_prefix_for_prod
-from sqlalchemy.sql import func
+from datetime import datetime
 
 class Company(db.Model):
     __tablename__ = 'companies'
@@ -11,8 +11,8 @@ class Company(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')))
     name = db.Column(db.String(100), nullable=False)
     website = db.Column(db.String(2048))
-    created_at = db.Column(db.DateTime, default=func.now())
-    updated_at = db.Column(db.DateTime, default=func.now())
+    created_at = db.Column(db.DateTime, default=datetime.now())
+    updated_at = db.Column(db.DateTime, default=datetime.now())
     
     user = db.relationship('User', back_populates='companies')
 
