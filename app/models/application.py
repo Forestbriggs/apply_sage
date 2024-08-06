@@ -39,5 +39,23 @@ class Application(db.Model):
             'salary_max': self.salary_max,
             'resume': self.resume,
             'cover_letter': self.cover_letter,
-            'applied_date': self.applied_date
+            'applied_date': self.applied_date,
+            'created_at': self.created_at,
+            'updated_at': self.updated_at
+        }
+
+    def to_dict_details(self):
+        return {
+            'id': self.id,
+            'title': self.title,
+            'status': self.status.to_dict(),
+            'category': self.category.to_dict(),
+            'company': self.company.to_dict_app_details(),
+            'salary_min': self.salary_min,
+            'salary_max': self.salary_max,
+            'resume': self.resume,
+            'cover_letter': self.cover_letter,
+            'applied_date': self.applied_date,
+            'created_at': self.created_at,
+            'updated_at': self.updated_at
         }

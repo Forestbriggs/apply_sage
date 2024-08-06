@@ -23,4 +23,4 @@ def application_details(application_id):
     if application.user_id != current_user.id:
         return {'error': {'message': 'Unauthorized'}}, 401
     
-    return application.to_dict()
+    return application.to_dict_details()
