@@ -15,8 +15,8 @@ class Application(db.Model):
     title = db.Column(db.String(100), nullable=False)
     salary_min = db.Column(db.Numeric(precision=10, scale=2))
     salary_max = db.Column(db.Numeric(precision=10, scale=2))
-    resume = db.Column(db.String(2048))
-    cover_letter = db.Column(db.String(2048))
+    resume_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('resumes.id')))
+    cover_letter_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('cover_letters.id')))
     applied_date = db.Column(db.DateTime)
     created_at = db.Column(db.DateTime, default=datetime.now())
     updated_at = db.Column(db.DateTime, default=datetime.now())
@@ -37,8 +37,8 @@ class Application(db.Model):
             'category': self.category.to_dict(),
             'salary_min': self.salary_min,
             'salary_max': self.salary_max,
-            'resume': self.resume,
-            'cover_letter': self.cover_letter,
+            'resume_id': self.resume_id,
+            'cover_letter_id': self.cover_letter_id,
             'applied_date': self.applied_date,
             'created_at': self.created_at,
             'updated_at': self.updated_at
@@ -53,8 +53,8 @@ class Application(db.Model):
             'company': self.company.to_dict_app_details(),
             'salary_min': self.salary_min,
             'salary_max': self.salary_max,
-            'resume': self.resume,
-            'cover_letter': self.cover_letter,
+            'resume_id': self.resume_id,
+            'cover_letter_id': self.cover_letter_id,
             'applied_date': self.applied_date,
             'created_at': self.created_at,
             'updated_at': self.updated_at

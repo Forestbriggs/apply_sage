@@ -1,5 +1,6 @@
 from flask import Blueprint, request
 from app.models import Application, db
+from app.forms import ApplicationForm
 from flask_login import current_user, login_required
 from datetime import datetime
 
@@ -11,6 +12,7 @@ application_routes = Blueprint('application', __name__)
 def applications():
     applications = Application.query.filter(Application.user_id==current_user.id)
     return {'Applications': [app.to_dict() for app in applications]}
+
 
 @application_routes.route('/<int:application_id>')
 @login_required
@@ -24,3 +26,19 @@ def application_details(application_id):
         return {'error': {'message': 'Unauthorized'}}, 401
     
     return application.to_dict_details()
+
+
+@application_routes.post('')
+@login_required
+def create_application():
+    form = ApplicationForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+    if form.validate_on_submit():
+        new_application = Application(
+            
+        )
+
+        db.session.add(new_application)
+        db.session.commit()
+        return new_application.to_dict(), 201
+    return form.errors()

@@ -28,7 +28,7 @@ def company_details(company_id):
     return company.to_dict()
 
 
-@company_routes.route('', methods=['POST'])
+@company_routes.post('')
 @login_required
 def create_company():
     form = CompanyForm()
