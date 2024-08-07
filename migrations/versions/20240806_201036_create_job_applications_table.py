@@ -1,8 +1,8 @@
 """create job_applications table
 
-Revision ID: 8df30d7ab2e2
-Revises: fabeb6a98998
-Create Date: 2024-08-02 18:46:12.897347
+Revision ID: eb63abfb5d90
+Revises: 61cb63385375
+Create Date: 2024-08-06 20:10:36.167666
 
 """
 from alembic import op
@@ -13,8 +13,8 @@ environment = os.getenv("FLASK_ENV")
 SCHEMA = os.environ.get("SCHEMA")
 
 # revision identifiers, used by Alembic.
-revision = '8df30d7ab2e2'
-down_revision = 'fabeb6a98998'
+revision = 'eb63abfb5d90'
+down_revision = '61cb63385375'
 branch_labels = None
 depends_on = None
 
@@ -37,10 +37,10 @@ def upgrade():
     sa.Column('updated_at', sa.DateTime(), nullable=True),
     sa.ForeignKeyConstraint(['category_id'], ['job_categories.id'], ),
     sa.ForeignKeyConstraint(['company_id'], ['companies.id'], ),
+    sa.ForeignKeyConstraint(['cover_letter_id'], ['cover_letters.id'], ),
+    sa.ForeignKeyConstraint(['resume_id'], ['resumes.id'], ),
     sa.ForeignKeyConstraint(['status_id'], ['application_statuses.id'], ),
     sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
-    sa.ForeignKeyConstraint(['resume_id'], ['resumes.id']),
-    sa.ForeignKeyConstraint(['cover_letter_id'], ['cover_letters.id']),
     sa.PrimaryKeyConstraint('id')
     )
     
