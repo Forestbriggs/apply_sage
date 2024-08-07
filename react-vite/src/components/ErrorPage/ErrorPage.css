@@ -1,0 +1,19 @@
+#error_page {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding-top: 25dvh;
+}
+
+#error_page h1 {
+    width: 35%;
+}
+
+#error_page a {
+    border: 1px solid #484848;
+    padding: 10px;
+    border-radius: .25rem;
+    font-size: 24px;
+}
