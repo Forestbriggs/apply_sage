@@ -1,0 +1,80 @@
+#hero {
+    background-color: var(--bg-color-alt);
+    height: 30dvh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+#hero_buttons {
+    display: flex;
+    justify-content: space-around;
+}
+
+#hero_buttons button {
+    border: none;
+    border-radius: .25rem;
+    cursor: pointer;
+    padding: 10px 10px;
+}
+
+#get_started {
+    background-color: #98A869;
+}
+
+#learn_more {
+    /* background-color: #6D7056; */
+    background-color: rgb(54, 94, 45);
+}
+
+#features {
+    height: 28dvh;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding-top: 25px;
+}
+
+.feature_card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    width: 20dvw;
+    text-align: center;
+}
+
+.feature_card img {
+    height: 80px;
+}
+
+.feature_quote {
+    color: rgb(255, 255, 255, 50%);
+    width: 85%;
+    font-size: 14px;
+}
+
+#testimonies {
+    background-color: var(--bg-color-alt);
+    height: 30dvh;
+}
+
+#pricing {
+    height: 40dvh;
+}
+
+#mission {
+    background-color: var(--bg-color-alt);
+    height: 20dvh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+#mission p {
+    font-size: 20px;
+    width: 55%;
+}

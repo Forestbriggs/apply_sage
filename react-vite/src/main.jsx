@@ -5,6 +5,7 @@ import { RouterProvider } from "react-router-dom";
 import configureStore from "./redux/store";
 import { router } from "./router";
 import * as sessionActions from "./redux/session";
+import './normalize.css';
 import "./index.css";
 
 const store = configureStore();
