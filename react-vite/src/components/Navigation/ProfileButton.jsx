@@ -49,8 +49,8 @@ function ProfileButton() {
                 <ul className={"profile-dropdown"} ref={ulRef}>
                     {user ? (
                         <>
-                            <li>{user.username}</li>
-                            <li>{user.email}</li>
+                            <li className="not_link">{user.username}</li>
+                            <li className="not_link">{user.email}</li>
                             <NavLink to={'/settings'}>Settings</NavLink>
                             <li>
                                 <button onClick={logout}>Log Out</button>

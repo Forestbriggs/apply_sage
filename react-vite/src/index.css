@@ -25,6 +25,10 @@
     -webkit-text-size-adjust: 100%;
 }
 
+#main__container {
+    min-height: 77.5dvh;
+}
+
 a {
     color: var(--font-color);
     text-decoration: none;
@@ -36,4 +40,7 @@ a:hover {
 
 button {
     color: var(--font-color);
+    border: none;
+    border-radius: .25rem;
+    padding: 5px 10px;
 }
