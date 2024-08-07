@@ -10,14 +10,14 @@ import "./index.css";
 const store = configureStore();
 
 if (import.meta.env.MODE !== "production") {
-  window.store = store;
-  window.sessionActions = sessionActions;
+    window.store = store;
+    window.sessionActions = sessionActions;
 }
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <React.StrictMode>
-    <ReduxProvider store={store}>
-      <RouterProvider router={router} />
-    </ReduxProvider>
-  </React.StrictMode>
+    <React.StrictMode>
+        <ReduxProvider store={store}>
+            <RouterProvider router={router} />
+        </ReduxProvider>
+    </React.StrictMode>
 );
