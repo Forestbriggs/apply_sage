@@ -28,6 +28,10 @@ class Application(db.Model):
     category = db.relationship('JobCategory', back_populates='applications')
 
     status = db.relationship('ApplicationStatus', back_populates='applications')
+
+    resume = db.relationship('Resume')
+    
+    cover_letter = db.relationship('CoverLetter')
     
     def to_dict(self):
         return {

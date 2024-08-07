@@ -30,8 +30,8 @@ def upgrade():
     sa.Column('title', sa.String(length=100), nullable=False),
     sa.Column('salary_min', sa.Numeric(precision=10, scale=2), nullable=True),
     sa.Column('salary_max', sa.Numeric(precision=10, scale=2), nullable=True),
-    sa.Column('resume', sa.String(length=2048), nullable=True),
-    sa.Column('cover_letter', sa.String(length=2048), nullable=True),
+    sa.Column('resume_id', sa.Integer(), nullable=True),
+    sa.Column('cover_letter_id', sa.Integer(), nullable=True),
     sa.Column('applied_date', sa.DateTime(), nullable=True),
     sa.Column('created_at', sa.DateTime(), nullable=True),
     sa.Column('updated_at', sa.DateTime(), nullable=True),
@@ -39,6 +39,8 @@ def upgrade():
     sa.ForeignKeyConstraint(['company_id'], ['companies.id'], ),
     sa.ForeignKeyConstraint(['status_id'], ['application_statuses.id'], ),
     sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
+    sa.ForeignKeyConstraint(['resume_id'], ['resumes.id']),
+    sa.ForeignKeyConstraint(['cover_letter_id'], ['cover_letters.id']),
     sa.PrimaryKeyConstraint('id')
     )
     
