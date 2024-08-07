@@ -2,7 +2,7 @@ from flask import Blueprint, request
 from app.models import Application, db
 from app.forms import ApplicationForm
 from flask_login import current_user, login_required
-from datetime import datetime
+from app.models.application_status import ApplicationStatus
 
 application_routes = Blueprint('application', __name__)
 
@@ -34,8 +34,17 @@ def create_application():
     form = ApplicationForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
+        applied = ApplicationStatus.query.filter(ApplicationStatus.name=='Applied')
+        
         new_application = Application(
-            
+            user_id = current_user.id,
+            category_id = form.job_category.data,
+            company_id = form.company.data,
+            status_id = applied.id,
+            title = form.title,
+            salary_min = form.salary_min.data,
+            salary_max = form.salary_max.data,
+            applied_date = form.applied_date.data
         )
 
         db.session.add(new_application)
