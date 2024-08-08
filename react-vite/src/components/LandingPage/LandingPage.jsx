@@ -59,7 +59,38 @@ export default function LandingPage() {
 
                 </div>
                 <div id="pricing">
-
+                    <div id="price_card__container">
+                        <div className="price_card">
+                            <h2>Free Plan:</h2>
+                            <span><h1>$0</h1><p>/month</p></span>
+                            <ul>
+                                <li>Basic tracking features</li>
+                                <li>Email notifications</li>
+                                <li>Community support</li>
+                            </ul>
+                        </div>
+                        <div className="price_card">
+                            <h2>Pro Plan:</h2>
+                            <span><h1>$10</h1><p>/month</p></span>
+                            <ul>
+                                <li>All Free features plus</li>
+                                <li>Advanced analytics</li>
+                                <li>Customizable workflows</li>
+                                <li>Priority support</li>
+                            </ul>
+                        </div>
+                        <div className="price_card">
+                            <h2>Premium Plan:</h2>
+                            <span><h1>$25</h1><p>/month</p></span>
+                            <ul>
+                                <li>All Pro features plus</li>
+                                <li>One-on-one career coaching</li>
+                                <li>Resume and cover letter reviews</li>
+                                <li>Dedicated support</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <button>Choose Your Plan</button>
                 </div>
                 <div id="mission">
                     <p>ApplySage is dedicated to helping job seekers manage their applications with ease and efficiency.

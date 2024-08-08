@@ -58,11 +58,74 @@
 
 #testimonies {
     background-color: var(--bg-color-alt);
-    height: 30dvh;
+    height: 35dvh;
 }
 
 #pricing {
+    height: 47dvh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#price_card__container {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
     height: 40dvh;
+    text-align: center;
+    width: 80dvw;
+    /** \/ Keeps cards from touching when screen width lessens */
+    gap: 20px;
+}
+
+.price_card {
+    background-color: white;
+    border-radius: .5rem;
+    color: #1F1F1F;
+    height: 30dvh;
+    width: 30dvh;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.price_card>h2 {
+    margin-bottom: 0;
+}
+
+.price_card>span {
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-start;
+    gap: 10px;
+}
+
+.price_card>span>h1 {
+    margin-top: 15px;
+    margin-bottom: 10px;
+    font-size: 42px;
+}
+
+.price_card>span>p {
+    padding-bottom: 18px;
+}
+
+.price_card>ul {
+    margin-top: 2px;
+    padding-left: 20px;
+}
+
+.price_card>ul>li {
+    color: #484848;
+    text-align: left;
+    margin: 10px 0;
+}
+
+#pricing>button {
+    background-color: #98A869;
+    padding: 10px 15px;
 }
 
 #mission {
@@ -77,4 +140,17 @@
 #mission p {
     font-size: 20px;
     width: 55%;
+}
+
+@media screen and (max-width: 800px) {
+    #pricing {
+        height: 100dvh;
+        margin-top: 20px;
+    }
+
+    #price_card__container {
+        flex-direction: column;
+        height: 90dvh;
+        margin-bottom: 25px;
+    }
 }
