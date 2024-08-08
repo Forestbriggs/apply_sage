@@ -19,13 +19,14 @@
     padding: 10px 10px;
 }
 
+
 #get_started {
     background-color: #98A869;
 }
 
 #learn_more {
     /* background-color: #6D7056; */
-    background-color: rgb(54, 94, 45);
+    background-color: rgba(69, 111, 61, 0.595);
 }
 
 #features {
@@ -58,7 +59,24 @@
 
 #testimonies {
     background-color: var(--bg-color-alt);
-    height: 35dvh;
+    height: 30dvh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-top: 40px;
+}
+
+#testimonies>div {
+    display: flex;
+    align-items: center;
+    gap: 300px;
+    width: 60dvw;
+    margin-top: -40px;
+}
+
+#testimonies>div>img {
+    height: 100px;
 }
 
 #pricing {
@@ -141,6 +159,53 @@
     font-size: 20px;
     width: 55%;
 }
+
+#hero.hero_logged_in {
+    flex-direction: column;
+    height: 25dvh;
+}
+
+.hero_logged_in input {
+    background-color: var(--font-color);
+}
+
+.hero_logged_in button {
+    background-color: #98A869;
+    margin-top: 30px;
+    padding: 8px 20px;
+}
+
+#recent_apps {
+    height: 35dvh;
+    display: flex;
+    justify-content: space-around;
+}
+
+#recent_apps_title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#recent_apps_title>h2 {
+    font-size: 32px;
+}
+
+#app_card__container {
+    width: 40dvw;
+}
+
+#app_metrics {
+    height: 80dvh;
+    background-color: #484848;
+    text-align: center;
+}
+
+#app_metrics>h2 {
+    font-size: 32px;
+    padding-top: 20px;
+}
+
 
 @media screen and (max-width: 800px) {
     #pricing {

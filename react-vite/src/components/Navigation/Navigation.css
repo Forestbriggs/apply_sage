@@ -54,7 +54,7 @@
     list-style-type: none;
     position: absolute;
     right: 2.5dvw;
-    top: 66px;
+    top: 8dvh;
 }
 
 .profile-dropdown li:not(.not_link) {
