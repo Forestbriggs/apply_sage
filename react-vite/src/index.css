@@ -1,5 +1,5 @@
 :root {
-    --bg-color-alt: #484848;
+    --bg-color-alt: #48484860;
     --card-width: clamp(400px, 70dvw, 1000px);
     --font-family: Roboto;
     /* --font-family: system-ui,
@@ -15,6 +15,7 @@
         sans-serif; */
     --font-color: rgba(255, 255, 2355, 0.87);
     --font-hover-color: rgb(12, 158, 12);
+    --main-button-color: #98A869;
     color: var(--font-color);
     background-color: #1F1F1F;
     font-family: var(--font-family);

@@ -98,7 +98,7 @@
 }
 
 .price_card {
-    background-color: white;
+    background-color: rgba(255, 255, 255, 0.937);
     border-radius: .5rem;
     color: #1F1F1F;
     height: 30dvh;
@@ -124,10 +124,6 @@
     margin-top: 15px;
     margin-bottom: 10px;
     font-size: 42px;
-}
-
-.price_card>span>p {
-    padding-bottom: 18px;
 }
 
 .price_card>ul {
@@ -197,7 +193,7 @@
 
 #app_metrics {
     height: 80dvh;
-    background-color: #484848;
+    background-color: var(--bg-color-alt);
     text-align: center;
 }
 

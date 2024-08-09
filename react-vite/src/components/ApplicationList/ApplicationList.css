@@ -1,5 +1,5 @@
 #application_list {
-    background-color: #484848;
+    background-color: var(--bg-color-alt);
     min-height: 77dvh;
 }
 
@@ -17,9 +17,8 @@
 
 .application_card {
     border: 1px solid rgb(255, 255, 255, 0.5);
+    /* border: 1px solid #484848; */
     border-radius: .25rem;
-    /* display: grid; */
-
     display: flex;
     width: var(--card-width);
     justify-content: space-around;

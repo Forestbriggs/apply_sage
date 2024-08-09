@@ -1,26 +1,16 @@
-import { format } from 'date-fns'
+import { format } from 'date-fns';
+import { useNavigate } from 'react-router-dom';
+import determineStatusClass from '../../utils/determineStatusClass';
 
-export default function ApplicationCard(application) {
+export default function ApplicationCard({ application }) {
+    const navigate = useNavigate();
 
-    const determineStatusClass = (status) => {
-        switch (status) {
-            case 'Applied':
-                return 'applied'
-            case 'Interviewed':
-                return 'interviewed'
-            case 'Offer Received':
-                return 'offer'
-            case 'Accepted':
-                return 'accepted'
-            case 'Rejected':
-                return 'rejected'
-            case 'Withdrawn':
-                return 'withdrawn'
-        }
+    const handleClick = () => {
+        return navigate(`${application.id}`)
     }
 
     return (
-        <div className="application_card">
+        <div className="application_card" onClick={handleClick}>
             <div>
                 <h3>{application.title}</h3>
                 <p>{application.company.name}</p>

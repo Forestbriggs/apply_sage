@@ -171,7 +171,11 @@ export default function ApplicationList() {
                 <h1>Your Applications</h1>
                 <div id='applications__container'>
                     {data.map((application) => {
-                        return ApplicationCard(application)
+                        return (
+                            <div key={`application-${application.id}`}>
+                                <ApplicationCard application={application} />
+                            </div>
+                        )
                     })}
                 </div>
                 <div id='pagination'>
