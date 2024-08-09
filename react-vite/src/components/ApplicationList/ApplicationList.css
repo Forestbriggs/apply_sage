@@ -1,0 +1,74 @@
+#application_list {
+    background-color: #484848;
+    min-height: 77dvh;
+}
+
+#application_list__container {
+    margin: 0 auto;
+    width: var(--card-width);
+    padding-top: 10px;
+}
+
+#applications__container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.application_card {
+    border: 1px solid rgb(255, 255, 255, 0.5);
+    border-radius: .25rem;
+    /* display: grid; */
+
+    display: flex;
+    width: var(--card-width);
+    justify-content: space-around;
+}
+
+.application_card:hover {
+    cursor: pointer;
+    border: 1px solid #1F1F1F;
+}
+
+.application_card>div:not(:first-of-type) {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.application_card>div {
+    flex-basis: 100%;
+}
+
+.application_card>div:first-of-type {
+    margin-left: 20px;
+}
+
+.applied {
+    color: #00A3FF;
+}
+
+.interviewed {
+    color: #D6D600;
+}
+
+.offer {
+    color: #25C8D3;
+}
+
+.accepted {
+    color: #008000;
+}
+
+.rejected {
+    color: #ed1818;
+}
+
+.withdrawn {
+    color: #7D7D7D;
+    opacity: 80%;
+}
+
+#pagination {
+    padding: 10px 0;
+}

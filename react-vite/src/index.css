@@ -1,5 +1,6 @@
 :root {
     --bg-color-alt: #484848;
+    --card-width: clamp(400px, 70dvw, 1000px);
     --font-family: Roboto;
     /* --font-family: system-ui,
         -apple-system,

@@ -11,7 +11,7 @@ application_routes = Blueprint('application', __name__)
 @login_required
 def applications():
     applications = Application.query.filter(Application.user_id==current_user.id)
-    return {'Applications': [app.to_dict() for app in applications]}
+    return {'Applications': [app.to_dict_details() for app in applications]}
 
 
 @application_routes.route('/<int:application_id>')
