@@ -1,10 +1,12 @@
 #error_page {
+    background-color: #484848;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     text-align: center;
-    padding-top: 25dvh;
+    /* padding-top: 25dvh; */
+    height: 80dvh;
 }
 
 #error_page h1 {
@@ -12,7 +14,7 @@
 }
 
 #error_page a {
-    border: 1px solid #484848;
+    border: 2px solid #1F1F1F;
     padding: 10px;
     border-radius: .25rem;
     font-size: 24px;
