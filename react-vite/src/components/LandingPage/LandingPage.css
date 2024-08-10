@@ -189,6 +189,21 @@
 
 #app_card__container {
     width: 40dvw;
+    display: flex;
+    justify-content: space-around;
+    text-align: center;
+    align-items: center;
+}
+
+#app_card__container>div {
+    border: 1px solid var(--bg-color-alt);
+    border-radius: .3rem;
+    cursor: pointer;
+    padding: 10px;
+}
+
+#app_card__container>div:hover {
+    border-color: #606060;
 }
 
 #app_metrics {

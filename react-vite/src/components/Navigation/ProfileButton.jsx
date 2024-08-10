@@ -2,10 +2,11 @@ import { useState, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { FaUserCircle } from 'react-icons/fa';
 import { thunkLogout } from "../../redux/session";
+import { NavLink } from "react-router-dom";
 import OpenModalMenuItem from "./OpenModalMenuItem";
 import LoginFormModal from "../LoginFormModal";
 import SignupFormModal from "../SignupFormModal";
-import { NavLink } from "react-router-dom";
+import handleFutureFeatureClick from '../../utils/handleFutureFeatureClick';
 
 function ProfileButton() {
     const dispatch = useDispatch();
@@ -51,7 +52,7 @@ function ProfileButton() {
                         <>
                             <li className="not_link">{user.username}</li>
                             <li className="not_link">{user.email}</li>
-                            <NavLink to={'/settings'}>Settings</NavLink>
+                            <NavLink onClick={handleFutureFeatureClick} to={'/settings'}>Settings</NavLink>
                             <li>
                                 <button onClick={logout}>Log Out</button>
                             </li>

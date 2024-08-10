@@ -1,10 +1,34 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect, useState } from "react";
+import { thunkGetUserDashboard } from "../../redux/applications";
+import { format } from "date-fns";
 import OpenModalButton from '../OpenModalButton';
-import './LandingPage.css';
 import SignupFormModal from "../SignupFormModal";
+import LoadingPage from '../LoadingPage';
+import handleFutureFeatureClick from '../../utils/handleFutureFeatureClick';
+import './LandingPage.css';
+import { useNavigate } from "react-router-dom";
 
 export default function LandingPage() {
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
     const sessionUser = useSelector(state => state.session.user);
+    const recent_applications = useSelector(state => state.applications);
+    const [isLoaded, setIsLoaded] = useState(false);
+
+    useEffect(() => {
+        if (!sessionUser) {
+            setIsLoaded(true)
+        } else if (!isLoaded) {
+            dispatch(thunkGetUserDashboard()).then(() => {
+                setIsLoaded(true)
+            })
+        }
+    }, [isLoaded, sessionUser, dispatch])
+
+    const handleRecentAppClick = (application_id) => {
+        return navigate(`applications/${application_id}`);
+    }
 
     let content;
     if (!sessionUser) {
@@ -21,7 +45,7 @@ export default function LandingPage() {
                                 modalComponent={<SignupFormModal />}
                                 buttonText={'Get Started For Free'}
                             />
-                            <button id="learn_more">LearnMore</button>
+                            <button onClick={handleFutureFeatureClick} id="learn_more">LearnMore</button>
                         </div>
                     </div>
                 </div>
@@ -101,7 +125,7 @@ export default function LandingPage() {
                             </ul>
                         </div>
                     </div>
-                    <button>Choose Your Plan</button>
+                    <button onClick={handleFutureFeatureClick}>Choose Your Plan</button>
                 </div>
                 <div id="mission">
                     <p>ApplySage is dedicated to helping job seekers manage their applications with ease and efficiency.
@@ -121,24 +145,20 @@ export default function LandingPage() {
                     <div id="recent_apps_title">
                         <h2>Recent Applications</h2>
                     </div>
-                    <div id="#app_card__container">
-                        {/* TODO grab 2 most recent applications from db and return their data
-                            (make dashboard route that will return those and analytics)
-                        */}
-                        <div id="card_one">
-                            <img src="/favicon.ico" alt="" />
-                            <strong>Tracking and Management</strong>
-                            <p className="feature_quote">
-                                &quot;Keep all your job applications in one place and never miss a follow up.&quot;
-                            </p>
-                        </div>
-                        <div id="card_two">
-                            <img src="/favicon.ico" alt="" />
-                            <strong>Tracking and Management</strong>
-                            <p className="feature_quote">
-                                &quot;Keep all your job applications in one place and never miss a follow up.&quot;
-                            </p>
-                        </div>
+                    <div id="app_card__container">
+                        {recent_applications.allIds.map((application_id) => {
+                            const application = recent_applications.data[application_id];
+                            return (
+                                <div onClick={() => handleRecentAppClick(application_id)} key={`dash-app-${application_id}`}>
+                                    {/* <img src="/favicon.ico" alt="" /> */}
+                                    <h3>{application.company.name}</h3>
+                                    <p>Position:</p>
+                                    <p>{application.title}</p>
+                                    <h2>Submitted:</h2>
+                                    <h2>{format(new Date(application.applied_date), 'M/d/yyyy')}</h2>
+                                </div>
+                            )
+                        })}
                     </div>
                 </div>
                 <div id="app_metrics">
@@ -150,5 +170,10 @@ export default function LandingPage() {
 
 
 
-    return content;
+    return (
+        <>
+            {isLoaded && content}
+            {!isLoaded && <LoadingPage />}
+        </>
+    )
 }
