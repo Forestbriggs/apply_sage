@@ -5,6 +5,7 @@ import ErrorPage from '../components/ErrorPage';
 import ApplicationList from '../components/ApplicationList/ApplicationList';
 import ApplicationDetails from '../components/ApplicationDetails';
 import CompanyList from '../components/CompanyList';
+import CompanyForm from '../components/CompanyForm/CompanyForm';
 
 export const router = createBrowserRouter([
     {
@@ -33,6 +34,10 @@ export const router = createBrowserRouter([
                     {
                         index: true,
                         element: <CompanyList />
+                    },
+                    {
+                        path: 'select',
+                        element: <CompanyForm />
                     }
                 ]
             },

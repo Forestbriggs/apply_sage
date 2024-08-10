@@ -30,6 +30,10 @@ export default function LandingPage() {
         return navigate(`applications/${application_id}`);
     }
 
+    const handleNewApplicationClick = () => {
+        return navigate('/companies/select');
+    }
+
     let content;
     if (!sessionUser) {
         content = (
@@ -139,7 +143,7 @@ export default function LandingPage() {
                 <div id="hero" className="hero_logged_in">
                     <h1>Hello {sessionUser.username}!</h1>
                     <input type="search" placeholder="Search for applications" />
-                    <button>Add Application</button>
+                    <button onClick={handleNewApplicationClick}>Add Application</button>
                 </div>
                 <div id="recent_apps">
                     <div id="recent_apps_title">

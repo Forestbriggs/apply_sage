@@ -1,0 +1,49 @@
+#company_form__container {
+    background-color: var(--bg-color-alt);
+    min-height: 77dvh;
+    padding-top: 10px;
+}
+
+#company_form {
+    margin: 0 auto;
+    width: var(--card-width);
+}
+
+#company_form>select {
+    background-color: rgba(255, 255, 255, 0.87);
+}
+
+#not_in_list {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 20px;
+}
+
+#not_in_list>input {
+    width: 20px;
+    cursor: pointer;
+}
+
+#not_in_list>input:not(:checked) {
+    accent-color: rgba(255, 255, 255, 0.87);
+}
+
+
+#new_company_form {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+}
+
+#new_company_form>div {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+#new_company_form>button {
+    background-color: var(--main-button-color);
+    padding: 5px 10px;
+}
