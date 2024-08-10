@@ -1,24 +1,35 @@
 import { createBrowserRouter } from 'react-router-dom';
-import LoginFormPage from '../components/LoginFormPage';
-import SignupFormPage from '../components/SignupFormPage';
 import Layout from './Layout';
+import LandingPage from '../components/LandingPage/LandingPage';
+import ErrorPage from '../components/ErrorPage';
+import ApplicationList from '../components/ApplicationList/ApplicationList';
+import ApplicationDetails from '../components/ApplicationDetails';
 
 export const router = createBrowserRouter([
-  {
-    element: <Layout />,
-    children: [
-      {
-        path: "/",
-        element: <h1>Welcome!</h1>,
-      },
-      {
-        path: "login",
-        element: <LoginFormPage />,
-      },
-      {
-        path: "signup",
-        element: <SignupFormPage />,
-      },
-    ],
-  },
+    {
+        element: <Layout />,
+        children: [
+            {
+                path: "/",
+                element: <LandingPage />,
+            },
+            {
+                path: 'applications',
+                children: [
+                    {
+                        index: true,
+                        element: <ApplicationList />
+                    },
+                    {
+                        path: ':applicationId',
+                        element: <ApplicationDetails />
+                    }
+                ]
+            },
+            {
+                path: "*",
+                element: <ErrorPage />,
+            }
+        ],
+    },
 ]);

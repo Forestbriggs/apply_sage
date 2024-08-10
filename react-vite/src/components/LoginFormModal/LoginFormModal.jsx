@@ -28,10 +28,23 @@ function LoginFormModal() {
         }
     };
 
+    const demoLogin = () => {
+        setErrors({})
+        return dispatch(thunkLogin({
+            email: 'demo@aa.io', password: 'password'
+        })).then(() => {
+            closeModal();
+        });
+    }
+
     return (
-        <>
+        <div id="login_signup__container">
             <h1>Log In</h1>
-            <form onSubmit={handleSubmit}>
+            <form>
+                <div className="error__container">
+                    {errors.email && <p className="errors">{errors.email}</p>}
+                    {/* {errors.password && <p>{errors.password}</p>} */}
+                </div>
                 <label>
                     Email
                     <input
@@ -41,7 +54,6 @@ function LoginFormModal() {
                         required
                     />
                 </label>
-                {errors.email && <p>{errors.email}</p>}
                 <label>
                     Password
                     <input
@@ -51,10 +63,12 @@ function LoginFormModal() {
                         required
                     />
                 </label>
-                {errors.password && <p>{errors.password}</p>}
-                <button type="submit">Log In</button>
+                <div id="button__container">
+                    <button onClick={handleSubmit}>Log In</button>
+                    <button id="demo" onClick={demoLogin}>Demo Login</button>
+                </div>
             </form>
-        </>
+        </div>
     );
 }
 
