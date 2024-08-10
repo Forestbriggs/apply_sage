@@ -4,6 +4,7 @@ import LandingPage from '../components/LandingPage/LandingPage';
 import ErrorPage from '../components/ErrorPage';
 import ApplicationList from '../components/ApplicationList/ApplicationList';
 import ApplicationDetails from '../components/ApplicationDetails';
+import CompanyList from '../components/CompanyList';
 
 export const router = createBrowserRouter([
     {
@@ -23,6 +24,15 @@ export const router = createBrowserRouter([
                     {
                         path: ':applicationId',
                         element: <ApplicationDetails />
+                    }
+                ]
+            },
+            {
+                path: 'companies',
+                children: [
+                    {
+                        index: true,
+                        element: <CompanyList />
                     }
                 ]
             },
