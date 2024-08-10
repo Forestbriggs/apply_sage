@@ -45,7 +45,7 @@ export default function ApplicationList() {
                     </div>
                 </div>
             }
-            {!isLoaded && <Loading />}
+            {!isLoaded && <LoadingPage />}
         </>
     )
 }

@@ -7,6 +7,10 @@ import ApplicationDetails from '../components/ApplicationDetails';
 import CompanyList from '../components/CompanyList';
 import CompanyForm from '../components/CompanyForm/CompanyForm';
 
+// TODO site wide validate user on all login required pages
+// TODO redirect if not logged in OR if logging out
+
+
 export const router = createBrowserRouter([
     {
         element: <Layout />,
