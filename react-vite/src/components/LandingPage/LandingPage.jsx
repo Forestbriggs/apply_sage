@@ -19,7 +19,7 @@ export default function LandingPage() {
     useEffect(() => {
         if (!sessionUser) {
             setIsLoaded(true)
-        } else if (!isLoaded) {
+        } else {
             dispatch(thunkGetUserDashboard()).then(() => {
                 setIsLoaded(true)
             })
