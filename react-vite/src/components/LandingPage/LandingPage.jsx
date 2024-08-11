@@ -55,28 +55,28 @@ export default function LandingPage() {
                 </div>
                 <div id="features">
                     <div className="feature_card">
-                        <img src="/favicon.ico" alt="" />
+                        <img src="/aa-favicon.ico" alt="" />
                         <strong>Tracking and Management</strong>
                         <p className="feature_quote">
                             &quot;Keep all your job applications in one place and never miss a follow up.&quot;
                         </p>
                     </div>
                     <div className="feature_card">
-                        <img src="/favicon.ico" alt="" />
+                        <img src="/aa-favicon.ico" alt="" />
                         <strong>Notifications and Reminders</strong>
                         <p className="feature_quote">
                             &quot;Receive timely reminders for application deadlines and follow-ups.&quot;
                         </p>
                     </div>
                     <div className="feature_card">
-                        <img src="/favicon.ico" alt="" />
+                        <img src="/aa-favicon.ico" alt="" />
                         <strong>Analytics and Insight</strong>
                         <p className="feature_quote">
                             &quot;Gain insights into your application progress and success rates.&quot;
                         </p>
                     </div>
                     <div className="feature_card">
-                        <img src="/favicon.ico" alt="" />
+                        <img src="/aa-favicon.ico" alt="" />
                         <strong>Customizable Workflows</strong>
                         <p className="feature_quote">
                             &quot;Tailor the application process to fit your unique job search strategy.&quot;
@@ -85,15 +85,15 @@ export default function LandingPage() {
                 </div>
                 <div id="testimonies">
                     <div>
-                        <img src="/favicon.ico" alt="" />
+                        <img src="/aa-favicon.ico" alt="" />
                         <p>&quot;ApplySage helped me land my dream job!&quot; - Jane Doe</p>
                     </div>
                     <div>
-                        <img src="/favicon.ico" alt="" />
+                        <img src="/aa-favicon.ico" alt="" />
                         <p>&quot;The best tool for managing job applications!&quot; - John Smith</p>
                     </div>
                     <div>
-                        <img src="/favicon.ico" alt="" />
+                        <img src="/aa-favicon.ico" alt="" />
                         <p>&quot;I love the insights and reminders.&quot; - Emily Johnson</p>
                     </div>
                 </div>
@@ -154,7 +154,7 @@ export default function LandingPage() {
                             const application = recent_applications.data[application_id];
                             return (
                                 <div onClick={() => handleRecentAppClick(application_id)} key={`dash-app-${application_id}`}>
-                                    {/* <img src="/favicon.ico" alt="" /> */}
+                                    {/* <img src="/aa-favicon.ico" alt="" /> */}
                                     <h3>{application.company.name}</h3>
                                     <p>Position:</p>
                                     <p>{application.title}</p>

@@ -15,10 +15,12 @@ function Navigation() {
     return (
         <div id="navbar">
             <div id="logo_brand__container">
-                <p id="logo" onClick={handleClick}>
-                    {/* TODO change to logo */}
-                    <img src="/favicon.ico" alt="apply_sage_logo" />
-                </p>
+                <img
+                    onClick={handleClick}
+                    id="logo"
+                    src="/apply_sage_logo.png"
+                    alt="apply_sage_logo"
+                />
                 <NavLink id="brand">
                     ApplySage
                 </NavLink>
