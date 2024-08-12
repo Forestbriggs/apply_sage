@@ -37,7 +37,7 @@ def create_company():
         new_company = Company(
             user_id = current_user.id,
             name = form.name.data,
-            website = form.name.data or None
+            website = form.website.data or None
         )
     
         db.session.add(new_company)

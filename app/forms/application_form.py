@@ -33,7 +33,6 @@ class ApplicationForm(FlaskForm):
         Length(max=100, message='Title must be 100 characters or less.')
     ])
     job_category = SelectField('job_category', choices=[])
-    company = SelectField('company', choices=[])
     salary_min = FloatField('salary_min', validators=[
         Optional(),
         NumberRange(min=0, message='Minimum salary must be at least 0.'),

@@ -1,4 +1,3 @@
-from time import sleep
 from flask import Blueprint, request
 from app.models import Application, db
 from app.forms import ApplicationForm

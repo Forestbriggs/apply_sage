@@ -24,6 +24,39 @@ export const thunkGetUserCompanies = () => async (dispatch) => {
     }
 }
 
+export const thunkGetCompanyById = (company_id) => async (dispatch) => {
+    const response = await fetch(`/api/companies/${company_id}`);
+    if (response.ok) {
+        const data = await response.json();
+        dispatch(setCompany(data));
+    } else if (response.status < 500) {
+        const errors = await response.json();
+        return errors;
+    } else {
+        return { server: 'Something went wrong. Please try again' }
+    }
+}
+
+export const thunkCreateCompany = (payload) => async (dispatch) => {
+    const response = await fetch('/api/companies', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(payload)
+    });
+    if (response.ok) {
+        const data = await response.json();
+        dispatch(setCompany(data));
+        return data.id;
+    } else if (response.status < 500) {
+        const errors = await response.json();
+        throw errors;
+    } else {
+        return { server: 'Something went wrong. Please try again' }
+    }
+}
+
 
 const initialState = { data: {}, allIds: [] }
 
@@ -37,6 +70,16 @@ function companyReducer(state = initialState, action) {
                     newState.allIds.push(company.id)
                 }
             })
+            return newState;
+        }
+
+        case SET_COMPANY: {
+            const newState = structuredClone(state);
+            const company = action.payload;
+            newState.data[company.id] = company;
+            if (newState.allIds.indexOf(company.id) < 0) {
+                newState.allIds.push(company.id)
+            }
             return newState;
         }
 

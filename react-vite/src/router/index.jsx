@@ -4,6 +4,7 @@ import LandingPage from '../components/LandingPage/LandingPage';
 import ErrorPage from '../components/ErrorPage';
 import ApplicationList from '../components/ApplicationList/ApplicationList';
 import ApplicationDetails from '../components/ApplicationDetails';
+import NewApplicationForm from '../components/ApplicationForm/NewApplicationForm';
 import CompanyList from '../components/CompanyList';
 import CompanyForm from '../components/CompanyForm/CompanyForm';
 
@@ -42,6 +43,19 @@ export const router = createBrowserRouter([
                     {
                         path: 'select',
                         element: <CompanyForm />
+                    },
+                    {
+                        path: ':companyId',
+                        children: [
+                            {
+                                index: true,
+                                element: 'company detail page'
+                            },
+                            {
+                                path: 'applications/create',
+                                element: <NewApplicationForm />
+                            }
+                        ]
                     }
                 ]
             },

@@ -1,0 +1,11 @@
+#app_form__container {
+    background-color: var(--bg-color-alt);
+    min-height: 77dvh;
+    padding-top: 10px;
+}
+
+#app_form__container>h1 {
+    width: var(--card-width);
+    margin: 0 auto;
+    margin-top: 20px;
+}

@@ -1,16 +1,19 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { thunkGetUserCompanies } from '../../redux/companies';
+import { useNavigate } from 'react-router-dom';
+import { thunkCreateCompany, thunkGetCompanyById, thunkGetUserCompanies } from '../../redux/companies';
 import LoadingPage from '../LoadingPage';
 import './CompanyForm.css';
 
 export default function CompanyForm() {
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     const [isLoaded, setIsLoaded] = useState(false);
     const [company, setCompany] = useState('');
     const [newCompany, setNewCompany] = useState(false);
     const [companyName, setCompanyName] = useState('');
     const [companyWebsite, setCompanyWebsite] = useState('');
+    const [errors, setErrors] = useState({});
     const companies = useSelector(state => state.companies);
 
     useEffect(() => {
@@ -21,20 +24,29 @@ export default function CompanyForm() {
         }
     }, [isLoaded, dispatch])
 
-    const handleSubmit = () => {
-        return;
-        /**
-         * Check if new company or not
-         * 
-         * if not new company
-         * - verify company select (throw error if not)
-         * - redirect to /company/{company_id}/application/create
-         * 
-         * if new company
-         * - verify company name (throw error if not)
-         * - send post request to create new company in db
-         * - with returned company redirect to /company/{company_id}/application/create
-         */
+    const handleNewCompanySubmit = async () => {
+        setErrors({})
+        const newErrors = {};
+        if (companyName.length === 0) newErrors.name = 'Company name is required';
+
+        if (Object.values(newErrors).length) {
+            setErrors(newErrors);
+            return;
+        }
+
+        const payload = { name: companyName };
+        if (companyWebsite.length) payload.website = companyWebsite;
+
+        return dispatch(thunkCreateCompany(payload)).then((data) => {
+            return navigate(`/companies/${data}/applications/create`)
+        }).catch((e) => setErrors(e));
+    }
+
+    const handleExistingCompanySubmit = () => {
+        setErrors({});
+        dispatch(thunkGetCompanyById(company)).then(() => {
+            return navigate(`/companies/${company}/applications/create`)
+        }).catch((e) => setErrors(e))
     }
 
     return (
@@ -74,17 +86,19 @@ export default function CompanyForm() {
                         </div>
                         <div id='new_company_form'>
                             <div>
-                                <label>Company Name:</label>
+                                <label>Company Name: <span className='required'>*</span>
+                                    <span className='errors'>  {errors.name ? errors.name : ''}</span>
+                                </label>
                                 <input
+                                    required
                                     disabled={!newCompany}
                                     type="text"
                                     value={companyName}
                                     onChange={(e) => setCompanyName(e.target.value)}
-                                    required
                                 />
                             </div>
                             <div>
-                                <label>Career Page Link</label>
+                                <label>Career Page Link <span className='errors'>{errors.website}</span></label>
                                 <input
                                     disabled={!newCompany}
                                     type="text"
@@ -92,7 +106,12 @@ export default function CompanyForm() {
                                     onChange={(e) => setCompanyWebsite(e.target.value)}
                                 />
                             </div>
-                            <button onClick={handleSubmit}>Next</button>
+                            <button
+                                onClick={newCompany ? handleNewCompanySubmit :
+                                    handleExistingCompanySubmit}
+                            >
+                                Next
+                            </button>
                         </div>
                     </div >
                 </div>

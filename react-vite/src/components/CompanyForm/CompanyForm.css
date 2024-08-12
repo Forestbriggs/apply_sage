@@ -47,3 +47,9 @@
     background-color: var(--main-button-color);
     padding: 5px 10px;
 }
+
+span.required,
+span.errors {
+    color: red;
+    font-size: 14px;
+}
