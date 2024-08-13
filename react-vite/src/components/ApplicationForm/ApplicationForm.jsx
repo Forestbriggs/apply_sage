@@ -1,12 +1,12 @@
 import './ApplicationForm.css';
 
 export default function ApplicationForm({ title, setTitle, jobCategory,
-    setJobCategory, salaryMin, setSalaryMin, salaryMax, setSalaryMax,
-    appliedDate, setAppliedDate, categories, errors }) {
+    setJobCategory, salaryMin, salaryMax, appliedDate, setAppliedDate,
+    categories, errors, handleMinSalaryChange, handleMaxSalaryChange }) {
     return (
         <>
             <div>
-                <label>Title</label>
+                <label>Title<span className='errors'>{errors.title}</span></label>
                 <input
                     placeholder='Job Title'
                     value={title}
@@ -14,10 +14,10 @@ export default function ApplicationForm({ title, setTitle, jobCategory,
                 />
             </div>
             <div>
-                <label>Job Category</label>
+                <label>Job Category<span className='errors'>{errors.job_category}</span></label>
                 <select
                     value={jobCategory}
-                    onChange={setJobCategory}
+                    onChange={(e) => setJobCategory(e.target.value)}
                 >
                     <option disabled value="">Select a Job Category</option>
                     {categories.map((category) => {
@@ -30,30 +30,29 @@ export default function ApplicationForm({ title, setTitle, jobCategory,
                             </option>
                         )
                     })}
+                    <option value="other">Other</option>
                 </select>
             </div>
             <div>
-                <label>Minimum Salary</label>
+                <label>Minimum Salary<span className='errors'>{errors.salary_min}</span></label>
                 <input
-                    type='number'
+                    type='text'
                     placeholder='e.g., 50000'
-                    min='0'
                     value={salaryMin}
-                    onChange={(e) => setSalaryMin(e.target.value)}
+                    onChange={(e) => handleMinSalaryChange(e)}
                 />
             </div>
             <div>
-                <label>Maximum Salary</label>
+                <label>Maximum Salary<span className='errors'>{errors.salary_max}</span></label>
                 <input
-                    type='number'
+                    type='text'
                     placeholder='e.g., 100000'
-                    min='0'
                     value={salaryMax}
-                    onChange={(e) => setSalaryMax(e.target.value)}
+                    onChange={(e) => handleMaxSalaryChange(e)}
                 />
             </div>
             <div>
-                <label>Date Applied</label>
+                <label>Date Applied<span className='errors'>{errors.applied_date}</span></label>
                 <input
                     type="date"
                     value={appliedDate}

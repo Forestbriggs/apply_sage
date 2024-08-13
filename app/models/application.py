@@ -1,3 +1,4 @@
+from unicodedata import category
 from .db import db, environment, SCHEMA, add_prefix_for_prod
 from datetime import datetime
 
@@ -34,11 +35,12 @@ class Application(db.Model):
     cover_letter = db.relationship('CoverLetter')
     
     def to_dict(self):
+        
         return {
             'id': self.id,
             'title': self.title,
             'status': self.status.to_dict(),
-            'category': self.category.to_dict(),
+            'company': self.company.to_dict_app_details(),
             'salary_min': self.salary_min,
             'salary_max': self.salary_max,
             'resume_id': self.resume_id,
@@ -53,8 +55,8 @@ class Application(db.Model):
             'id': self.id,
             'title': self.title,
             'status': self.status.to_dict(),
-            'category': self.category.to_dict(),
-            'company': self.company.to_dict_app_details(),
+            'category': self.category.to_dict() if self.category is not None else None,
+            'company': self.company.to_dict_app_details() if self.company is not None else None,
             'salary_min': self.salary_min,
             'salary_max': self.salary_max,
             'resume_id': self.resume_id,

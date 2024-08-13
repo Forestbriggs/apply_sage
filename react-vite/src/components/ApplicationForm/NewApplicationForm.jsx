@@ -1,9 +1,15 @@
+import { isFuture } from 'date-fns';
 import { useDispatch } from 'react-redux';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import ApplicationForm from "./ApplicationForm";
+import { formatSalary, cleanSalaryFormat } from '../../utils/formatSalary';
+import { thunkCreateApplication } from '../../redux/applications';
 
 export default function NewApplicationForm() {
     const dispatch = useDispatch();
+    const navigate = useNavigate();
+    const { companyId } = useParams();
     const [title, setTitle] = useState('');
     const [jobCategory, setJobCategory] = useState('');
     const [salaryMin, setSalaryMin] = useState('');
@@ -11,7 +17,7 @@ export default function NewApplicationForm() {
     const [appliedDate, setAppliedDate] = useState('');
     const [errors, setErrors] = useState({});
     const [categories, setCategories] = useState([]);
-    const [isLoaded, setIsLoaded] = useState(false);
+    // const [isLoaded, setIsLoaded] = useState(false);
 
     const fetchCategories = async () => {
         const response = await fetch('/api/categories')
@@ -23,6 +29,52 @@ export default function NewApplicationForm() {
         fetchCategories();
     }, [])
 
+    const handleMinSalaryChange = (e) => {
+        const formattedVal = formatSalary(e);
+        if (formattedVal === '0') {
+            setSalaryMin('');
+            return;
+        }
+        setSalaryMin('$' + formattedVal);
+    }
+
+    const handleMaxSalaryChange = (e) => {
+        const formattedVal = formatSalary(e);
+        if (formattedVal === '0') {
+            setSalaryMax('');
+            return;
+        }
+        setSalaryMax('$' + formattedVal);
+    }
+
+    const handleSubmit = (e) => {
+        e.preventDefault()
+        setErrors({});
+        const newErrors = {};
+        if (title.length <= 0) newErrors.title = 'Title is required';
+        if (title.length > 100) newErrors.title = 'Title must be 100 characters or less';
+        if (!jobCategory) newErrors.job_category = 'Job category is required'
+        if (salaryMin.length !== 0 && Number(salaryMin) <= 0) newErrors.salary_min = 'Minimum salary must be greater than 0';
+        if (salaryMax.length !== 0 && Number(salaryMax) <= 0) newErrors.salary_max = 'Maximum salary must be greater than 0';
+        if (isFuture(appliedDate)) newErrors.applied_date = 'Applied date can not be in the future'
+
+
+        if (Object.values(newErrors).length) {
+            setErrors(newErrors);
+            return;
+        }
+
+        const payload = { title, company: companyId };
+        if (jobCategory !== 'other') payload.job_category = jobCategory
+        if (salaryMin) payload.salary_min = cleanSalaryFormat(salaryMin);
+        if (salaryMax) payload.salary_max = cleanSalaryFormat(salaryMax);
+        if (appliedDate) payload.applied_date = appliedDate;
+
+        return dispatch(thunkCreateApplication(payload)).then((data) => {
+            return navigate(`/applications/${data}`)
+        }).catch((e) => setErrors(e))
+    }
+
     return (
         <div id="app_form__container">
             <h1>Add a New Job Application</h1>
@@ -33,14 +85,15 @@ export default function NewApplicationForm() {
                     jobCategory={jobCategory}
                     setJobCategory={setJobCategory}
                     salaryMax={salaryMax}
-                    setSalaryMax={setSalaryMax}
                     salaryMin={salaryMin}
-                    setSalaryMin={setSalaryMin}
                     appliedDate={appliedDate}
                     setAppliedDate={setAppliedDate}
                     categories={categories}
                     errors={errors}
+                    handleMinSalaryChange={handleMinSalaryChange}
+                    handleMaxSalaryChange={handleMaxSalaryChange}
                 />
+                <button onClick={handleSubmit}>Submit</button>
             </form>
         </div>
     )
