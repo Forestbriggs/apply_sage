@@ -40,7 +40,10 @@ export default function ApplicationDetails() {
                             <h1>{application.title}</h1>
                             <div id='company__container'>
                                 <h2>{application.company.name}</h2>
-                                <a target='_blank' rel='noopener noreferrer' href={application.company.website}>{application.company.name}&apos;s Career Page</a>
+                                {
+                                    application?.company?.website &&
+                                    <a target='_blank' rel='noopener noreferrer' href={application.company.website}>{application.company.name}&apos;s Career Page</a>
+                                }
                             </div>
                         </div>
                         <div id='header_status_buttons'>
@@ -61,19 +64,30 @@ export default function ApplicationDetails() {
                                 <div id='app_details'>
                                     <div>
                                         <p>Category:</p>
-                                        <p>{application.category.name}</p>
+                                        {application?.category?.name ?
+                                            <p>{application?.category?.name}</p> :
+                                            <p>Not Set</p>
+                                        }
                                     </div>
                                     <div>
                                         <p>Salary Range:</p>
-                                        <p>${Number(application.salary_min)
-                                            .toLocaleString('en-US', { minimumFractionDigits: 0 })}
-                                            {' '}-{' '}
-                                            {Number(application.salary_max)
-                                                .toLocaleString('en-US', { minimumFractionDigits: 0 })}</p>
+                                        {
+                                            application.salary_min && application.salary_max ?
+                                                <p>${Number(application.salary_min)
+                                                    .toLocaleString('en-US', { minimumFractionDigits: 0 })}
+                                                    {' '}-{' '}
+                                                    {Number(application.salary_max)
+                                                        .toLocaleString('en-US', { minimumFractionDigits: 0 })}</p> :
+                                                <p>Not Set</p>
+                                        }
                                     </div>
                                     <div>
                                         <p>Application Date:</p>
-                                        <p>{format(new Date(application.applied_date), 'M/d/yyyy')}</p>
+                                        {
+                                            application.applied_date ?
+                                                <p>{format(new Date(application.applied_date), 'M/d/yyyy')}</p> :
+                                                <p>Not Set</p>
+                                        }
                                     </div>
                                 </div>
                             </div>

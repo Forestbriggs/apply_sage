@@ -1,9 +1,9 @@
 import { useDispatch, useSelector } from 'react-redux';
 import ApplicationCard from './ApplicationCard';
-import './ApplicationList.css';
 import { useEffect, useState } from 'react';
 import { thunkGetUserApplications } from '../../redux/applications';
-import Loading from '../LoadingPage/LoadingPage';
+import LoadingPage from '../LoadingPage/LoadingPage';
+import './ApplicationList.css';
 
 
 
@@ -45,7 +45,7 @@ export default function ApplicationList() {
                     </div>
                 </div>
             }
-            {!isLoaded && <Loading />}
+            {!isLoaded && <LoadingPage />}
         </>
     )
 }
