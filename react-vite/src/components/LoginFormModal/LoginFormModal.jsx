@@ -13,6 +13,15 @@ function LoginFormModal() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setErrors({});
+        const newErrors = {};
+        if (email.length < 6) newErrors.email = 'Email is required';
+        if (password.length < 6) newErrors.password = 'Password is required';
+
+        if (Object.values(newErrors).length) {
+            setErrors(newErrors);
+            return;
+        }
 
         const serverResponse = await dispatch(
             thunkLogin({
@@ -28,8 +37,9 @@ function LoginFormModal() {
         }
     };
 
-    const demoLogin = () => {
-        setErrors({})
+    const demoLogin = (e) => {
+        e.preventDefault()
+        setErrors({});
         return dispatch(thunkLogin({
             email: 'demo@aa.io', password: 'password'
         })).then(() => {
@@ -41,26 +51,26 @@ function LoginFormModal() {
         <div id="login_signup__container">
             <h1>Log In</h1>
             <form>
-                <div className="error__container">
-                    {errors.email && <p className="errors">{errors.email}</p>}
-                    {/* {errors.password && <p>{errors.password}</p>} */}
-                </div>
                 <label>
                     Email
+                    <div className="error__container">
+                        {errors.email && <p className="errors">{errors.email}</p>}
+                    </div>
                     <input
                         type="text"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
-                        required
                     />
                 </label>
                 <label>
                     Password
+                    <div className="error__container">
+                        {errors.password && <p className="errors">{errors.password}</p>}
+                    </div>
                     <input
                         type="password"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
-                        required
                     />
                 </label>
                 <div id="button__container">

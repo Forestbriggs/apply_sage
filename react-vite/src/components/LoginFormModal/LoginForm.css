@@ -44,12 +44,12 @@ form button {
 }
 
 .error__container {
-    height: 18px;
-    margin-bottom: 10px;
+    height: 11px;
+    margin-bottom: 5px;
 }
 
 .errors {
-    font-size: 18px;
+    font-size: 14px;
     margin-top: 0;
     color: rgb(244, 48, 48);
 }
