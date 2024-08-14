@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import { FaRegFile, FaRegFileAlt } from 'react-icons/fa';
-import { format } from 'date-fns';
+import { format, parseISO } from 'date-fns';
 import { useEffect, useState } from 'react';
 import { thunkGetApplicationById } from '../../redux/applications';
 // import OpenModalButton from '../OpenModalButton';
@@ -17,6 +17,7 @@ export default function ApplicationDetails() {
     const navigate = useNavigate();
     const application = useSelector(state => state.applications.data[applicationId]);
     const [isLoaded, setIsLoaded] = useState(false);
+    let appliedDate;
 
     useEffect(() => {
         if (!sessionUser || sessionUser?.id !== application?.user_id) {
@@ -29,8 +30,19 @@ export default function ApplicationDetails() {
         }
     })
 
+    if (isLoaded && application?.applied_date) {
+        const isoDateStr = new Date(application.applied_date).toISOString();
+        const parsedDate = parseISO(isoDateStr.split('T')[0])
+        const formattedDate = format(parsedDate, 'M/d/yyyy');
+        appliedDate = formattedDate;
+    }
+
     const handleBackClick = () => {
         return navigate('..')
+    }
+
+    const handleEditClick = () => {
+        return navigate('edit');
     }
 
     return (
@@ -53,7 +65,7 @@ export default function ApplicationDetails() {
                         <div id='header_status_buttons'>
                             <h2 className={determineStatusClass(application.status.name)}>{application.status.name}</h2>
                             <div id='detail_button__container'>
-                                <button onClick={handleFutureFeatureClick} className='edit_button'>Edit</button>
+                                <button onClick={handleEditClick} className='edit_button'>Edit</button>
                                 <button onClick={handleFutureFeatureClick} id='archive_button'>Archive</button>
                                 {/* TODO create delete modal */}
                                 {/* <OpenModalButton buttonText={'Delete'} id={'delete_button'} /> */}
@@ -89,7 +101,7 @@ export default function ApplicationDetails() {
                                         <p>Application Date:</p>
                                         {
                                             application.applied_date ?
-                                                <p>{format(new Date(application.applied_date), 'M/d/yyyy')}</p> :
+                                                <p>{appliedDate}</p> :
                                                 <p>Not Set</p>
                                         }
                                     </div>

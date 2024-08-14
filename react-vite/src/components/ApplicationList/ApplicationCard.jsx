@@ -1,9 +1,23 @@
-import { format } from 'date-fns';
+import { format, parseISO } from 'date-fns';
 import { useNavigate } from 'react-router-dom';
 import determineStatusClass from '../../utils/determineStatusClass';
 
 export default function ApplicationCard({ application }) {
     const navigate = useNavigate();
+    let appliedDate = null;
+    let lastUpdated;
+
+    if (application.applied_date) {
+        const isoDateStr = new Date(application.applied_date).toISOString();
+        const parsedDate = parseISO(isoDateStr.split('T')[0])
+        const formattedDate = format(parsedDate, 'M/d/yyyy');
+        appliedDate = formattedDate;
+    }
+
+    const isoDateStr = new Date(application.updated_at).toISOString();
+    const parsedDate = parseISO(isoDateStr.split('T')[0])
+    const formattedDate = format(parsedDate, 'M/d/yyyy');
+    lastUpdated = formattedDate;
 
     const handleClick = () => {
         return navigate(`${application.id}`)
@@ -21,7 +35,10 @@ export default function ApplicationCard({ application }) {
             </div>
             <div>
                 <p>Date Applied</p>
-                <p>{format(new Date(application.applied_date), 'M/d/yyyy')}</p>
+                {appliedDate ?
+                    <p>{appliedDate}</p> :
+                    <p>Not Set</p>
+                }
             </div>
             <div>
                 <p>Salary Range</p>
@@ -33,7 +50,7 @@ export default function ApplicationCard({ application }) {
             </div>
             <div>
                 <p>Last Updated</p>
-                <p>{format(new Date(application.updated_at), 'M/d/yyyy')}</p>
+                <p>{lastUpdated}</p>
             </div>
         </div >
     )
