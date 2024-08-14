@@ -1,4 +1,12 @@
+import { useNavigate } from "react-router-dom"
+
 export default function CompanyCard({ company }) {
+    const navigate = useNavigate();
+
+    const handleClick = () => {
+        return navigate(`/companies/${company.id}/applications/create`);
+    }
+
     return (
         <div className="company_card">
             <h2>{company.name}</h2>
@@ -8,7 +16,7 @@ export default function CompanyCard({ company }) {
                     <button className='edit_button'>Edit</button>
                     <button className="delete_button">Delete</button>
                 </div>
-                <button className="add_button">Add Application</button>
+                <button onClick={handleClick} className="add_button">Add Application</button>
             </div>
         </div>
     )
