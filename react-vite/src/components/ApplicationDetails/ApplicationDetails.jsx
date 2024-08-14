@@ -19,7 +19,7 @@ export default function ApplicationDetails() {
     const [isLoaded, setIsLoaded] = useState(false);
 
     useEffect(() => {
-        if (!sessionUser || sessionUser?.id !== application?.id) {
+        if (!sessionUser || sessionUser?.id !== application?.user_id) {
             return navigate('/');
         }
         if (!isLoaded) {
