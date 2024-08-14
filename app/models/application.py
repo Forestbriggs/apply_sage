@@ -38,6 +38,7 @@ class Application(db.Model):
         
         return {
             'id': self.id,
+            'user_id': self.user_id,
             'title': self.title,
             'status': self.status.to_dict(),
             'company': self.company.to_dict_app_details(),
@@ -53,6 +54,7 @@ class Application(db.Model):
     def to_dict_details(self):
         return {
             'id': self.id,
+            'user_id': self.user_id,
             'title': self.title,
             'status': self.status.to_dict(),
             'category': self.category.to_dict() if self.category is not None else None,
