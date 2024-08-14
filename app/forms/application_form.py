@@ -9,7 +9,7 @@ from app.models.company import Company
 from app.models.job_category import JobCategory
 
 def validate_salary_range(form, field):
-    if form.salary_min.data is not None and form.salary.max_data is not None:
+    if form.salary_min.data is not None and form.salary_max.data is not None:
         if form.salary_min.data >= form.salary_max.data:
             raise ValidationError('Maximum salary must be greater than minimum salary.')
         
@@ -18,7 +18,7 @@ def validate_salary_presence(form, field):
         raise ValidationError('Both minimum salary and maximum salary must be provided or left empty.')
     
 def validate_applied_date(form, field):
-    if field.data > datetime.today().date():
+    if form.applied_date.data > datetime.today().date():
         raise ValidationError('The applied date cannot be in the future.')
 
 class ApplicationForm(FlaskForm):
@@ -39,7 +39,6 @@ class ApplicationForm(FlaskForm):
         Optional(),
         NumberRange(min=0, message='Minimum salary must be at least 0.'),
         validate_salary_presence,
-        validate_salary_range
     ])
     salary_max = FloatField('salary_max', validators=[
         Optional(),
