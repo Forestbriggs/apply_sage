@@ -3,8 +3,8 @@ import { cleanSalaryFormat, formatSalary } from "../../utils/formatSalary";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
+import { thunkEditApplication, thunkGetApplicationById } from "../../redux/applications";
 import ApplicationForm from "./ApplicationForm";
-import { thunkGetApplicationById } from "../../redux/applications";
 import LoadingPage from "../LoadingPage";
 
 export default function EditApplicationForm() {
@@ -40,12 +40,16 @@ export default function EditApplicationForm() {
                 }
 
                 setTitle(app.title);
-                if (app.category) setJobCategory(app.category.id);
+                if (app.category) {
+                    setJobCategory(app.category.id);
+                } else {
+                    setJobCategory('other');
+                }
                 if (app.salary_min) setSalaryMin('$' + new Intl.NumberFormat().format(app.salary_min));
                 if (app.salary_max) setSalaryMax('$' + new Intl.NumberFormat().format(app.salary_max));
                 if (app.applied_date) {
                     const isoDateStr = new Date(app.applied_date).toISOString();
-                    const parsedDate = parseISO(isoDateStr)
+                    const parsedDate = parseISO(isoDateStr.split('T')[0])
                     const formattedDate = format(parsedDate, 'yyyy-MM-dd');
                     setAppliedDate(formattedDate);
                 }
@@ -97,10 +101,9 @@ export default function EditApplicationForm() {
         if (salaryMax) payload.salary_max = Number(cleanSalaryFormat(salaryMax));
         if (appliedDate) payload.applied_date = format(applied_date, 'M/d/yyyy');
 
-        return;
-        // return dispatch(thunkEditApplication(payload)).then((data) => {
-        //     return navigate(`/applications/${data}`)
-        // }).catch((e) => setErrors(e))
+        return dispatch(thunkEditApplication(applicationId, payload)).then((data) => {
+            return navigate(`/applications/${data}`)
+        }).catch((e) => setErrors(e))
     }
 
     return (

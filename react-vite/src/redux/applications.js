@@ -71,6 +71,26 @@ export const thunkCreateApplication = (payload) => async (dispatch) => {
     }
 }
 
+export const thunkEditApplication = (applicationId, payload) => async (dispatch) => {
+    const response = await fetch(`/api/applications/${applicationId}`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(payload)
+    });
+    if (response.ok) {
+        const data = await response.json();
+        dispatch(setApplication(data));
+        return data.id;
+    } else if (response.status < 500) {
+        const errors = await response.json();
+        throw errors;
+    } else {
+        return { server: 'Something went wrong. Please try again' }
+    }
+}
+
 const initialState = { data: {}, allIds: [] };
 
 function applicationReducer(state = initialState, action) {
