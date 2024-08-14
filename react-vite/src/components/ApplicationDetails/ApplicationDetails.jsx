@@ -20,15 +20,24 @@ export default function ApplicationDetails() {
     let appliedDate;
 
     useEffect(() => {
-        if (!sessionUser || sessionUser?.id !== application?.user_id) {
+        if (!sessionUser) {
             return navigate('/');
         }
-        if (!isLoaded) {
-            dispatch(thunkGetApplicationById(applicationId)).then(() => {
-                setIsLoaded(true);
-            }, [dispatch, isLoaded])
+        if (!Number.isInteger(Number(applicationId))) {
+            return navigate('/error-page');
         }
-    })
+        if (!isLoaded) {
+            dispatch(thunkGetApplicationById(applicationId)).then((application) => {
+                if (application.errors) {
+                    return navigate('/error-page')
+                }
+                if (sessionUser.id !== application.user_id) {
+                    return navigate('/');
+                }
+                setIsLoaded(true);
+            })
+        }
+    }, [dispatch, isLoaded, applicationId, navigate, sessionUser])
 
     if (isLoaded && application?.applied_date) {
         const isoDateStr = new Date(application.applied_date).toISOString();

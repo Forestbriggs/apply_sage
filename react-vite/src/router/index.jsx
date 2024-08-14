@@ -5,12 +5,10 @@ import ErrorPage from '../components/ErrorPage';
 import ApplicationList from '../components/ApplicationList/ApplicationList';
 import ApplicationDetails from '../components/ApplicationDetails';
 import NewApplicationForm from '../components/ApplicationForm/NewApplicationForm';
+import EditApplicationForm from '../components/ApplicationForm/EditApplicationForm';
 import CompanyList from '../components/CompanyList';
 import CompanyForm from '../components/CompanyForm/CompanyForm';
-import EditApplicationForm from '../components/ApplicationForm/EditApplicationForm';
-
-// TODO site wide validate user on all login required pages
-// TODO redirect if not logged in OR if logging out
+import EditCompanyForm from '../components/CompanyForm/EditCompanyForm';
 
 
 export const router = createBrowserRouter([
@@ -55,8 +53,17 @@ export const router = createBrowserRouter([
                         element: <CompanyForm />
                     },
                     {
-                        path: ':companyId/applications/create',
-                        element: <NewApplicationForm />
+                        path: ':companyId',
+                        children: [
+                            {
+                                path: 'applications/create',
+                                element: <NewApplicationForm />
+                            },
+                            {
+                                path: 'edit',
+                                element: <EditCompanyForm />
+                            }
+                        ]
                     }
                 ]
             },

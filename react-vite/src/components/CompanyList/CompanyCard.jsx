@@ -3,8 +3,12 @@ import { useNavigate } from "react-router-dom"
 export default function CompanyCard({ company }) {
     const navigate = useNavigate();
 
-    const handleClick = () => {
+    const handleAddApplication = () => {
         return navigate(`/companies/${company.id}/applications/create`);
+    }
+
+    const handleEdit = () => {
+        return navigate(`${company.id}/edit`);
     }
 
     return (
@@ -13,10 +17,10 @@ export default function CompanyCard({ company }) {
             {company.website && <a target='_blank' rel='noopener noreferrer' href={company.website}>{company.name}&apos;s Career Page</a>}
             <div className="button_group">
                 <div>
-                    <button className='edit_button'>Edit</button>
+                    <button onClick={handleEdit} className='edit_button'>Edit</button>
                     <button className="delete_button">Delete</button>
                 </div>
-                <button onClick={handleClick} className="add_button">Add Application</button>
+                <button onClick={handleAddApplication} className="add_button">Add Application</button>
             </div>
         </div>
     )
