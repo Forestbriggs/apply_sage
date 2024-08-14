@@ -2,7 +2,7 @@
     text-align: center;
 }
 
-form {
+#login_signup__container>form {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -10,7 +10,7 @@ form {
     gap: 10px;
 }
 
-form label {
+#login_signup__container>form label {
     text-align: left;
     display: flex;
     flex-direction: column;
@@ -19,18 +19,17 @@ form label {
     font-size: large;
 }
 
-input {
+#login_signup__container input {
     font-size: medium;
     padding-inline-start: 20px;
     border-radius: .5rem;
     border: 1px solid grey;
-    background-color: #080808;
     height: 24px;
     width: clamp(400px, 20vw, 90vw);
     margin-top: 2px;
 }
 
-#button__container {
+#login_signup__container #button__container {
     display: flex;
     gap: 20px;
 }

@@ -1,0 +1,47 @@
+#company_list {
+    background-color: var(--bg-color-alt);
+    min-height: 77dvh;
+    padding-top: 10px;
+}
+
+#company_list>h1 {
+    width: var(--card-width);
+    margin: 0 auto;
+    margin-top: 10px;
+}
+
+#company_grid {
+    width: var(--card-width);
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+    padding: 20px;
+}
+
+.company_card {
+    border: 1px solid rgb(255, 255, 255, 0.5);
+    border-radius: .3rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    gap: 15px;
+}
+
+.company_card>h2 {
+    margin: 0;
+}
+
+.button_group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.button_group>div {
+    display: flex;
+    gap: 16px;
+}

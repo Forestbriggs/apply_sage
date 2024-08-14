@@ -3,6 +3,7 @@ import LoadingPage from '../LoadingPage';
 import './CompanyList.css';
 import { useEffect, useState } from 'react';
 import { thunkGetUserCompanies } from '../../redux/companies';
+import CompanyCard from './CompanyCard';
 
 export default function CompanyList() {
     const dispatch = useDispatch();
@@ -21,15 +22,12 @@ export default function CompanyList() {
         <>
             {isLoaded &&
                 <div id='company_list'>
-                    <div id='company_list__container'>
-                        <h1>Your Companies</h1>
+                    <h1>Your Companies</h1>
+                    <div id='company_grid'>
                         {companies.allIds.map((company_id) => {
                             const company = companies.data[company_id];
-                            // TODO create grid layout with companies
                             return (
-                                <div key={`company-${company_id}`}>
-                                    {company.name}
-                                </div>
+                                <CompanyCard key={company.id} company={company} />
                             )
                         })}
                     </div>
