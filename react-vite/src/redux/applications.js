@@ -42,6 +42,7 @@ export const thunkGetApplicationById = (application_id) => async (dispatch) => {
     if (response.ok) {
         const data = await response.json();
         dispatch(setApplication(data));
+        return data;
     } else if (response.status < 500) {
         const errors = await response.json();
         return errors;

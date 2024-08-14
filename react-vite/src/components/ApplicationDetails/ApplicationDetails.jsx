@@ -33,6 +33,10 @@ export default function ApplicationDetails() {
         return navigate('..')
     }
 
+    const handleEditClick = () => {
+        return navigate('edit');
+    }
+
     return (
         <>
             {isLoaded &&
@@ -53,7 +57,7 @@ export default function ApplicationDetails() {
                         <div id='header_status_buttons'>
                             <h2 className={determineStatusClass(application.status.name)}>{application.status.name}</h2>
                             <div id='detail_button__container'>
-                                <button onClick={handleFutureFeatureClick} className='edit_button'>Edit</button>
+                                <button onClick={handleEditClick} className='edit_button'>Edit</button>
                                 <button onClick={handleFutureFeatureClick} id='archive_button'>Archive</button>
                                 {/* TODO create delete modal */}
                                 {/* <OpenModalButton buttonText={'Delete'} id={'delete_button'} /> */}
