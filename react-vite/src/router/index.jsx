@@ -45,17 +45,8 @@ export const router = createBrowserRouter([
                         element: <CompanyForm />
                     },
                     {
-                        path: ':companyId',
-                        children: [
-                            {
-                                index: true,
-                                element: 'company detail page'
-                            },
-                            {
-                                path: 'applications/create',
-                                element: <NewApplicationForm />
-                            }
-                        ]
+                        path: ':companyId/applications/create',
+                        element: <NewApplicationForm />
                     }
                 ]
             },

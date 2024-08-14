@@ -16,6 +16,7 @@ export const thunkGetUserCompanies = () => async (dispatch) => {
     if (response.ok) {
         const data = await response.json();
         dispatch(setCompanies(data));
+        return data;
     } else if (response.status < 500) {
         const errors = await response.json();
         return errors;

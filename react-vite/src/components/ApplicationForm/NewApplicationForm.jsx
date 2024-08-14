@@ -1,12 +1,13 @@
 import { isFuture, format } from 'date-fns';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import { formatSalary, cleanSalaryFormat } from '../../utils/formatSalary';
 import { thunkCreateApplication } from '../../redux/applications';
 import ApplicationForm from "./ApplicationForm";
 
 export default function NewApplicationForm() {
+    const sessionUser = useSelector(state => state.session.user);
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const { companyId } = useParams();
@@ -24,9 +25,21 @@ export default function NewApplicationForm() {
         setCategories(data);
     }
 
+    const verifyCompanyOwnership = useCallback(async () => {
+        const response = await fetch(`/api/companies/${companyId}`);
+        const company = await response.json();
+        if (company.user.id !== sessionUser?.id) {
+            return navigate('/')
+        }
+    }, [companyId, sessionUser, navigate])
+
     useEffect(() => {
+        if (!sessionUser) {
+            return navigate('/');
+        }
+        verifyCompanyOwnership();
         fetchCategories();
-    }, [])
+    }, [navigate, sessionUser, verifyCompanyOwnership])
 
     const handleMinSalaryChange = (e) => {
         const formattedVal = formatSalary(e);
