@@ -17,7 +17,6 @@ export default function NewApplicationForm() {
     const [appliedDate, setAppliedDate] = useState('');
     const [errors, setErrors] = useState({});
     const [categories, setCategories] = useState([]);
-    // const [isLoaded, setIsLoaded] = useState(false);
 
     const fetchCategories = async () => {
         const response = await fetch('/api/categories')

@@ -9,3 +9,32 @@
     margin: 0 auto;
     margin-top: 20px;
 }
+
+#app_form__container>form {
+    width: var(--card-width);
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+#app_form__container>form>div {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    font-size: large;
+}
+
+#app_form__container input {
+    font-size: medium;
+    border: 1px solid grey;
+    border-radius: .3rem;
+    height: 24px;
+    width: clamp(250px, 10dvw, 80dvw);
+}
+
+#app_form__container button {
+    margin-top: 10px;
+}

@@ -56,3 +56,23 @@ input {
 input:disabled {
     background-color: rgba(255, 255, 255, 0.5);
 }
+
+.edit_button {
+    background-color: #007BFF;
+}
+
+.edit_button:hover {
+    background-color: #0056B3;
+}
+
+.delete_button {
+    background-color: #DC3545;
+}
+
+.delete_button:hover {
+    background-color: #C82333;
+}
+
+.add_button {
+    background-color: var(--main-button-color);
+}

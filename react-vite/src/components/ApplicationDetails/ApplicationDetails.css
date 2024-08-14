@@ -57,16 +57,12 @@
     gap: 10px;
 }
 
-#edit_button {
-    background-color: var(--main-button-color);
-}
-
 #archive_button {
-    background-color: rgba(0, 0, 0, 0.511);
+    background-color: #6C757D;
 }
 
-#delete_button {
-    background-color: #ed1818;
+#archive_button:hover {
+    background-color: #5A6268;
 }
 
 #main_section {
@@ -148,14 +144,6 @@
     padding: 0 20px;
     display: flex;
     gap: 40px;
-}
-
-.reminder_edit {
-    background-color: var(--main-button-color);
-}
-
-.reminder_delete {
-    background-color: #ed1818;
 }
 
 #resume_cv {

@@ -49,11 +49,11 @@ export default function ApplicationDetails() {
                         <div id='header_status_buttons'>
                             <h2 className={determineStatusClass(application.status.name)}>{application.status.name}</h2>
                             <div id='detail_button__container'>
-                                <button onClick={handleFutureFeatureClick} id='edit_button'>Edit</button>
+                                <button onClick={handleFutureFeatureClick} className='edit_button'>Edit</button>
                                 <button onClick={handleFutureFeatureClick} id='archive_button'>Archive</button>
                                 {/* TODO create delete modal */}
                                 {/* <OpenModalButton buttonText={'Delete'} id={'delete_button'} /> */}
-                                <button onClick={handleFutureFeatureClick} id='delete_button'>Delete</button>
+                                <button onClick={handleFutureFeatureClick} className='delete_button'>Delete</button>
                             </div>
                         </div>
                     </div>
@@ -124,14 +124,14 @@ export default function ApplicationDetails() {
                                         <div className='reminder_card'>
                                             <div><p>10:00 am 11/10/24</p> <p>Negotiation</p></div>
                                             {/* TODO OpenModalButton for details modal */}
-                                            <button onClick={handleFutureFeatureClick} className='reminder_edit'>edit</button>
-                                            <button onClick={handleFutureFeatureClick} className='reminder_delete'>delete</button>
+                                            <button onClick={handleFutureFeatureClick} className='edit_button'>edit</button>
+                                            <button onClick={handleFutureFeatureClick} className='delete_button'>delete</button>
                                         </div>
                                         <div className='reminder_card'>
                                             <div><p>10:00 am 11/10/24</p> <p>Negotiation</p></div>
                                             {/* TODO OpenModalButton for details modal */}
-                                            <button onClick={handleFutureFeatureClick} className='reminder_edit'>edit</button>
-                                            <button onClick={handleFutureFeatureClick} className='reminder_delete'>delete</button>
+                                            <button onClick={handleFutureFeatureClick} className='edit_button'>edit</button>
+                                            <button onClick={handleFutureFeatureClick} className='delete_button'>delete</button>
                                         </div>
                                     </div>
                                 </div>
@@ -148,8 +148,8 @@ export default function ApplicationDetails() {
                                         </div>
                                         <div className='resume_cv_buttons'>
                                             {/* TODO View button */}
-                                            <button onClick={handleFutureFeatureClick} className='reminder_edit'>edit</button>
-                                            <button onClick={handleFutureFeatureClick} className='reminder_delete'>delete</button>
+                                            <button onClick={handleFutureFeatureClick} className='edit_button'>edit</button>
+                                            <button onClick={handleFutureFeatureClick} className='delete_button'>delete</button>
                                         </div>
                                     </div>
                                     <div>
@@ -159,8 +159,8 @@ export default function ApplicationDetails() {
                                         </div>
                                         <div className='resume_cv_buttons'>
                                             {/* TODO view button */}
-                                            <button onClick={handleFutureFeatureClick} className='reminder_edit'>edit</button>
-                                            <button onClick={handleFutureFeatureClick} className='reminder_delete'>delete</button>
+                                            <button onClick={handleFutureFeatureClick} className='edit_button'>edit</button>
+                                            <button onClick={handleFutureFeatureClick} className='delete_button'>delete</button>
                                         </div>
                                     </div>
                                 </div>
@@ -175,15 +175,15 @@ export default function ApplicationDetails() {
                                             <div className='note_card'>
                                                 <p>Note about job application</p>
                                             </div>
-                                            <button onClick={handleFutureFeatureClick} className='reminder_edit'>edit</button>
-                                            <button onClick={handleFutureFeatureClick} className='reminder_delete'>delete</button>
+                                            <button onClick={handleFutureFeatureClick} className='edit_button'>edit</button>
+                                            <button onClick={handleFutureFeatureClick} className='delete_button'>delete</button>
                                         </div>
                                         <div>
                                             <div className='note_card'>
                                                 <p>Note about job application</p>
                                             </div>
-                                            <button onClick={handleFutureFeatureClick} className='reminder_edit'>edit</button>
-                                            <button onClick={handleFutureFeatureClick} className='reminder_delete'>delete</button>
+                                            <button onClick={handleFutureFeatureClick} className='edit_button'>edit</button>
+                                            <button onClick={handleFutureFeatureClick} className='delete_button'>delete</button>
                                         </div>
                                     </div>
                                 </div>

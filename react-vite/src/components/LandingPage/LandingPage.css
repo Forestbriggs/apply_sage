@@ -162,7 +162,14 @@
 }
 
 .hero_logged_in input {
+    font-size: medium;
+    padding-inline-start: 20px;
     background-color: var(--font-color);
+    border: 1px solid grey;
+    border-radius: .3rem;
+    height: 24px;
+    width: clamp(400px, 20dvw, 90dvw);
+    margin-top: 2px;
 }
 
 .hero_logged_in button {

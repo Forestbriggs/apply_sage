@@ -44,6 +44,14 @@ export default function CompanyForm() {
 
     const handleExistingCompanySubmit = () => {
         setErrors({});
+        const newErrors = {};
+        if (!company) newErrors.company = 'Company is required';
+
+        if (Object.values(newErrors).length) {
+            setErrors(newErrors);
+            return;
+        }
+
         dispatch(thunkGetCompanyById(company)).then(() => {
             return navigate(`/companies/${company}/applications/create`)
         }).catch((e) => setErrors(e))
@@ -55,25 +63,31 @@ export default function CompanyForm() {
                 <div id='company_form__container'>
                     <div id='company_form'>
                         <h1>What Company is This Application For?</h1>
-                        <select
-                            name="company"
-                            id="company_select"
-                            value={company}
-                            onChange={(e) => setCompany(e.target.value)}
-                            disabled={newCompany}
-                        >
-                            <option disabled value="">Select a Company</option>
-                            {companies.allIds.map((company_id) => {
-                                const company = companies.data[company_id];
-                                return (
-                                    <option
-                                        key={company_id}
-                                        value={company_id}>
-                                        {company.name}
-                                    </option>
-                                )
-                            })}
-                        </select>
+                        <div>
+
+                            <select
+                                name="company"
+                                id="company_select"
+                                value={company}
+                                onChange={(e) => setCompany(e.target.value)}
+                                disabled={newCompany}
+                            >
+                                <option disabled value="">Select a Company</option>
+                                {companies.allIds.map((company_id) => {
+                                    const company = companies.data[company_id];
+                                    return (
+                                        <option
+                                            key={company_id}
+                                            value={company_id}>
+                                            {company.name}
+                                        </option>
+                                    )
+                                })}
+                            </select>
+                            <span> </span>
+                            {!newCompany && <span className='required'>*</span>}
+                            <span className='errors'> {errors.company}</span>
+                        </div>
                         <div id='not_in_list'>
                             <h2>Not in List?</h2>
                             <input
@@ -86,8 +100,8 @@ export default function CompanyForm() {
                         </div>
                         <div id='new_company_form'>
                             <div>
-                                <label>Company Name: <span className='required'>*</span>
-                                    <span className='errors'>  {errors.name ? errors.name : ''}</span>
+                                <label>Company Name: {newCompany && <span className='required'>*</span>}
+                                    <span className='errors'>  {errors.name}</span>
                                 </label>
                                 <input
                                     required
@@ -114,7 +128,7 @@ export default function CompanyForm() {
                             </button>
                         </div>
                     </div >
-                </div>
+                </div >
             }
             {!isLoaded && <LoadingPage />}
         </>
