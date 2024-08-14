@@ -163,6 +163,9 @@ export default function LandingPage() {
                                 </div>
                             )
                         })}
+                        {recent_applications.allIds.length === 0 &&
+                            <h2>Add some applications and they will show up here!</h2>
+                        }
                     </div>
                 </div>
                 <div id="app_metrics">

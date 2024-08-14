@@ -6,6 +6,7 @@ import LoadingPage from '../LoadingPage';
 import './CompanyForm.css';
 
 export default function CompanyForm() {
+    const sessionUser = useSelector(state => state.session.user);
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const [isLoaded, setIsLoaded] = useState(false);
@@ -17,12 +18,18 @@ export default function CompanyForm() {
     const companies = useSelector(state => state.companies);
 
     useEffect(() => {
+        if (!sessionUser) {
+            return navigate('/');
+        }
         if (!isLoaded) {
-            dispatch(thunkGetUserCompanies()).then(() => {
+            dispatch(thunkGetUserCompanies()).then((data) => {
+                if (Object.values(data)[0].length === 0) {
+                    setNewCompany(true);
+                }
                 setIsLoaded(true);
             })
         }
-    }, [isLoaded, dispatch])
+    }, [isLoaded, dispatch, sessionUser, navigate])
 
     const handleNewCompanySubmit = async () => {
         setErrors({})
@@ -63,40 +70,43 @@ export default function CompanyForm() {
                 <div id='company_form__container'>
                     <div id='company_form'>
                         <h1>What Company is This Application For?</h1>
-                        <div>
-
-                            <select
-                                name="company"
-                                id="company_select"
-                                value={company}
-                                onChange={(e) => setCompany(e.target.value)}
-                                disabled={newCompany}
-                            >
-                                <option disabled value="">Select a Company</option>
-                                {companies.allIds.map((company_id) => {
-                                    const company = companies.data[company_id];
-                                    return (
-                                        <option
-                                            key={company_id}
-                                            value={company_id}>
-                                            {company.name}
-                                        </option>
-                                    )
-                                })}
-                            </select>
-                            <span> </span>
-                            {!newCompany && <span className='required'>*</span>}
-                            <span className='errors'> {errors.company}</span>
-                        </div>
+                        {companies.allIds.length > 0 &&
+                            <div>
+                                <select
+                                    name="company"
+                                    id="company_select"
+                                    value={company}
+                                    onChange={(e) => setCompany(e.target.value)}
+                                    disabled={newCompany}
+                                >
+                                    <option disabled value="">Select a Company</option>
+                                    {companies.allIds.map((company_id) => {
+                                        const company = companies.data[company_id];
+                                        return (
+                                            <option
+                                                key={company_id}
+                                                value={company_id}>
+                                                {company.name}
+                                            </option>
+                                        )
+                                    })}
+                                </select>
+                                <span> </span>
+                                {!newCompany && <span className='required'>*</span>}
+                                <span className='errors'> {errors.company}</span>
+                            </div>
+                        }
                         <div id='not_in_list'>
-                            <h2>Not in List?</h2>
-                            <input
-                                type="checkbox"
-                                name="newCompany"
-                                id="new_company_checkbox"
-                                value={newCompany}
-                                onChange={() => setNewCompany(!newCompany)}
-                            />
+                            <h2>{companies.allIds.length > 0 ? 'Not in List ?' : 'Add a new company'}</h2>
+                            {companies.allIds.length > 0 &&
+                                <input
+                                    type="checkbox"
+                                    name="newCompany"
+                                    id="new_company_checkbox"
+                                    value={newCompany}
+                                    onChange={() => setNewCompany(!newCompany)}
+                                />
+                            }
                         </div>
                         <div id='new_company_form'>
                             <div>

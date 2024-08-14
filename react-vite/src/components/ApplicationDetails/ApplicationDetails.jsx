@@ -11,6 +11,7 @@ import handleFutureFeatureClick from '../../utils/handleFutureFeatureClick';
 import './ApplicationDetails.css';
 
 export default function ApplicationDetails() {
+    const sessionUser = useSelector(state => state.session.user);
     const { applicationId } = useParams();
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -18,6 +19,9 @@ export default function ApplicationDetails() {
     const [isLoaded, setIsLoaded] = useState(false);
 
     useEffect(() => {
+        if (!sessionUser || sessionUser?.id !== application?.id) {
+            return navigate('/');
+        }
         if (!isLoaded) {
             dispatch(thunkGetApplicationById(applicationId)).then(() => {
                 setIsLoaded(true);
