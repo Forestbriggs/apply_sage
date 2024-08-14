@@ -1,10 +1,10 @@
-import { isFuture } from 'date-fns';
+import { isFuture, format } from 'date-fns';
 import { useDispatch } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import ApplicationForm from "./ApplicationForm";
 import { formatSalary, cleanSalaryFormat } from '../../utils/formatSalary';
 import { thunkCreateApplication } from '../../redux/applications';
+import ApplicationForm from "./ApplicationForm";
 
 export default function NewApplicationForm() {
     const dispatch = useDispatch();
@@ -49,6 +49,8 @@ export default function NewApplicationForm() {
 
     const handleSubmit = (e) => {
         e.preventDefault()
+        const [y, m, d] = appliedDate.split('-');
+        const applied_date = new Date(y, parseInt(m, 10) - 1, d);
         setErrors({});
         const newErrors = {};
         if (title.length <= 0) newErrors.title = 'Title is required';
@@ -56,7 +58,7 @@ export default function NewApplicationForm() {
         if (!jobCategory) newErrors.job_category = 'Job category is required'
         if (salaryMin.length !== 0 && Number(salaryMin) <= 0) newErrors.salary_min = 'Minimum salary must be greater than 0';
         if (salaryMax.length !== 0 && Number(salaryMax) <= 0) newErrors.salary_max = 'Maximum salary must be greater than 0';
-        if (isFuture(appliedDate)) newErrors.applied_date = 'Applied date can not be in the future'
+        if (isFuture(applied_date)) newErrors.applied_date = 'Applied date can not be in the future'
 
 
         if (Object.values(newErrors).length) {
@@ -66,9 +68,9 @@ export default function NewApplicationForm() {
 
         const payload = { title, company: companyId };
         if (jobCategory !== 'other') payload.job_category = jobCategory
-        if (salaryMin) payload.salary_min = cleanSalaryFormat(salaryMin);
-        if (salaryMax) payload.salary_max = cleanSalaryFormat(salaryMax);
-        if (appliedDate) payload.applied_date = appliedDate;
+        if (salaryMin) payload.salary_min = Number(cleanSalaryFormat(salaryMin));
+        if (salaryMax) payload.salary_max = Number(cleanSalaryFormat(salaryMax));
+        if (appliedDate) payload.applied_date = format(applied_date, 'M/d/yyyy');
 
         return dispatch(thunkCreateApplication(payload)).then((data) => {
             return navigate(`/applications/${data}`)
