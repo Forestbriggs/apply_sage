@@ -4,11 +4,12 @@ import { FaRegFile, FaRegFileAlt } from 'react-icons/fa';
 import { format, parseISO } from 'date-fns';
 import { useEffect, useState } from 'react';
 import { thunkGetApplicationById } from '../../redux/applications';
-// import OpenModalButton from '../OpenModalButton';
+import OpenModalButton from '../OpenModalButton';
 import LoadingPage from '../LoadingPage';
 import determineStatusClass from '../../utils/determineStatusClass';
 import handleFutureFeatureClick from '../../utils/handleFutureFeatureClick';
 import './ApplicationDetails.css';
+import DeleteApplicationModal from '../DeleteApplicationModal/DeleteApplicationModal';
 
 export default function ApplicationDetails() {
     const sessionUser = useSelector(state => state.session.user);
@@ -54,6 +55,10 @@ export default function ApplicationDetails() {
         return navigate('edit');
     }
 
+    const navigateOnDelete = () => {
+        return navigate('/applications');
+    }
+
     return (
         <>
             {isLoaded &&
@@ -77,8 +82,12 @@ export default function ApplicationDetails() {
                                 <button onClick={handleEditClick} className='edit_button'>Edit</button>
                                 <button onClick={handleFutureFeatureClick} id='archive_button'>Archive</button>
                                 {/* TODO create delete modal */}
-                                {/* <OpenModalButton buttonText={'Delete'} id={'delete_button'} /> */}
-                                <button onClick={handleFutureFeatureClick} className='delete_button'>Delete</button>
+                                <OpenModalButton
+                                    buttonText={'Delete'}
+                                    className={'delete_button'}
+                                    navigateOnDelete={navigateOnDelete}
+                                    modalComponent={<DeleteApplicationModal />}
+                                />
                             </div>
                         </div>
                     </div>
