@@ -76,3 +76,7 @@ input:disabled {
 .add_button {
     background-color: var(--main-button-color);
 }
+
+* {
+    word-break: break-all;
+}

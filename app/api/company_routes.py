@@ -63,6 +63,7 @@ def edit_company(company_id):
         company.name = form.name.data
         company.website = form.website.data
         company.updated_at = datetime.now()
+        
         db.session.commit()
         return company.to_dict()
     return form.errors, 400

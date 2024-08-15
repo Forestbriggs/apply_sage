@@ -30,6 +30,7 @@ export const thunkGetCompanyById = (company_id) => async (dispatch) => {
     if (response.ok) {
         const data = await response.json();
         dispatch(setCompany(data));
+        return data;
     } else if (response.status < 500) {
         const errors = await response.json();
         return errors;
@@ -41,6 +42,26 @@ export const thunkGetCompanyById = (company_id) => async (dispatch) => {
 export const thunkCreateCompany = (payload) => async (dispatch) => {
     const response = await fetch('/api/companies', {
         method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(payload)
+    });
+    if (response.ok) {
+        const data = await response.json();
+        dispatch(setCompany(data));
+        return data.id;
+    } else if (response.status < 500) {
+        const errors = await response.json();
+        throw errors;
+    } else {
+        return { server: 'Something went wrong. Please try again' }
+    }
+}
+
+export const thunkEditCompany = (companyId, payload) => async (dispatch) => {
+    const response = await fetch(`/api/companies/${companyId}`, {
+        method: 'PUT',
         headers: {
             'Content-Type': 'application/json'
         },
