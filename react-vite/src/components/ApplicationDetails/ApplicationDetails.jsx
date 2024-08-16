@@ -87,7 +87,7 @@ export default function ApplicationDetails() {
                                     className={'delete_button'}
                                     modalComponent={
                                         <DeleteModal
-                                            applicationId={applicationId}
+                                            typeId={applicationId}
                                             navigateOnDelete={navigateOnDelete}
                                             type={'application'}
                                         />
