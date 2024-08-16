@@ -1,13 +1,17 @@
 import { useDispatch } from 'react-redux';
 import { useModal } from '../../context/Modal';
 import './DeleteApplicationModal.css';
+import { thunkDeleteApplicationById } from '../../redux/applications';
 
 export default function DeleteApplicationModal({ applicationId, navigateOnDelete }) {
     const { closeModal } = useModal();
     const dispatch = useDispatch();
 
     const confirmDelete = () => {
-        console.log('deleting')
+        dispatch(thunkDeleteApplicationById(applicationId)).then(() => {
+            closeModal();
+            return navigateOnDelete();
+        })
     }
 
     return (

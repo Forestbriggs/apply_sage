@@ -1,5 +1,6 @@
 const SET_APPLICATIONS = 'applications/setApplications';
 const SET_APPLICATION = 'applications/setApplication';
+const REMOVE_APPLICATION = 'applications/removeApplication';
 
 const setApplications = (applications) => ({
     type: SET_APPLICATIONS,
@@ -9,6 +10,11 @@ const setApplications = (applications) => ({
 const setApplication = (application) => ({
     type: SET_APPLICATION,
     payload: application
+})
+
+const removeApplication = (applicationId) => ({
+    type: REMOVE_APPLICATION,
+    payload: applicationId
 })
 
 export const thunkGetUserApplications = () => async (dispatch) => {
@@ -91,6 +97,22 @@ export const thunkEditApplication = (applicationId, payload) => async (dispatch)
     }
 }
 
+export const thunkDeleteApplicationById = (applicationId) => async (dispatch) => {
+    const response = await fetch(`/api/applications/${applicationId}`, {
+        method: 'DELETE'
+    });
+    if (response.ok) {
+        const data = await response.json();
+        dispatch(removeApplication(applicationId));
+        return data;
+    } else if (response.status < 500) {
+        const errors = await response.json();
+        throw errors;
+    } else {
+        return { server: 'Something went wrong. Please try again' }
+    }
+}
+
 const initialState = { data: {}, allIds: [] };
 
 function applicationReducer(state = initialState, action) {
@@ -114,6 +136,17 @@ function applicationReducer(state = initialState, action) {
                 newState.allIds.push(application.id)
             }
             return newState;
+        }
+
+        case REMOVE_APPLICATION: {
+            const newState = structuredClone(state);
+            const applicationId = action.payload;
+            if (newState.data[applicationId]) {
+                delete newState.data[applicationId];
+            }
+            if (newState.allIds.indexOf(applicationId) > -1) {
+                newState.allIds.splice(newState.allIds.indexOf(applicationId), 1)
+            }
         }
 
         default:
