@@ -1,0 +1,23 @@
+#delete_modal__container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+    padding: 10px;
+}
+
+#delete_modal__container>h1 {
+    margin-bottom: 0;
+}
+
+#delete_modal__container>div {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    align-items: center;
+}
+
+#delete_modal__container>div>button {
+    padding: 10px 15px;
+    font-size: large;
+}

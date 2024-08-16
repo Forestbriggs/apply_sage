@@ -9,10 +9,12 @@
     width: var(--card-width);
 }
 
-#company_form>select {
-    background-color: rgba(255, 255, 255, 0.87);
+
+#company_select {
     border: 1px solid grey;
     border-radius: .3rem;
+    width: 200px;
+    height: 24px;
 }
 
 #not_in_list {
@@ -62,4 +64,15 @@ span.required,
 span.errors {
     color: red;
     font-size: 14px;
+}
+
+#edit_company_title,
+.company_edit_form {
+    width: var(--card-width);
+    margin: 0 auto;
+}
+
+#edit_company_title {
+    margin-top: 15px;
+    margin-bottom: 10px;
 }

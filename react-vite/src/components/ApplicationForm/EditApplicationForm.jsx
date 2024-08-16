@@ -31,10 +31,16 @@ export default function EditApplicationForm() {
         if (!sessionUser) {
             return navigate('/');
         }
+        if (!Number.isInteger(Number(applicationId))) {
+            return navigate('/error-page');
+        }
         fetchCategories();
         if (!isLoaded) {
 
             dispatch(thunkGetApplicationById(applicationId)).then((app) => {
+                if (app.errors) {
+                    return navigate('/error-page')
+                }
                 if (sessionUser.id !== app.user_id) {
                     return navigate('/');
                 }

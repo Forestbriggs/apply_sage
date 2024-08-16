@@ -5,14 +5,12 @@ import ErrorPage from '../components/ErrorPage';
 import ApplicationList from '../components/ApplicationList/ApplicationList';
 import ApplicationDetails from '../components/ApplicationDetails';
 import NewApplicationForm from '../components/ApplicationForm/NewApplicationForm';
+import EditApplicationForm from '../components/ApplicationForm/EditApplicationForm';
 import CompanyList from '../components/CompanyList';
 import CompanyForm from '../components/CompanyForm/CompanyForm';
-import EditApplicationForm from '../components/ApplicationForm/EditApplicationForm';
+import EditCompanyForm from '../components/CompanyForm/EditCompanyForm';
 
-// TODO site wide validate user on all login required pages
-// TODO redirect if not logged in OR if logging out
-
-
+// TODO add break-word to inputs to protect against bad actors, test inputs
 export const router = createBrowserRouter([
     {
         element: <Layout />,
@@ -55,8 +53,21 @@ export const router = createBrowserRouter([
                         element: <CompanyForm />
                     },
                     {
-                        path: ':companyId/applications/create',
-                        element: <NewApplicationForm />
+                        path: ':companyId',
+                        children: [
+                            {
+                                index: true,
+                                element: <ErrorPage />
+                            },
+                            {
+                                path: 'applications/create',
+                                element: <NewApplicationForm />
+                            },
+                            {
+                                path: 'edit',
+                                element: <EditCompanyForm />
+                            }
+                        ]
                     }
                 ]
             },

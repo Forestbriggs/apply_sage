@@ -28,6 +28,9 @@ export default function NewApplicationForm() {
     const verifyCompanyOwnership = useCallback(async () => {
         const response = await fetch(`/api/companies/${companyId}`);
         const company = await response.json();
+        if (company.errors) {
+            return navigate('/error-page')
+        }
         if (company.user.id !== sessionUser?.id) {
             return navigate('/')
         }
@@ -37,9 +40,12 @@ export default function NewApplicationForm() {
         if (!sessionUser) {
             return navigate('/');
         }
+        if (!Number.isInteger(Number(companyId))) {
+            return navigate('error-page')
+        }
         verifyCompanyOwnership();
         fetchCategories();
-    }, [navigate, sessionUser, verifyCompanyOwnership])
+    }, [navigate, sessionUser, verifyCompanyOwnership, companyId])
 
     const handleMinSalaryChange = (e) => {
         const formattedVal = formatSalary(e);

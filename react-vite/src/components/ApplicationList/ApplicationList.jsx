@@ -8,7 +8,7 @@ import { useNavigate } from 'react-router-dom';
 
 
 
-
+// TODO add pagination
 export default function ApplicationList() {
     const sessionUser = useSelector(state => state.session.user);
     const dispatch = useDispatch();

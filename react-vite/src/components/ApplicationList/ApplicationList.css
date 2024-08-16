@@ -17,7 +17,6 @@
 
 .application_card {
     border: 1px solid rgb(255, 255, 255, 0.5);
-    /* border: 1px solid #484848; */
     border-radius: .25rem;
     display: flex;
     width: var(--card-width);
@@ -27,6 +26,10 @@
 .application_card:hover {
     cursor: pointer;
     border: 1px solid #1F1F1F;
+}
+
+.application_title {
+    word-break: keep-all;
 }
 
 .application_card>div:not(:first-of-type) {

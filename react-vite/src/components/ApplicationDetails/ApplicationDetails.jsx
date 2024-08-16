@@ -4,11 +4,12 @@ import { FaRegFile, FaRegFileAlt } from 'react-icons/fa';
 import { format, parseISO } from 'date-fns';
 import { useEffect, useState } from 'react';
 import { thunkGetApplicationById } from '../../redux/applications';
-// import OpenModalButton from '../OpenModalButton';
+import OpenModalButton from '../OpenModalButton';
 import LoadingPage from '../LoadingPage';
 import determineStatusClass from '../../utils/determineStatusClass';
 import handleFutureFeatureClick from '../../utils/handleFutureFeatureClick';
 import './ApplicationDetails.css';
+import DeleteModal from '../DeleteModal/DeleteModal';
 
 export default function ApplicationDetails() {
     const sessionUser = useSelector(state => state.session.user);
@@ -20,15 +21,24 @@ export default function ApplicationDetails() {
     let appliedDate;
 
     useEffect(() => {
-        if (!sessionUser || sessionUser?.id !== application?.user_id) {
+        if (!sessionUser) {
             return navigate('/');
         }
-        if (!isLoaded) {
-            dispatch(thunkGetApplicationById(applicationId)).then(() => {
-                setIsLoaded(true);
-            }, [dispatch, isLoaded])
+        if (!Number.isInteger(Number(applicationId))) {
+            return navigate('/error-page');
         }
-    })
+        if (!isLoaded) {
+            dispatch(thunkGetApplicationById(applicationId)).then((application) => {
+                if (application.errors) {
+                    return navigate('/error-page')
+                }
+                if (sessionUser.id !== application.user_id) {
+                    return navigate('/');
+                }
+                setIsLoaded(true);
+            })
+        }
+    }, [dispatch, isLoaded, applicationId, navigate, sessionUser])
 
     if (isLoaded && application?.applied_date) {
         const isoDateStr = new Date(application.applied_date).toISOString();
@@ -43,6 +53,10 @@ export default function ApplicationDetails() {
 
     const handleEditClick = () => {
         return navigate('edit');
+    }
+
+    const navigateOnDelete = () => {
+        return navigate('/applications');
     }
 
     return (
@@ -68,8 +82,17 @@ export default function ApplicationDetails() {
                                 <button onClick={handleEditClick} className='edit_button'>Edit</button>
                                 <button onClick={handleFutureFeatureClick} id='archive_button'>Archive</button>
                                 {/* TODO create delete modal */}
-                                {/* <OpenModalButton buttonText={'Delete'} id={'delete_button'} /> */}
-                                <button onClick={handleFutureFeatureClick} className='delete_button'>Delete</button>
+                                <OpenModalButton
+                                    buttonText={'Delete'}
+                                    className={'delete_button'}
+                                    modalComponent={
+                                        <DeleteModal
+                                            applicationId={applicationId}
+                                            navigateOnDelete={navigateOnDelete}
+                                            type={'application'}
+                                        />
+                                    }
+                                />
                             </div>
                         </div>
                     </div>

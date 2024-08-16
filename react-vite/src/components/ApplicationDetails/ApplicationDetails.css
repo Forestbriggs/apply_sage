@@ -46,6 +46,7 @@
 }
 
 #header_status_buttons {
+    min-width: 222px;
     text-align: end;
 }
 

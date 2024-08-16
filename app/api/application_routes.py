@@ -86,3 +86,19 @@ def edit_application(application_id):
         db.session.commit()
         return application.to_dict_details()
     return form.errors, 400
+
+    
+@application_routes.delete('/<int:application_id>')
+@login_required
+def delete_application(application_id):
+    application = Application.query.get(application_id)
+    
+    if not application:
+        return {'errors': {'message': 'Job Application could not be found'}}, 404
+    
+    if application.user_id != current_user.id:
+        return {'error': {'message': 'Unauthorized'}}, 401
+    
+    db.session.delete(application)
+    db.session.commit()
+    return {'message': 'Successfully deleted'}

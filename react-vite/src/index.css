@@ -76,3 +76,15 @@ input:disabled {
 .add_button {
     background-color: var(--main-button-color);
 }
+
+.cancel_button {
+    background-color: #A9A9A9;
+}
+
+.cancel_button:hover {
+    background-color: #6C757D;
+}
+
+* {
+    word-break: break-all;
+}

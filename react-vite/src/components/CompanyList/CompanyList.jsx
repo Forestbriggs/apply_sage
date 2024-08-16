@@ -6,6 +6,7 @@ import { thunkGetUserCompanies } from '../../redux/companies';
 import CompanyCard from './CompanyCard';
 import { useNavigate } from 'react-router-dom';
 
+// TODO add pagination
 export default function CompanyList() {
     const sessionUser = useSelector(state => state.session.user);
     const dispatch = useDispatch();
@@ -20,9 +21,10 @@ export default function CompanyList() {
         if (!isLoaded) {
             dispatch(thunkGetUserCompanies()).then(() => {
                 setIsLoaded(true);
-            }, [dispatch, isLoaded])
+            })
         }
-    })
+
+    }, [dispatch, isLoaded, navigate, sessionUser])
 
     const handleAddClick = () => {
         return navigate('/companies/select');
@@ -44,7 +46,10 @@ export default function CompanyList() {
                         {companies.allIds.map((company_id) => {
                             const company = companies.data[company_id];
                             return (
-                                <CompanyCard key={company.id} company={company} />
+                                <CompanyCard
+                                    key={company.id}
+                                    company={company}
+                                />
                             )
                         })}
                     </div>
