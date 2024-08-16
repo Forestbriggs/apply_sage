@@ -1,3 +1,3 @@
-import DeleteApplicationModal from "./DeleteApplicationModal";
+import DeleteModal from "./DeleteModal";
 
-export default DeleteApplicationModal;
+export default DeleteModal;
