@@ -1,6 +1,7 @@
 import { format, parseISO } from 'date-fns';
 import { useNavigate } from 'react-router-dom';
 import determineStatusClass from '../../utils/determineStatusClass';
+import verifyStringLength from '../../utils/verifyStringLength';
 
 export default function ApplicationCard({ application }) {
     const navigate = useNavigate();
@@ -26,7 +27,11 @@ export default function ApplicationCard({ application }) {
     return (
         <div className="application_card" onClick={handleClick}>
             <div>
-                <h3>{application.title}</h3>
+                <h3
+                    className={verifyStringLength(application.title, 18) ? 'application_title' : ''}
+                >
+                    {application.title}
+                </h3>
                 <p>{application.company.name}</p>
             </div>
             <div>

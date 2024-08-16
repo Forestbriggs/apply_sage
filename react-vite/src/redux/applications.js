@@ -147,6 +147,7 @@ function applicationReducer(state = initialState, action) {
             if (newState.allIds.indexOf(applicationId) > -1) {
                 newState.allIds.splice(newState.allIds.indexOf(applicationId), 1)
             }
+            return newState;
         }
 
         default:

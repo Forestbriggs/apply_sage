@@ -21,9 +21,10 @@ export default function CompanyList() {
         if (!isLoaded) {
             dispatch(thunkGetUserCompanies()).then(() => {
                 setIsLoaded(true);
-            }, [dispatch, isLoaded])
+            })
         }
-    })
+
+    }, [dispatch, isLoaded, navigate, sessionUser])
 
     const handleAddClick = () => {
         return navigate('/companies/select');
@@ -45,7 +46,10 @@ export default function CompanyList() {
                         {companies.allIds.map((company_id) => {
                             const company = companies.data[company_id];
                             return (
-                                <CompanyCard key={company.id} company={company} />
+                                <CompanyCard
+                                    key={company.id}
+                                    company={company}
+                                />
                             )
                         })}
                     </div>

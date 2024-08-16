@@ -9,7 +9,7 @@ import LoadingPage from '../LoadingPage';
 import determineStatusClass from '../../utils/determineStatusClass';
 import handleFutureFeatureClick from '../../utils/handleFutureFeatureClick';
 import './ApplicationDetails.css';
-import DeleteApplicationModal from '../DeleteApplicationModal/DeleteApplicationModal';
+import DeleteModal from '../DeleteModal/DeleteModal';
 
 export default function ApplicationDetails() {
     const sessionUser = useSelector(state => state.session.user);
@@ -85,7 +85,13 @@ export default function ApplicationDetails() {
                                 <OpenModalButton
                                     buttonText={'Delete'}
                                     className={'delete_button'}
-                                    modalComponent={<DeleteApplicationModal applicationId={applicationId} navigateOnDelete={navigateOnDelete} />}
+                                    modalComponent={
+                                        <DeleteModal
+                                            applicationId={applicationId}
+                                            navigateOnDelete={navigateOnDelete}
+                                            type={'application'}
+                                        />
+                                    }
                                 />
                             </div>
                         </div>

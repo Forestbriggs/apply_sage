@@ -17,7 +17,7 @@ class User(db.Model, UserMixin):
     created_at = db.Column(db.DateTime, default=datetime.now())
     updated_at = db.Column(db.DateTime, default=datetime.now())
 
-    companies = db.relationship('Company', back_populates='user')
+    companies = db.relationship('Company', back_populates='user', cascade='all, delete-orphan')
     
     applications = db.relationship('Application', back_populates='user')
 

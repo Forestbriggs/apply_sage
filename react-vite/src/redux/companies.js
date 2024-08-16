@@ -1,5 +1,6 @@
 const SET_COMPANIES = 'companies/setCompanies';
 const SET_COMPANY = 'companies/setCompany';
+const REMOVE_COMPANY = 'companies/removeCompany'
 
 const setCompanies = (companies) => ({
     type: SET_COMPANIES,
@@ -9,6 +10,11 @@ const setCompanies = (companies) => ({
 const setCompany = (company) => ({
     type: SET_COMPANY,
     payload: company
+});
+
+const removeCompany = (companyId) => ({
+    type: REMOVE_COMPANY,
+    payload: companyId
 });
 
 export const thunkGetUserCompanies = () => async (dispatch) => {
@@ -79,6 +85,22 @@ export const thunkEditCompany = (companyId, payload) => async (dispatch) => {
     }
 }
 
+export const thunkDeleteCompanyById = (companyId) => async (dispatch) => {
+    const response = await fetch(`/api/companies/${companyId}`, {
+        method: 'DELETE'
+    });
+    if (response.ok) {
+        const data = await response.json();
+        dispatch(removeCompany(companyId));
+        return data;
+    } else if (response.status < 500) {
+        const errors = await response.json();
+        throw errors;
+    } else {
+        return { server: 'Something went wrong. Please try again' }
+    }
+}
+
 
 const initialState = { data: {}, allIds: [] }
 
@@ -101,6 +123,18 @@ function companyReducer(state = initialState, action) {
             newState.data[company.id] = company;
             if (newState.allIds.indexOf(company.id) < 0) {
                 newState.allIds.push(company.id)
+            }
+            return newState;
+        }
+
+        case REMOVE_COMPANY: {
+            const newState = structuredClone(state);
+            const companyId = action.payload;
+            if (newState.data[companyId]) {
+                delete newState.data[companyId];
+            }
+            if (newState.allIds.indexOf(companyId) > -1) {
+                newState.allIds.splice(newState.allIds.indexOf(companyId), 1)
             }
             return newState;
         }

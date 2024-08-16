@@ -7,7 +7,7 @@ from datetime import datetime
 company_routes = Blueprint('company', __name__)
 
 
-@company_routes.route('')
+@company_routes.get('')
 @login_required
 def companies():
     companies = Company.query.filter(Company.user_id==current_user.id)
@@ -46,7 +46,7 @@ def create_company():
     return form.errors, 400
 
 
-@company_routes.route('/<int:company_id>', methods=['PUT'])
+@company_routes.put('/<int:company_id>')
 @login_required
 def edit_company(company_id):
     company = Company.query.get(company_id)
@@ -69,7 +69,7 @@ def edit_company(company_id):
     return form.errors, 400
 
 
-@company_routes.route('/<int:company_id>', methods=['DELETE'])
+@company_routes.delete('/<int:company_id>')
 @login_required
 def delete_company(company_id):
     company = Company.query.get(company_id)

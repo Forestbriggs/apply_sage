@@ -16,7 +16,7 @@ class Company(db.Model):
     
     user = db.relationship('User', back_populates='companies')
 
-    applications = db.relationship('Application', back_populates='company')
+    applications = db.relationship('Application', back_populates='company', cascade="all, delete-orphan")
 
     def to_dict(self):
         return {

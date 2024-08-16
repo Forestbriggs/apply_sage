@@ -1,4 +1,6 @@
 import { useNavigate } from "react-router-dom"
+import OpenModalButton from '../OpenModalButton';
+import DeleteModal from "../DeleteModal/DeleteModal";
 
 export default function CompanyCard({ company }) {
     const navigate = useNavigate();
@@ -18,9 +20,23 @@ export default function CompanyCard({ company }) {
             <div className="button_group">
                 <div>
                     <button onClick={handleEdit} className='edit_button'>Edit</button>
-                    <button className="delete_button">Delete</button>
+                    <OpenModalButton
+                        buttonText={'Delete'}
+                        className={'delete_button'}
+                        modalComponent={
+                            <DeleteModal
+                                typeId={company.id}
+                                type={'company'}
+                            />
+                        }
+                    />
                 </div>
-                <button onClick={handleAddApplication} className="add_button">Add Application</button>
+                <button
+                    onClick={handleAddApplication}
+                    className="add_button"
+                >
+                    Add Application
+                </button>
             </div>
         </div>
     )
