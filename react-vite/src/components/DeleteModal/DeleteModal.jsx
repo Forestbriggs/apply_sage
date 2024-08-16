@@ -12,8 +12,8 @@ export default function DeleteModal({ typeId, navigateOnDelete, type }) {
         switch (type) {
             case 'application':
                 dispatch(thunkDeleteApplicationById(typeId)).then(() => {
-                    closeModal();
-                    return navigateOnDelete();
+                    navigateOnDelete();
+                    return closeModal();
                 })
                 break
             case 'company':
@@ -32,7 +32,7 @@ export default function DeleteModal({ typeId, navigateOnDelete, type }) {
             <div>
                 <div id='delete_modal__container'>
                     <h1>Confirm Delete</h1>
-                    <h3>Are you sure you want to delete this application?</h3>
+                    <h3>Are you sure you want to delete this {type === 'company' ? 'company' : 'application'}?</h3>
                     <div>
                         <button onClick={closeModal} className='cancel_button'>Cancel</button>
                         <button onClick={confirmDelete} className='delete_button'>Delete</button>
