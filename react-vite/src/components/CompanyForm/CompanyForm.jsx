@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { thunkCreateCompany, thunkGetCompanyById, thunkGetUserCompanies } from '../../redux/companies';
+import { toast } from 'react-toastify';
 import LoadingPage from '../LoadingPage';
 import './CompanyForm.css';
 
@@ -44,9 +45,15 @@ export default function CompanyForm() {
         const payload = { name: companyName };
         if (companyWebsite.length) payload.website = companyWebsite;
 
-        return dispatch(thunkCreateCompany(payload)).then((data) => {
+        return toast.promise(dispatch(thunkCreateCompany(payload)).then((data) => {
             return navigate(`/companies/${data}/applications/create`)
-        }).catch((e) => setErrors(e));
+        }),
+            {
+                pending: 'Posting...',
+                success: 'Company successfully created',
+                error: 'Error creating Company',
+
+            }).catch((e) => setErrors(e))
     }
 
     const handleExistingCompanySubmit = () => {

@@ -1,3 +1,4 @@
+import axios from 'axios';
 const SET_APPLICATIONS = 'applications/setApplications';
 const SET_APPLICATION = 'applications/setApplication';
 const REMOVE_APPLICATION = 'applications/removeApplication';
@@ -18,15 +19,19 @@ const removeApplication = (applicationId) => ({
 })
 
 export const thunkGetUserApplications = () => async (dispatch) => {
-    const response = await fetch('/api/applications');
-    if (response.ok) {
-        const data = await response.json();
-        dispatch(setApplications(data));
-    } else if (response.status < 500) {
-        const errors = await response.json();
-        return errors;
-    } else {
-        return { server: 'Something went wrong. Please try again' }
+    try {
+        const response = await axios.get('/api/applications');
+        console.log(response)
+        if (response.status >= 200 && response.status < 300) {
+            const data = response.data;
+            dispatch(setApplications(data));
+        }
+    } catch (error) {
+        if (error.response) {
+            throw error.response
+        } else {
+            throw { server: 'Something went wrong. Please try again' }
+        }
     }
 };
 
