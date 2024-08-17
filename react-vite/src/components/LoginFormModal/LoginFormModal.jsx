@@ -23,18 +23,13 @@ function LoginFormModal() {
             return;
         }
 
-        const serverResponse = await dispatch(
-            thunkLogin({
-                email,
-                password,
-            })
-        );
-
-        if (serverResponse) {
-            setErrors(serverResponse);
-        } else {
+        return dispatch(thunkLogin({
+            email,
+            password,
+        })
+        ).then(() => {
             closeModal();
-        }
+        }).catch((e) => { setErrors(e) })
     };
 
     const demoLogin = (e) => {

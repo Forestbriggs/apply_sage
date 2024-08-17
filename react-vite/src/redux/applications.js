@@ -21,11 +21,8 @@ const removeApplication = (applicationId) => ({
 export const thunkGetUserApplications = () => async (dispatch) => {
     try {
         const response = await axios.get('/api/applications');
-        console.log(response)
-        if (response.status >= 200 && response.status < 300) {
-            const data = response.data;
-            dispatch(setApplications(data));
-        }
+        const data = response.data;
+        dispatch(setApplications(data));
     } catch (error) {
         if (error.response) {
             throw error.response
@@ -36,85 +33,76 @@ export const thunkGetUserApplications = () => async (dispatch) => {
 };
 
 export const thunkGetUserDashboard = () => async (dispatch) => {
-    const response = await fetch('/api/applications/dashboard');
-    if (response.ok) {
-        const data = await response.json();
+    try {
+        const response = await axios.get('/api/applications/dashboard');
+        const data = response.data;
         dispatch(setApplications(data));
-    } else if (response.status < 500) {
-        const errors = await response.json();
-        return errors;
-    } else {
-        return { server: 'Something went wrong. Please try again' }
+    } catch (error) {
+        if (error.response) {
+            throw error.response.data;
+        } else {
+            throw { server: 'Something went wrong. Please try again' }
+        }
     }
 }
 
 export const thunkGetApplicationById = (application_id) => async (dispatch) => {
-    const response = await fetch(`/api/applications/${application_id}`);
-    if (response.ok) {
-        const data = await response.json();
+    try {
+        const response = await axios.get(`/api/applications/${application_id}`);
+        const data = response.data;
         dispatch(setApplication(data));
         return data;
-    } else if (response.status < 500) {
-        const errors = await response.json();
-        return errors;
-    } else {
-        return { server: 'Something went wrong. Please try again' }
+    } catch (error) {
+        if (error.response) {
+            throw error.response.data;
+        } else {
+            throw { server: 'Something went wrong. Please try again' }
+        }
     }
 }
 
 export const thunkCreateApplication = (payload) => async (dispatch) => {
-    const response = await fetch('/api/applications', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(payload)
-    });
-    if (response.ok) {
-        const data = await response.json();
+    try {
+        const response = await axios.post('/api/applications', payload);
+        const data = response.data;
         dispatch(setApplication(data));
         return data.id;
-    } else if (response.status < 500) {
-        const errors = await response.json();
-        throw errors;
-    } else {
-        return { server: 'Something went wrong. Please try again' }
+    } catch (error) {
+        if (error.response) {
+            throw error.response.data;
+        } else {
+            throw { server: 'Something went wrong. Please try again' }
+        }
     }
 }
 
 export const thunkEditApplication = (applicationId, payload) => async (dispatch) => {
-    const response = await fetch(`/api/applications/${applicationId}`, {
-        method: 'PUT',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(payload)
-    });
-    if (response.ok) {
-        const data = await response.json();
+    try {
+        const response = await axios.put(`/api/applications/${applicationId}`, payload);
+        const data = response.data;
         dispatch(setApplication(data));
         return data.id;
-    } else if (response.status < 500) {
-        const errors = await response.json();
-        throw errors;
-    } else {
-        return { server: 'Something went wrong. Please try again' }
+    } catch (error) {
+        if (error.response) {
+            throw error.response.data;
+        } else {
+            throw { server: 'Something went wrong. Please try again' }
+        }
     }
 }
 
 export const thunkDeleteApplicationById = (applicationId) => async (dispatch) => {
-    const response = await fetch(`/api/applications/${applicationId}`, {
-        method: 'DELETE'
-    });
-    if (response.ok) {
+    try {
+        const response = await axios.delete(`/api/applications/${applicationId}`);
         const data = await response.json();
         dispatch(removeApplication(applicationId));
         return data;
-    } else if (response.status < 500) {
-        const errors = await response.json();
-        throw errors;
-    } else {
-        return { server: 'Something went wrong. Please try again' }
+    } catch (error) {
+        if (error.response) {
+            throw error.response.data;
+        } else {
+            throw { server: 'Something went wrong. Please try again' }
+        }
     }
 }
 

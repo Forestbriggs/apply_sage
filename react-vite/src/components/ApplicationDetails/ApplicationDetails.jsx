@@ -29,14 +29,11 @@ export default function ApplicationDetails() {
         }
         if (!isLoaded) {
             dispatch(thunkGetApplicationById(applicationId)).then((application) => {
-                if (application.errors) {
-                    return navigate('/error-page')
-                }
                 if (sessionUser.id !== application.user_id) {
                     return navigate('/');
                 }
                 setIsLoaded(true);
-            })
+            }).catch(() => navigate('/error-page'));
         }
     }, [dispatch, isLoaded, applicationId, navigate, sessionUser])
 
