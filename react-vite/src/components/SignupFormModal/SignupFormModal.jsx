@@ -23,19 +23,17 @@ function SignupFormModal() {
             });
         }
 
-        const serverResponse = await dispatch(
+        return dispatch(
             thunkSignup({
                 email,
                 username,
                 password,
             })
-        );
-
-        if (serverResponse) {
-            setErrors(serverResponse);
-        } else {
+        ).then(() => {
             closeModal();
-        }
+        }).catch((e) => {
+            setErrors(e);
+        });
     };
 
     return (
@@ -43,48 +41,49 @@ function SignupFormModal() {
             <div id="login_signup__container">
 
                 <h1>Sign Up</h1>
-                {errors.server && <p>{errors.server}</p>}
+                <div className="error__container">
+                    {errors.server && <p>{errors.server}</p>}
+                </div>
                 <form onSubmit={handleSubmit}>
                     <label>
-                        Email
-                        <input
-                            type="text"
-                            value={email}
-                            onChange={(e) => setEmail(e.target.value)}
-                            required
-                        />
+                        Email<span>{errors.email && <p className="errors">{errors.email}</p>}</span>
                     </label>
-                    {errors.email && <p>{errors.email}</p>}
+                    <input
+                        type="text"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        required
+                    />
                     <label>
                         Username
-                        <input
-                            type="text"
-                            value={username}
-                            onChange={(e) => setUsername(e.target.value)}
-                            required
-                        />
+                        {errors.username && <p>{errors.username}</p>}
                     </label>
-                    {errors.username && <p>{errors.username}</p>}
+                    <input
+                        type="text"
+                        value={username}
+                        onChange={(e) => setUsername(e.target.value)}
+                        required
+                    />
                     <label>
                         Password
-                        <input
-                            type="password"
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
-                            required
-                        />
                     </label>
                     {errors.password && <p>{errors.password}</p>}
+                    <input
+                        type="password"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        required
+                    />
                     <label>
                         Confirm Password
-                        <input
-                            type="password"
-                            value={confirmPassword}
-                            onChange={(e) => setConfirmPassword(e.target.value)}
-                            required
-                        />
+                        {errors.confirmPassword && <p>{errors.confirmPassword}</p>}
                     </label>
-                    {errors.confirmPassword && <p>{errors.confirmPassword}</p>}
+                    <input
+                        type="password"
+                        value={confirmPassword}
+                        onChange={(e) => setConfirmPassword(e.target.value)}
+                        required
+                    />
                     <button type="submit">Sign Up</button>
                 </form>
             </div>

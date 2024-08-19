@@ -1,4 +1,9 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 :root {
+    /* Try changing back to 484848 after fixing all container bg colors */
     --bg-color-alt: #48484860;
     --card-width: clamp(400px, 70dvw, 1000px);
     --font-family: Roboto;
@@ -28,17 +33,25 @@
 }
 
 #main__container {
-    min-height: 77.5dvh;
+    min-height: calc(100dvh - 96px - 100px);
+    background-color: var(--bg-color-alt);
 }
 
-a {
+@layer base {
+    a {
+        /* create custom css classes with websites colors */
+        @apply text-white hover:text-green-500
+    }
+}
+
+/* a {
     color: var(--font-color);
     text-decoration: none;
 }
 
 a:hover {
     color: var(--font-hover-color);
-}
+} */
 
 button {
     color: var(--font-color);

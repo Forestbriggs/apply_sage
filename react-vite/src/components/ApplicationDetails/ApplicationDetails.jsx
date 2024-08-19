@@ -60,16 +60,22 @@ export default function ApplicationDetails() {
         <>
             {isLoaded &&
 
-                <div id='application_details'>
-                    <div id='application_header'>
-                        <div id='application_header_title'>
+                <div className='my-0 mx-auto pt-2.5'>
+                    <div className='py-0 px-[150px] border-b border-solid border-[#484848] flex justify-between pb-[10px]'>
+                        <div>
                             <span onClick={handleBackClick} id='back_button'><div>{'<'}</div><p>Back to applications</p></span>
-                            <h1>{application.title}</h1>
-                            <div id='company__container'>
-                                <h2>{application.company.name}</h2>
+                            <h1 className='mt-1.5 mb-0 text-3xl font-bold'>{application.title}</h1>
+                            <div className='flex items-center gap-5'>
+                                <h2 className='text-2xl'>{application.company.name}</h2>
                                 {
                                     application?.company?.website &&
-                                    <a target='_blank' rel='noopener noreferrer' href={application.company.website}>{application.company.name}&apos;s Career Page</a>
+                                    <a
+                                        target='_blank'
+                                        rel='noopener noreferrer'
+                                        href={application.company.website}
+                                    >
+                                        {application.company.name}&apos;s Career Page
+                                    </a>
                                 }
                             </div>
                         </div>
@@ -226,7 +232,7 @@ export default function ApplicationDetails() {
                             </div>
                         </div>
                     </div>
-                </div>
+                </div >
             }
             {!isLoaded && <LoadingPage />}
         </>
