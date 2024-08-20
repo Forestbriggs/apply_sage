@@ -1,15 +1,26 @@
 import { NavLink } from 'react-router-dom';
-import './Footer.css';
 
 export default function Footer() {
     return (
-        <div id='footer'>
+        <div className='h-[100px] flex items-center justify-between px-[35px]'>
             <div>
                 <p>© 2024 ApplySage</p>
             </div>
-            <div id='footer_links'>
-                <NavLink>LinkedIn</NavLink>
-                <NavLink>GitHub</NavLink>
+            <div className='flex gap-[20px]'>
+                <a
+                    target='_blank'
+                    rel='noreferrer noopener'
+                    href='https://www.linkedin.com/in/forest-briggs'
+                >
+                    LinkedIn
+                </a >
+                <a
+                    target='_blank'
+                    rel='noreferrer noopener'
+                    href='https://github.com/Forestbriggs/apply_sage'
+                >
+                    GitHub
+                </a >
             </div>
         </div>
     )

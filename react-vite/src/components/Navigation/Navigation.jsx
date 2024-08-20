@@ -13,19 +13,19 @@ function Navigation() {
     }
 
     return (
-        <div id="navbar">
-            <div id="logo_brand__container">
+        <div id="navbar" className="flex justify-between items-center my-0 mx-auto h-[96px]">
+            <div className="flex items-center gap-[20px]">
                 <img
                     onClick={handleClick}
-                    id="logo"
+                    className="cursor-pointer size-[70px] rounded-full"
                     src="/apply_sage_logo.png"
                     alt="apply_sage_logo"
                 />
-                <NavLink id="brand">
+                <NavLink className='text-[24px]'>
                     ApplySage
                 </NavLink>
             </div>
-            <div id='login_signup'>
+            <div className="flex items-center gap-[20px]">
                 {sessionUser && <NavLink to={'/applications'}>Applications</NavLink>}
                 {sessionUser && <NavLink to={'/companies'}>Companies</NavLink>}
                 <ProfileButton />

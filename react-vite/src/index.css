@@ -32,35 +32,16 @@
     -webkit-text-size-adjust: 100%;
 }
 
-#main__container {
-    min-height: calc(100dvh - 96px - 100px);
-    background-color: var(--bg-color-alt);
-}
-
 @layer base {
     a {
         /* create custom css classes with websites colors */
-        @apply text-white hover:text-green-500
+        @apply text-white hover:text-hover-color
+    }
+
+    button {
+        @apply rounded-md py-1 px-3 border-none cursor-pointer text-lg
     }
 }
-
-/* a {
-    color: var(--font-color);
-    text-decoration: none;
-}
-
-a:hover {
-    color: var(--font-hover-color);
-} */
-
-button {
-    color: var(--font-color);
-    cursor: pointer;
-    border: none;
-    border-radius: .25rem;
-    padding: 5px 10px;
-}
-
 input {
     background-color: rgba(255, 255, 255, 0.87);
     color: #1F1F1F;
@@ -98,6 +79,6 @@ input:disabled {
     background-color: #6C757D;
 }
 
-* {
+/* * {
     word-break: break-all;
-}
+} */
