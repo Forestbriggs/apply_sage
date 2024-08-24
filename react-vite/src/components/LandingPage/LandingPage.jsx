@@ -87,15 +87,15 @@ export default function LandingPage() {
                 <div id="testimonies" className="flex flex-col justify-center items-center pt-[40px] 2xl:flex-row">
                     <div className="flex items-center justify-between mt-[-40px] 2xl:justify-around">
                         <img className="h-[100px]" src='/aa-favicon.ico' alt="testimonial-avatar" />
-                        <p>&quot;ApplySage helped me land my dream job!&quot; - Jane Doe</p>
+                        <p>&quot;ApplySage helped me land my dream job!&quot; - Jane Doe (Sample Testimonial)</p>
                     </div>
                     <div className="flex items-center justify-between mt-[-40px]  2xl:justify-around">
                         <img className="h-[100px]" src="/aa-favicon.ico" alt="testimonial-avatar" />
-                        <p>&quot;The best tool for managing job applications!&quot; - John Smith</p>
+                        <p>&quot;The best tool for managing job applications!&quot; - John Smith (Sample Testimonial)</p>
                     </div>
                     <div className="flex items-center justify-between mt-[-40px]  2xl:justify-around">
                         <img className="h-[100px]" src="/aa-favicon.ico" alt="testimonial-avatar" />
-                        <p>&quot;I love the insights and reminders.&quot; - Emily Johnson</p>
+                        <p>&quot;I love the insights and reminders.&quot; - Emily Johnson (Sample Testimonial)</p>
                     </div>
                 </div>
                 <div id="pricing" className="bg-main flex flex-col items-center">
