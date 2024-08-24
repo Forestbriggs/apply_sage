@@ -24,7 +24,7 @@ export default {
                 'delete-btn': '#DC3545',
                 'delete-btn-hover': '#C82333',
                 'cancel-btn': '#A9A9A9',
-                'cancel-btn-hover': '#6C757Ds'
+                'cancel-btn-hover': '#6C757D'
             },
             textColor: {
                 'main-color': 'rgba(255, 255, 255, 0.87)',

@@ -2,7 +2,6 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
 import { thunkSignup } from "../../redux/session";
-import "./SignupForm.css";
 
 function SignupFormModal() {
     const dispatch = useDispatch();
@@ -38,53 +37,70 @@ function SignupFormModal() {
 
     return (
         <>
-            <div id="login_signup__container">
+            <div className="text-center">
 
-                <h1>Sign Up</h1>
+                <h1 className="text-3xl mb-2">Sign Up</h1>
                 <div className="error__container">
                     {errors.server && <p>{errors.server}</p>}
                 </div>
-                <form onSubmit={handleSubmit}>
-                    <label>
-                        Email<span>{errors.email && <p className="errors">{errors.email}</p>}</span>
-                    </label>
+                <form
+                    className="flex flex-col justify-start items-center 
+                    gap-2.5 text-lg"
+                    onSubmit={handleSubmit}
+                >
+                    <label htmlFor="email">Email</label>
+                    <div className="min-h-4">
+                        {errors.email && <p className="text-sm text-red-500">{errors.email}</p>}
+                    </div>
                     <input
+                        id="email"
+                        className="text-md rounded border border-gray-50 
+                        border-solid h-6 w-clamp-input"
                         type="text"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                         required
                     />
-                    <label>
-                        Username
-                        {errors.username && <p>{errors.username}</p>}
-                    </label>
+                    <label htmlFor="username">Username</label>
+                    <div className="min-h-4">
+                        {errors.username && <p className="text-sm tet-red-500">{errors.username}</p>}
+                    </div>
                     <input
+                        id="username"
+                        className="text-md rounded border border-gray-50 
+                        border-solid h-6 w-clamp-input"
                         type="text"
                         value={username}
                         onChange={(e) => setUsername(e.target.value)}
                         required
                     />
-                    <label>
-                        Password
-                    </label>
-                    {errors.password && <p>{errors.password}</p>}
+                    <label htmlFor="password">Password</label>
+                    <div className="min-h-4">
+                        {errors.password && <p className="text-sm text-red-500">{errors.password}</p>}
+                    </div>
                     <input
+                        id="password"
+                        className="text-md rounded border border-gray-50 
+                        border-solid h-6 w-clamp-input"
                         type="password"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                         required
                     />
-                    <label>
-                        Confirm Password
-                        {errors.confirmPassword && <p>{errors.confirmPassword}</p>}
-                    </label>
+                    <label htmlFor="confirm-password">Confirm Password</label>
+                    <div className="min-h-4">
+                        {errors.confirmPassword && <p className="text-sm text-red-500">{errors.confirmPassword}</p>}
+                    </div>
                     <input
+                        id="confirm-password"
+                        className="text-md rounded border border-gray-50 
+                        border-solid h-6 w-clamp-input"
                         type="password"
                         value={confirmPassword}
                         onChange={(e) => setConfirmPassword(e.target.value)}
                         required
                     />
-                    <button type="submit">Sign Up</button>
+                    <button className="bg-btn-main hover:bg-btn-main-hover" type="submit">Sign Up</button>
                 </form>
             </div>
         </>

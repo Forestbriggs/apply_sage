@@ -87,8 +87,8 @@ function LoginFormModal(): JSX.Element {
                     aria-invalid={errors.password ? true : false}
                 />
                 <div className="flex gap-5">
-                    <button type="submit" >Log In</button>
-                    <button id="demo" onClick={demoLogin}>Demo Login</button>
+                    <button className="bg-btn-main hover:bg-btn-main-hover" type="submit" >Log In</button>
+                    <button className="bg-cancel-btn hover:bg-cancel-btn-hover" id="demo" onClick={demoLogin}>Demo Login</button>
                 </div>
             </form>
         </div>
