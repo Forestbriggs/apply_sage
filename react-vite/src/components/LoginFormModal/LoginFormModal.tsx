@@ -4,7 +4,6 @@ import { useModal } from "../../context/Modal";
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
-import "./LoginForm.css";
 
 const schema = yup
     .object({

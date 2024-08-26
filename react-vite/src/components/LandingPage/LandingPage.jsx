@@ -148,26 +148,42 @@ export default function LandingPage() {
         content = (
             // TODO Still needs tailwind conversion
             <>
-                <div id="hero" className="hero_logged_in">
-                    <h1>Hello {sessionUser.username}!</h1>
-                    <input type="search" placeholder="Search for applications" />
-                    <button onClick={handleNewApplicationClick}>Add Application</button>
+                <div id="hero_logged_in" className="flex flex-col justify-center items-center">
+                    <h1 className="text-3xl font-bold my-7">Hello {sessionUser.username}!</h1>
+                    <input
+                        className="font-medium pl-5 bg-[rgb(255,255,255,0.87)]
+                            border border-solid border-gray-500 rounded
+                                w-clamp-search h-6 mt-0.5"
+                        type="search"
+                        placeholder="Search for applications" />
+                    <button
+                        onClick={handleNewApplicationClick}
+                        className="bg-btn-main mt-8 py-1 px-4
+                            hover:bg-btn-main-hover"
+                    >
+                        Add Application
+                    </button>
                 </div>
-                <div id="recent_apps">
-                    <div id="recent_apps_title">
-                        <h2>Recent Applications</h2>
+                <div id="recent_apps" className="flex justify-around bg-main mt-6">
+                    <div className="flex justify-center items-center">
+                        <h2 className="text-3xl">Recent Applications</h2>
                     </div>
-                    <div id="app_card__container">
+                    <div id="app_card__container" className="flex justify-around text-center items-center">
                         {recent_applications.allIds.map((application_id) => {
                             const application = recent_applications.data[application_id];
                             return (
-                                <div onClick={() => handleRecentAppClick(application_id)} key={`dash-app-${application_id}`}>
+                                <div
+                                    onClick={() => handleRecentAppClick(application_id)}
+                                    key={`dash-app-${application_id}`}
+                                    className="border border-solid border-alt 
+                                    cursor-pointer p-2.5 rounded hover:border-[#606060]"
+                                >
                                     {/* <img src="/aa-favicon.ico" alt="" /> */}
-                                    <h3>{application.company.name}</h3>
+                                    <h3 className="text-2xl">{application.company.name}</h3>
                                     <p>Position:</p>
                                     <p>{application.title}</p>
-                                    <h2>Submitted:</h2>
-                                    <h2>{format(new Date(application.applied_date), 'M/d/yyyy')}</h2>
+                                    <h2 className="text-3xl">Submitted:</h2>
+                                    <h2 className="text-3xl">{format(new Date(application.applied_date), 'M/d/yyyy')}</h2>
                                 </div>
                             )
                         })}

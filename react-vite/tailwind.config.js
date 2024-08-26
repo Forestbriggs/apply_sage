@@ -10,6 +10,7 @@ export default {
         extend: {
             width: {
                 'clamp-input': 'clamp(300px, 20dvw, 90dvw)',
+                'clamp-search': 'clamp(400px, 20dvw, 90dvw)'
             },
             minHeight: {
                 'main-container': 'calc(100dvh - 96px - 100px)',
@@ -31,6 +32,9 @@ export default {
                 'hover-color': 'rgb(12, 158, 12)',
                 'main-dark': '#1F1F1F',
             },
+            borderColor: {
+                'alt': '#48484860'
+            }
         },
     },
     plugins: [

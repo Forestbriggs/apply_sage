@@ -53,60 +53,15 @@
 }
 
 #hero.hero_logged_in {
-    flex-direction: column;
     height: 25dvh;
-}
-
-.hero_logged_in input {
-    font-size: medium;
-    padding-inline-start: 20px;
-    background-color: var(--font-color);
-    border: 1px solid grey;
-    border-radius: .3rem;
-    height: 24px;
-    width: clamp(400px, 20dvw, 90dvw);
-    margin-top: 2px;
-}
-
-.hero_logged_in button {
-    background-color: #98A869;
-    margin-top: 30px;
-    padding: 8px 20px;
 }
 
 #recent_apps {
     height: 35dvh;
-    display: flex;
-    justify-content: space-around;
-}
-
-#recent_apps_title {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-#recent_apps_title>h2 {
-    font-size: 32px;
 }
 
 #app_card__container {
     width: 40dvw;
-    display: flex;
-    justify-content: space-around;
-    text-align: center;
-    align-items: center;
-}
-
-#app_card__container>div {
-    border: 1px solid var(--bg-color-alt);
-    border-radius: .3rem;
-    cursor: pointer;
-    padding: 10px;
-}
-
-#app_card__container>div:hover {
-    border-color: #606060;
 }
 
 #app_metrics {
