@@ -176,24 +176,28 @@ export default function LandingPage() {
                                     onClick={() => handleRecentAppClick(application_id)}
                                     key={`dash-app-${application_id}`}
                                     className="border border-solid border-alt 
-                                    cursor-pointer p-2.5 rounded hover:border-[#606060]"
+                                    cursor-pointer p-2.5 flex flex-col gap-3
+                                    rounded hover:border-[#606060]"
                                 >
                                     {/* <img src="/aa-favicon.ico" alt="" /> */}
-                                    <h3 className="text-2xl">{application.company.name}</h3>
+                                    <h3 className="text-xl font-bold">{application.company.name}</h3>
                                     <p>Position:</p>
                                     <p>{application.title}</p>
-                                    <h2 className="text-3xl">Submitted:</h2>
-                                    <h2 className="text-3xl">{format(new Date(application.applied_date), 'M/d/yyyy')}</h2>
+                                    <h2 className="text-xl font-bold">Submitted:</h2>
+                                    <h2 className="text-xl font-bold">{format(new Date(application.applied_date), 'M/d/yyyy')}</h2>
                                 </div>
                             )
                         })}
                         {recent_applications.allIds.length === 0 &&
-                            <h2>Add some applications and they will show up here!</h2>
+                            <h2 className="text-2xl">Add some applications and they will show up here!</h2>
                         }
                     </div>
                 </div>
-                <div id="app_metrics">
-                    <h2>Application Metrics</h2>
+                <div id="app_metrics" className="text-center">
+                    <h2 className="text-3xl pt-5">Application Metrics</h2>
+                    <div>
+                        <article className="text-2xl mt-12">Feature will be coming soon :)</article>
+                    </div>
                 </div>
             </>
         )

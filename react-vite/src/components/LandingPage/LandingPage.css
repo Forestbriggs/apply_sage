@@ -66,15 +66,7 @@
 
 #app_metrics {
     height: 80dvh;
-    background-color: var(--bg-color-alt);
-    text-align: center;
 }
-
-#app_metrics>h2 {
-    font-size: 32px;
-    padding-top: 20px;
-}
-
 
 @media screen and (max-width: 800px) {
     #pricing {
