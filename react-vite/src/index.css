@@ -39,7 +39,7 @@
     }
 
     button {
-        @apply rounded-md py-1 px-3 border-none cursor-pointer text-lg
+        @apply rounded-md py-0.5 px-3 border-none cursor-pointer
     }
 }
 
