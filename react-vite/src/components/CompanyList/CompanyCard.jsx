@@ -15,7 +15,7 @@ export default function CompanyCard({ company }) {
 
     return (
         <div className="company_card">
-            <h2>{company.name}</h2>
+            <h2 className="text-2xl font-bold">{company.name}</h2>
             {company.website && <a target='_blank' rel='noopener noreferrer' href={company.website}>{company.name}&apos;s Career Page</a>}
             <div className="button_group">
                 <div>

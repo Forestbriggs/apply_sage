@@ -1,5 +1,4 @@
 #company_form__container {
-    background-color: var(--bg-color-alt);
     min-height: 77dvh;
     padding-top: 10px;
 }
@@ -15,6 +14,7 @@
     border-radius: .3rem;
     width: 200px;
     height: 24px;
+    color: #1F1F1F;
 }
 
 #not_in_list {

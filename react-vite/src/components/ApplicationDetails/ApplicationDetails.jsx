@@ -10,6 +10,7 @@ import determineStatusClass from '../../utils/determineStatusClass';
 import handleFutureFeatureClick from '../../utils/handleFutureFeatureClick';
 import './ApplicationDetails.css';
 import DeleteModal from '../DeleteModal/DeleteModal';
+import verifyStringLength from '../../utils/verifyStringLength';
 
 export default function ApplicationDetails() {
     const sessionUser = useSelector(state => state.session.user);
@@ -29,14 +30,11 @@ export default function ApplicationDetails() {
         }
         if (!isLoaded) {
             dispatch(thunkGetApplicationById(applicationId)).then((application) => {
-                if (application.errors) {
-                    return navigate('/error-page')
-                }
                 if (sessionUser.id !== application.user_id) {
                     return navigate('/');
                 }
                 setIsLoaded(true);
-            })
+            }).catch(() => navigate('/error-page'));
         }
     }, [dispatch, isLoaded, applicationId, navigate, sessionUser])
 
@@ -63,25 +61,51 @@ export default function ApplicationDetails() {
         <>
             {isLoaded &&
 
-                <div id='application_details'>
-                    <div id='application_header'>
-                        <div id='application_header_title'>
+                <div className='my-0 mx-auto pt-2.5'>
+                    <div className='py-0 px-[150px] border-b border-solid border-[#484848] flex justify-between pb-[10px]'>
+                        <div>
                             <span onClick={handleBackClick} id='back_button'><div>{'<'}</div><p>Back to applications</p></span>
-                            <h1>{application.title}</h1>
-                            <div id='company__container'>
-                                <h2>{application.company.name}</h2>
+                            <h1
+                                className={`${verifyStringLength(application.title, 18) ? '' : 'break-all w-[90%]'}
+                                    mt-2 mb-1 text-3xl font-bold`}
+                            >{application.title}</h1>
+                            <div className='flex items-center gap-8'>
+                                <h2 className='text-2xl'>{application.company.name}</h2>
                                 {
                                     application?.company?.website &&
-                                    <a target='_blank' rel='noopener noreferrer' href={application.company.website}>{application.company.name}&apos;s Career Page</a>
+                                    <a
+                                        target='_blank'
+                                        rel='noopener noreferrer'
+                                        href={application.company.website}
+                                    >
+                                        {application.company.name}&apos;s Career Page
+                                    </a>
                                 }
                             </div>
                         </div>
-                        <div id='header_status_buttons'>
-                            <h2 className={determineStatusClass(application.status.name)}>{application.status.name}</h2>
-                            <div id='detail_button__container'>
-                                <button onClick={handleEditClick} className='edit_button'>Edit</button>
-                                <button onClick={handleFutureFeatureClick} id='archive_button'>Archive</button>
-                                {/* TODO create delete modal */}
+                        <div className='min-w-56 text-end flex flex-col gap-4'>
+                            <h2 className={`${determineStatusClass(application.status.name)}
+                                            text-xl`}
+                            >
+                                {application.status.name}
+                            </h2>
+                            <div
+                                id='detail_button__container'
+                                className='border border-solid border-[#484848] 
+                                rounded p-2.5 flex gap-2.5'
+                            >
+                                <button
+                                    onClick={handleEditClick}
+                                    className='bg-edit-btn hover:bg-edit-btn-hover'
+                                >
+                                    Edit
+                                </button>
+                                <button
+                                    onClick={handleFutureFeatureClick}
+                                    id='archive_button'
+                                >
+                                    Archive
+                                </button>
                                 <OpenModalButton
                                     buttonText={'Delete'}
                                     className={'delete_button'}
@@ -99,7 +123,7 @@ export default function ApplicationDetails() {
                     <div id='main_section'>
                         <div id='main_left'>
                             <div>
-                                <h2>Job Application Details:</h2>
+                                <h2 className='text-2xl font-bold py-2'>Job Application Details:</h2>
                                 <div id='app_details'>
                                     <div>
                                         <p>Category:</p>
@@ -131,7 +155,7 @@ export default function ApplicationDetails() {
                                 </div>
                             </div>
                             <div>
-                                <h2>Application Status History:</h2>
+                                <h2 className='text-2xl font-bold py-2'>Application Status History:</h2>
                                 <div id='app_status_history'>
                                     <h3>Feature coming soon...</h3>
                                     <h4>Example below (Not actual data)</h4>
@@ -155,7 +179,7 @@ export default function ApplicationDetails() {
                                 </div>
                             </div>
                             <div>
-                                <h2>Reminders:</h2>
+                                <h2 className='text-2xl font-bold py-2'>Reminders:</h2>
                                 <div id='app_reminders'>
                                     <h3>Feature coming soon...</h3>
                                     <h4>Example below (Not actual data)</h4>
@@ -178,7 +202,7 @@ export default function ApplicationDetails() {
                         </div>
                         <div id='main_right'>
                             <div>
-                                <h2>Attachments:</h2>
+                                <h2 className='text-2xl font-bold py-2'>Attachments:</h2>
                                 <div id='resume_cv'>
                                     <div>
                                         <h3>Resume:</h3>
@@ -205,7 +229,7 @@ export default function ApplicationDetails() {
                                 </div>
                             </div>
                             <div>
-                                <h2>Notes:</h2>
+                                <h2 className='text-2xl font-bold py-2'>Notes:</h2>
                                 <div id='app_notes'>
                                     <h3>Feature coming soon...</h3>
                                     <h4>Example below</h4>
@@ -229,7 +253,7 @@ export default function ApplicationDetails() {
                             </div>
                         </div>
                     </div>
-                </div>
+                </div >
             }
             {!isLoaded && <LoadingPage />}
         </>

@@ -5,6 +5,8 @@ import { thunkGetUserApplications } from '../../redux/applications';
 import LoadingPage from '../LoadingPage/LoadingPage';
 import './ApplicationList.css';
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 
@@ -23,9 +25,12 @@ export default function ApplicationList() {
         if (!isLoaded) {
             dispatch(thunkGetUserApplications()).then(() => {
                 setIsLoaded(true);
-            }, [dispatch, isLoaded])
+            }).catch((error) => {
+                toast('There was an error');
+                return navigate('/error-page')
+            })
         }
-    })
+    }, [dispatch, isLoaded, navigate, sessionUser])
 
     const handleAddClick = () => {
         navigate('/companies/select');
@@ -36,7 +41,7 @@ export default function ApplicationList() {
             {isLoaded &&
                 <div id='application_list'>
                     <div id='application_list__container'>
-                        <h1>Your Applications</h1>
+                        <h1 className='text-3xl font-bold py-2 pb-5'>Your Applications</h1>
                         <div id='applications__container'>
                             {
                                 applications.allIds.map((application_id) => {

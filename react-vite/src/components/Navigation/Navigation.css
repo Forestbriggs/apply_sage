@@ -1,50 +1,10 @@
 #navbar {
-    border-bottom: 1px solid var(--border-color);
     width: 95dvw;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin: 0 auto;
-    height: 100px;
-}
-
-#logo_brand__container {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-}
-
-#logo {
-    cursor: pointer;
-    height: 70px;
-    width: 70px;
-    border-radius: 10rem;
-}
-
-#brand {
-    font-size: 24px;
-}
-
-#login_signup {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-}
-
-#login_signup #profile_button {
-    border: none;
-    border-radius: .25rem;
-    color: #1F1F1F;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 5px;
-    font-size: 30px;
-    cursor: pointer;
 }
 
 .profile-dropdown {
     background-color: #1F1F1F;
+    color: white;
     border: 1px solid gray;
     border-top: none;
     border-radius: 0 0 .25rem .25rem;
@@ -57,7 +17,6 @@
     list-style-type: none;
     position: absolute;
     right: 2.5dvw;
-    top: 82px;
 }
 
 .profile-dropdown li:not(.not_link) {
@@ -66,12 +25,4 @@
 
 .profile-dropdown li:not(.not_link):hover {
     color: var(--font-hover-color);
-}
-
-.profile-dropdown button {
-    background-color: #98A869;
-    border: none;
-    border-radius: .25rem;
-    cursor: pointer;
-    padding: 3px 5px;
 }

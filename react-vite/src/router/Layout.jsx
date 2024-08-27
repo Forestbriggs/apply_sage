@@ -17,7 +17,7 @@ export default function Layout() {
         <>
             <ModalProvider>
                 <Navigation />
-                <div id="main__container">
+                <div className="min-h-main-container bg-main-alt">
                     {isLoaded && <Outlet />}
                     <Modal />
                 </div>

@@ -1,4 +1,9 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 :root {
+    /* Try changing back to 484848 after fixing all container bg colors */
     --bg-color-alt: #48484860;
     --card-width: clamp(400px, 70dvw, 1000px);
     --font-family: Roboto;
@@ -27,25 +32,15 @@
     -webkit-text-size-adjust: 100%;
 }
 
-#main__container {
-    min-height: 77.5dvh;
-}
+@layer base {
+    a {
+        /* create custom css classes with websites colors */
+        @apply text-white hover:text-hover-color
+    }
 
-a {
-    color: var(--font-color);
-    text-decoration: none;
-}
-
-a:hover {
-    color: var(--font-hover-color);
-}
-
-button {
-    color: var(--font-color);
-    cursor: pointer;
-    border: none;
-    border-radius: .25rem;
-    padding: 5px 10px;
+    button {
+        @apply rounded-md py-0.5 px-3 border-none cursor-pointer
+    }
 }
 
 input {
@@ -85,6 +80,6 @@ input:disabled {
     background-color: #6C757D;
 }
 
-* {
+/* * {
     word-break: break-all;
-}
+} */

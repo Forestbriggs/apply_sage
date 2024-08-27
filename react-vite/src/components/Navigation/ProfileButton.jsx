@@ -46,18 +46,16 @@ function ProfileButton() {
 
     return (
         <>
-            <button id="profile_button" onClick={toggleMenu}>
-                <FaUserCircle />
-            </button>
+            <FaUserCircle onClick={toggleMenu} className="text-4xl cursor-pointer" />
             {showMenu && (
-                <ul className={"profile-dropdown"} ref={ulRef}>
+                <ul className="profile-dropdown top-24" ref={ulRef}>
                     {user ? (
                         <>
                             <li className="not_link">{user.username}</li>
                             <li className="not_link">{user.email}</li>
                             <NavLink onClick={handleFutureFeatureClick} to={'/settings'}>Settings</NavLink>
                             <li>
-                                <button onClick={logout}>Log Out</button>
+                                <button className="text-main-color bg-btn-main py-[.5px] px-2 hover:bg-btn-main-hover" onClick={logout}>Log Out</button>
                             </li>
                         </>
                     ) : (

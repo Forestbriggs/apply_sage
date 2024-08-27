@@ -116,7 +116,7 @@ export default function EditApplicationForm() {
         <>
             {isLoaded &&
                 <div id="app_form__container">
-                    <h1>Edit Job Application</h1>
+                    <h1 className="text-3xl font-bold">Edit Job Application</h1>
                     <form>
                         <ApplicationForm
                             title={title}
@@ -132,7 +132,8 @@ export default function EditApplicationForm() {
                             handleMinSalaryChange={handleMinSalaryChange}
                             handleMaxSalaryChange={handleMaxSalaryChange}
                         />
-                        <button onClick={handleSubmit}>Submit</button>
+                        <button className="bg-btn-main hover:bg-btn-main-hover"
+                            onClick={handleSubmit}>Submit</button>
                     </form>
                 </div>
             }

@@ -31,8 +31,8 @@ export default function DeleteModal({ typeId, navigateOnDelete, type }) {
         <>
             <div>
                 <div id='delete_modal__container'>
-                    <h1>Confirm Delete</h1>
-                    <h3>Are you sure you want to delete this {type === 'company' ? 'company' : 'application'}?</h3>
+                    <h1 className='text-3xl font-bold'>Confirm Delete</h1>
+                    <h3 className='text-xl font-bold'>Are you sure you want to delete this {type === 'company' ? 'company' : 'application'}?</h3>
                     <div>
                         <button onClick={closeModal} className='cancel_button'>Cancel</button>
                         <button onClick={confirmDelete} className='delete_button'>Delete</button>

@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { thunkCreateCompany, thunkGetCompanyById, thunkGetUserCompanies } from '../../redux/companies';
+import { toast } from 'react-toastify';
 import LoadingPage from '../LoadingPage';
 import './CompanyForm.css';
 
@@ -44,9 +45,15 @@ export default function CompanyForm() {
         const payload = { name: companyName };
         if (companyWebsite.length) payload.website = companyWebsite;
 
-        return dispatch(thunkCreateCompany(payload)).then((data) => {
+        return toast.promise(dispatch(thunkCreateCompany(payload)).then((data) => {
             return navigate(`/companies/${data}/applications/create`)
-        }).catch((e) => setErrors(e));
+        }),
+            {
+                pending: 'Posting...',
+                success: 'Company successfully created',
+                error: 'Error creating Company',
+
+            }).catch((e) => setErrors(e))
     }
 
     const handleExistingCompanySubmit = () => {
@@ -69,7 +76,7 @@ export default function CompanyForm() {
             {isLoaded &&
                 <div id='company_form__container'>
                     <div id='company_form'>
-                        <h1>What Company is This Application For?</h1>
+                        <h1 className='text-3xl font-bold py-4'>What Company is This Application For?</h1>
                         {companies.allIds.length > 0 &&
                             <div>
                                 <select
@@ -97,7 +104,7 @@ export default function CompanyForm() {
                             </div>
                         }
                         <div id='not_in_list'>
-                            <h2>{companies.allIds.length > 0 ? 'Not in List ?' : 'Add a new company'}</h2>
+                            <h2 className='text-2xl font-bold py-4'>{companies.allIds.length > 0 ? 'Not in List ?' : 'Add a new company'}</h2>
                             {companies.allIds.length > 0 &&
                                 <input
                                     type="checkbox"
