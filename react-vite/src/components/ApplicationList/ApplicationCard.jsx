@@ -25,10 +25,11 @@ export default function ApplicationCard({ application }) {
     }
 
     return (
-        <div className="application_card" onClick={handleClick}>
+        <div className="application_card p-2" onClick={handleClick}>
             <div>
                 <h3
-                    className={verifyStringLength(application.title, 18) ? 'application_title' : ''}
+                    className={`${verifyStringLength(application.title, 18) ?
+                        '' : 'break-all'} font-bold`}
                 >
                     {application.title}
                 </h3>

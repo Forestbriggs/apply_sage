@@ -23,14 +23,11 @@
     border: 1px solid #1F1F1F;
 }
 
-.application_title {
-    word-break: keep-all;
-}
-
 .application_card>div:not(:first-of-type) {
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
 }
 
 .application_card>div {
