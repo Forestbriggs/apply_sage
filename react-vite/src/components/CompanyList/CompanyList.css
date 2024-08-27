@@ -1,5 +1,4 @@
 #company_list {
-    background-color: var(--bg-color-alt);
     min-height: 77dvh;
     padding-top: 10px;
 }
@@ -22,7 +21,7 @@
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     gap: 20px;
-    padding: 20px;
+    padding: 20px 0;
 }
 
 .company_card {

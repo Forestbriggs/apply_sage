@@ -34,7 +34,7 @@ export default function CompanyList() {
         <>
             {isLoaded &&
                 <div id='company_list'>
-                    <h1>Your Companies</h1>
+                    <h1 className='text-3xl font-bold'>Your Companies</h1>
                     {companies.allIds.length === 0 &&
                         <div className='no_companies'>
                             <h2>Haven&apos;t applied to any companies yet?</h2>
