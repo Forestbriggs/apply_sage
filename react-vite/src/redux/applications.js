@@ -94,7 +94,7 @@ export const thunkEditApplication = (applicationId, payload) => async (dispatch)
 export const thunkDeleteApplicationById = (applicationId) => async (dispatch) => {
     try {
         const response = await axios.delete(`/api/applications/${applicationId}`);
-        const data = await response.json();
+        const data = response.data;
         dispatch(removeApplication(applicationId));
         return data;
     } catch (error) {

@@ -16,6 +16,7 @@ export default function ApplicationForm({ title, setTitle, jobCategory,
             <div>
                 <label>Job Category<span className='required'> *</span><span className='errors'> {errors.job_category}</span></label>
                 <select
+                    className='text-main-dark'
                     value={jobCategory}
                     onChange={(e) => setJobCategory(e.target.value)}
                 >

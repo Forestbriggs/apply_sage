@@ -53,7 +53,7 @@ export default function EditCompanyForm() {
         <>
             {isLoaded &&
                 <div id="company_form__container">
-                    <h1 id="edit_company_title">Edit Company</h1>
+                    <h1 id="edit_company_title" className="text-3xl font-bold">Edit Company</h1>
                     <form id="new_company_form" className="company_edit_form">
                         <label>Company Name: {<span className='required'>*</span>}
                             <span className='errors'>  {errors.name}</span>
