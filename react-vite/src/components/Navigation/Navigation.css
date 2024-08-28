@@ -1,5 +1,6 @@
 #navbar {
     width: 95dvw;
+    transition: height 150ms;
 }
 
 .profile-dropdown {

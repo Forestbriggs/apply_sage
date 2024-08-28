@@ -34,6 +34,10 @@ export default {
             },
             borderColor: {
                 'alt': '#48484860'
+            },
+            screens: {
+                'feature-main': '1328px',
+                'testimony-main': '1090px'
             }
         },
     },

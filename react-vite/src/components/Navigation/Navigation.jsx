@@ -13,21 +13,49 @@ function Navigation() {
     }
 
     return (
-        <div id="navbar" className="flex justify-between items-center my-0 mx-auto h-[96px]">
-            <div className="flex items-center gap-[20px]">
+        <div id="navbar"
+            className="
+            flex justify-between items-center my-0 mx-auto py-2 h-16
+            sm:h-[96px]
+            ease-out
+            "
+        >
+            <div
+                className="
+                flex items-center gap-[20px]
+                "
+            >
                 <img
                     onClick={handleClick}
-                    className="cursor-pointer size-[70px] rounded-full"
+                    className="
+                    cursor-pointer rounded-full size-12
+                    sm:size-[70px] 
+                    transition-all
+                    "
                     src="/apply_sage_logo.png"
                     alt="apply_sage_logo"
                 />
-                <NavLink className='text-[24px]'>
+                <NavLink
+                    className='
+                    text-lg
+                    sm:text-2xl
+                    transition-all
+                    '
+                >
                     ApplySage
                 </NavLink>
             </div>
-            <div className="flex items-center gap-[20px]">
-                {sessionUser && <NavLink to={'/applications'}>Applications</NavLink>}
-                {sessionUser && <NavLink to={'/companies'}>Companies</NavLink>}
+            <div
+                className="
+                flex items-center gap-5
+                "
+            >
+                {sessionUser && <NavLink
+                    className='hidden sm:inline'
+                    to={'/applications'}>Applications</NavLink>}
+                {sessionUser && <NavLink
+                    className='hidden sm:inline'
+                    to={'/companies'}>Companies</NavLink>}
                 <ProfileButton />
             </div>
         </div>
