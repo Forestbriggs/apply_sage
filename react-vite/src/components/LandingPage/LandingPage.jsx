@@ -39,6 +39,7 @@ export default function LandingPage() {
     if (!sessionUser) {
         content = (
             <>
+                {/* Hero */}
                 <div id="hero"
                     className="
                     flex justify-center items-center text-center h-fit py-6
@@ -98,6 +99,7 @@ export default function LandingPage() {
                     </div>
                 </div >
 
+                {/* Features */}
                 <div id="features"
                     className='
                     flex flex-col flex-1 bg-main items-center justify-around h-fit gap-4 py-8 px-4
@@ -166,6 +168,7 @@ export default function LandingPage() {
                     </div>
                 </div>
 
+                {/* Testimonies */}
                 <div id="testimonies"
                     className="
                     h-fit
@@ -209,6 +212,7 @@ export default function LandingPage() {
                     </div>
                 </div>
 
+                {/* Pricing */}
                 <div id="pricing"
                     className="
                     flex flex-col items-center bg-main h-fit py-8
@@ -224,7 +228,7 @@ export default function LandingPage() {
                             className="
                             size-64 bg-[rgba(255,255,255,0.9)] rounded text-main-dark p-[20px] flex flex-col items-start
                             sm:h-2/3 sm:w-9/12
-                            lg:size-72
+                            lg:size-72 sm:max-md:transition-all
                             "
                         >
                             <div className="flex flex-col items-start sm:max-lg:items-center sm:max-lg:w-1/2 sm:max-lg:mx-auto">
@@ -243,7 +247,7 @@ export default function LandingPage() {
                             className="
                             size-64 bg-[rgba(255,255,255,0.9)] rounded text-main-dark p-[20px] flex flex-col items-start
                             sm:h-2/3 sm:w-9/12
-                            lg:size-72
+                            lg:size-72 sm:max-md:transition-all
                             "
                         >
                             <div className="flex flex-col items-start sm:max-lg:items-center sm:max-lg:w-1/2 sm:max-lg:mx-auto">
@@ -263,7 +267,7 @@ export default function LandingPage() {
                             className="
                             size-64 bg-[rgba(255,255,255,0.9)] rounded text-main-dark p-[20px] flex flex-col items-start
                             sm:h-2/3 sm:w-9/12
-                            lg:size-72
+                            lg:size-72 sm:max-md:transition-all
                             "
                         >
                             <div className="flex flex-col items-start sm:max-lg:items-center sm:max-lg:w-1/2 sm:max-lg:mx-auto">
@@ -282,7 +286,7 @@ export default function LandingPage() {
                     </div>
                     <button className="bg-btn-main hover:bg-btn-main-hover mt-8" onClick={handleFutureFeatureClick}>Choose Your Plan</button>
                 </div>
-
+                {/* Mission */}
                 <div className="flex justify-center items-center text-center py-4 md:py-4 transition-all">
                     <p className="text-sm w-9/12 md:text-base lg:text-xl lg:w-7/12 transition-all">ApplySage is dedicated to helping job seekers manage their applications with ease and efficiency.
                         Our mission is to provide smart, insightful tools that support your career journey.</p>
@@ -293,6 +297,7 @@ export default function LandingPage() {
         content = (
             // TODO Still needs tailwind conversion
             <>
+                {/* Hero Unauth */}
                 <div id="hero_logged_in" className="flex flex-col justify-center items-center">
                     <h1 className="text-3xl font-bold my-7">Hello {sessionUser.username}!</h1>
                     <input
@@ -309,6 +314,8 @@ export default function LandingPage() {
                         Add Application
                     </button>
                 </div>
+
+                {/* Recent Apps */}
                 <div id="recent_apps" className="flex justify-around bg-main mt-6">
                     <div className="flex justify-center items-center">
                         <h2 className="text-3xl">Recent Applications</h2>
@@ -338,6 +345,8 @@ export default function LandingPage() {
                         }
                     </div>
                 </div>
+
+                {/* Metrics */}
                 <div id="app_metrics" className="text-center">
                     <h2 className="text-3xl pt-5">Application Metrics</h2>
                     <div>

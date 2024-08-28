@@ -1,5 +1,3 @@
-import { NavLink } from 'react-router-dom';
-
 export default function Footer() {
     return (
         <div className='h-[100px] flex items-center justify-between px-[35px]'>

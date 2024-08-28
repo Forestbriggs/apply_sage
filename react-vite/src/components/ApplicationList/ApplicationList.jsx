@@ -25,7 +25,7 @@ export default function ApplicationList() {
         if (!isLoaded) {
             dispatch(thunkGetUserApplications()).then(() => {
                 setIsLoaded(true);
-            }).catch((error) => {
+            }).catch(() => {
                 toast('There was an error');
                 return navigate('/error-page')
             })
