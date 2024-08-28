@@ -39,96 +39,240 @@ export default function LandingPage() {
     if (!sessionUser) {
         content = (
             <>
-                <div id="hero" className="flex justify-center items-center text-center">
-                    <div className="flex flex-col gap-2">
-                        <h1 className="text-4xl font-bold">Welcome to ApplySage</h1>
-                        <h2 className="text-2xl">Your Next Job Application Tracker</h2>
-                        <p className="mb-2">Where Job Applications Meet Insight</p>
-                        <div className="flex justify-around gap-2">
+                <div id="hero"
+                    className="
+                    flex justify-center items-center text-center h-fit py-6
+                    sm:py-10
+                    transition-all
+                    "
+                >
+                    <div
+                        className="
+                        flex flex-col gap-2
+                        "
+                    >
+                        <h1
+                            className="
+                            text-2xl font-bold
+                            sm:text-3xl
+                            transition-all
+                            "
+                        >
+                            Welcome to ApplySage
+                        </h1>
+                        <h2
+                            className="
+                            text-lg
+                            sm:text-2xl
+                            transition-all
+                            "
+                        >
+                            Your Next Job Application Tracker
+                        </h2>
+                        <p
+                            className="
+                            text-sm mb-2
+                            sm:text-base
+                            transition-all
+                            "
+                        >
+                            Where Job Applications Meet Insight
+                        </p>
+                        <div
+                            className="
+                            flex justify-around gap-2
+                            "
+                        >
                             <OpenModalButton
                                 className='bg-btn-main hover:bg-btn-main-hover'
                                 modalComponent={<SignupFormModal />}
                                 buttonText={'Get Started For Free'}
                             />
-                            <button className="bg-[rgba(69,111,61,0.595)] hover:bg-[rgba(69,111,61,0.5)]" onClick={handleFutureFeatureClick}>LearnMore</button>
+                            <button
+                                className="bg-[rgba(69,111,61,0.595)] hover:bg-[rgba(69,111,61,0.5)]"
+                                onClick={handleFutureFeatureClick}
+                            >
+                                LearnMore
+                            </button>
                         </div>
                     </div>
                 </div >
-                <div id="features" className='bg-main flex items-center justify-around pt-[25px]'>
-                    <div className=" feature_card flex flex-col justify-center items-center gap-2 text-center">
-                        <FaTasks fontSize={40} />
-                        <strong>Tracking and Management</strong>
-                        <p className="text-sm text-[rgb(255,255,255,50%)] w-10/12">
-                            &quot;Keep all your job applications in one place and never miss a follow up.&quot;
-                        </p>
+
+                <div id="features"
+                    className='
+                    flex flex-col flex-1 bg-main items-center justify-around h-fit gap-4 py-8 px-4
+                    feature-main:py-14 feature-main:flex-row
+                    '
+                >
+                    <div
+                        className="
+                        flex flex-1 justify-center items-center gap-4 text-center w-4/5 my-0 mx-auto
+                        border border-alt rounded-md p-6
+                        feature-main:flex-col feature-main:w-fit feature-main:gap-2
+                        "
+                    >
+                        <FaTasks className="text-7xl feature-main:text-5xl" />
+                        <div className="flex flex-col justify-center items-center gap-1">
+                            <strong>Tracking and Management</strong>
+                            <p className="text-sm text-[rgb(255,255,255,50%)] min-[530px]:w-10/12">
+                                &quot;Keep all your job applications in one place and never miss a follow up.&quot;
+                            </p>
+                        </div>
                     </div>
-                    <div className=" feature_card flex flex-col justify-center items-center gap-2 text-center">
-                        <FaCalendarCheck fontSize={40} />
-                        <strong>Notifications and Reminders</strong>
-                        <p className="text-sm text-[rgb(255,255,255,50%)] w-10/12">
-                            &quot;Receive timely reminders for application deadlines and follow-ups.&quot;
-                        </p>
+                    <div
+                        className="
+                        flex flex-1 justify-center items-center gap-4 text-center w-4/5 my-0 mx-auto
+                        border border-alt rounded-md p-6
+                        feature-main:flex-col feature-main:w-fit feature-main:gap-2
+                        "
+                    >
+                        <FaCalendarCheck className="text-7xl feature-main:text-5xl" />
+                        <div className="flex flex-col justify-center items-center gap-1">
+                            <strong>Notifications and Reminders</strong>
+                            <p className="text-sm text-[rgb(255,255,255,50%)] min-[530px]:w-10/12">
+                                &quot;Receive timely reminders for application deadlines and follow-ups.&quot;
+                            </p>
+                        </div>
                     </div>
-                    <div className="feature_card flex flex-col justify-center items-center gap-2 text-center">
-                        <FaChartBar fontSize={40} />
-                        <strong>Analytics and Insight</strong>
-                        <p className="text-sm text-[rgb(255,255,255,50%)] w-10/12">
-                            &quot;Gain insights into your application progress and success rates.&quot;
-                        </p>
+                    <div
+                        className="
+                        flex flex-1 justify-center items-center gap-4 text-center w-4/5 my-0 mx-auto
+                        border border-alt rounded-md p-6
+                        feature-main:flex-col feature-main:w-fit feature-main:gap-2
+                        "
+                    >
+                        <FaChartBar className="text-7xl feature-main:text-5xl" />
+                        <div className="flex flex-col justify-center items-center gap-1">
+                            <strong>Analytics and Insight</strong>
+                            <p className="text-sm text-[rgb(255,255,255,50%)] min-[530px]:w-10/12">
+                                &quot;Gain insights into your application progress and success rates.&quot;
+                            </p>
+                        </div>
                     </div>
-                    <div className="feature_card flex flex-col justify-center items-center gap-2 text-center">
-                        <FaProjectDiagram fontSize={40} />
-                        <strong>Customizable Workflows</strong>
-                        <p className="text-sm text-[rgb(255,255,255,50%)] w-10/12">
-                            &quot;Tailor the application process to fit your unique job search strategy.&quot;
-                        </p>
+                    <div
+                        className="
+                        flex flex-1 justify-center items-center gap-4 text-center w-4/5 my-0 mx-auto
+                        border border-alt rounded-md p-6
+                        feature-main:flex-col feature-main:w-fit feature-main:gap-2
+                        "
+                    >
+                        <FaProjectDiagram className="text-7xl feature-main:text-5xl" />
+                        <div className="flex flex-col justify-center items-center gap-1">
+                            <strong>Customizable Workflows</strong>
+                            <p className="text-sm text-[rgb(255,255,255,50%)] min-[530px]:w-10/12">
+                                &quot;Tailor the application process to fit your unique job search strategy.&quot;
+                            </p>
+                        </div>
                     </div>
                 </div>
-                <div id="testimonies" className="flex flex-col justify-center items-center pt-[40px] 2xl:flex-row">
-                    <div className="flex items-center justify-between mt-[-40px] 2xl:justify-around">
-                        <img className="h-[100px]" src='/aa-favicon.ico' alt="testimonial-avatar" />
-                        <p>&quot;ApplySage helped me land my dream job!&quot; - Jane Doe (Sample Testimonial)</p>
+
+                <div id="testimonies"
+                    className="
+                    h-fit
+                    flex flex-col justify-center items-center gap-6 py-8 px-4
+                    sm:gap-0 sm:mt-[40px]
+                    2xl:flex-row
+                    "
+                >
+                    <div className="
+                flex flex-col items-center justify-between gap-2
+                sm:flex-row sm:w-[clamp(400px,60dvw,800px)] sm:gap-0
+                2xl:flex-col 2xl:gap-5 sm:mt-[-40px]
+                ">
+                        <img className="h-20 sm:h-[100px]" src='/aa-favicon.ico' alt="testimonial-avatar" />
+                        <div className="flex flex-col justify-center items-center gap-1 sm:items-end lg:flex-row 2xl:flex-col 2xl:items-center">
+                            <p>&quot;ApplySage helped me land my dream job!&quot;</p>
+                            <span className="text-sm text-[rgb(255,255,255,50%)]"> - Jane Doe (Sample Testimonial)</span>
+                        </div>
                     </div>
-                    <div className="flex items-center justify-between mt-[-40px]  2xl:justify-around">
-                        <img className="h-[100px]" src="/aa-favicon.ico" alt="testimonial-avatar" />
-                        <p>&quot;The best tool for managing job applications!&quot; - John Smith (Sample Testimonial)</p>
+                    <div className="
+                flex flex-col items-center justify-between gap-2
+                sm:flex-row sm:w-[clamp(400px,60dvw,800px)] sm:gap-0
+                2xl:flex-col 2xl:gap-5 sm:mt-[-40px]
+                ">
+                        <img className="h-20 sm:h-[100px]" src="/aa-favicon.ico" alt="testimonial-avatar" />
+                        <div className="flex flex-col justify-center items-center gap-1 sm:items-end lg:flex-row 2xl:flex-col 2xl:items-center">
+                            <p className="2xl:flex 2xl:flex-col 2xl:text-center">&quot;The best tool for managing job applications!&quot;</p>
+                            <span className="text-sm text-[rgb(255,255,255,50%)]">- John Smith (Sample Testimonial)</span>
+                        </div>
                     </div>
-                    <div className="flex items-center justify-between mt-[-40px]  2xl:justify-around">
-                        <img className="h-[100px]" src="/aa-favicon.ico" alt="testimonial-avatar" />
-                        <p>&quot;I love the insights and reminders.&quot; - Emily Johnson (Sample Testimonial)</p>
+                    <div className="
+                flex flex-col items-center justify-between gap-2
+                sm:flex-row  sm:w-[clamp(400px,60dvw,800px)] sm:gap-0
+                2xl:flex-col 2xl:gap-5 sm:mt-[-40px]
+                ">
+                        <img className="h-20 sm:h-[100px]" src="/aa-favicon.ico" alt="testimonial-avatar" />
+                        <div className="flex flex-col justify-center items-center gap-1 sm:items-end lg:flex-row 2xl:flex-col 2xl:items-center">
+                            <p className="2xl:flex 2xl:flex-col 2xl:text-center">&quot;I love the insights and reminders.&quot;</p>
+                            <span className="text-sm text-[rgb(255,255,255,50%)]"> - Emily Johnson (Sample Testimonial)</span>
+                        </div>
                     </div>
                 </div>
-                <div id="pricing" className="bg-main flex flex-col items-center">
-                    <div id="price_card__container" className="flex justify-evenly items-center text-center gap-[20px] {}">
-                        <div className="price_card bg-[rgba(255,255,255,0.9)] rounded text-main-dark p-[20px] flex flex-col items-start">
-                            <h2 className="mb-0">Free Plan:</h2>
-                            <span className="flex items-end justify-start gap-[10px]">
-                                <h1 className="text-5xl mt-[15px]">$0</h1><p>/month</p>
-                            </span>
-                            <ul className=" mt-1 pl-[10px]">
+
+                <div id="pricing"
+                    className="
+                    flex flex-col items-center bg-main h-fit py-8
+                    "
+                >
+                    <div
+                        className="
+                        flex flex-col items-center text-center gap-5
+                        lg:flex-row lg:gap-10 xl:gap-20 transition-all
+                        "
+                    >
+                        <div
+                            className="
+                            size-64 bg-[rgba(255,255,255,0.9)] rounded text-main-dark p-[20px] flex flex-col items-start
+                            sm:h-2/3 sm:w-9/12
+                            lg:size-72
+                            "
+                        >
+                            <div className="flex flex-col items-start sm:max-lg:items-center sm:max-lg:w-1/2 sm:max-lg:mx-auto">
+                                <h2 className="mb-0">Free Plan:</h2>
+                                <span className="flex items-end justify-start gap-[10px]">
+                                    <h1 className="text-5xl mt-[15px]">$0</h1><p>/month</p>
+                                </span>
+                            </div>
+                            <ul className="pl-[10px] w-10/12 mt-6 mx-auto sm:flex  lg:flex-col lg:gap-3 lg:mt-10">
                                 <li>Basic tracking features</li>
                                 <li>Email notifications</li>
                                 <li>Community support</li>
                             </ul>
                         </div>
-                        <div className="price_card bg-[rgba(255,255,255,0.9)] rounded text-main-dark p-[20px] flex flex-col items-start">
-                            <h2>Pro Plan:</h2>
-                            <span className="flex items-end justify-start gap-[10px]">
-                                <h1 className="text-5xl mt-[15px]">$10</h1><p>/month</p>
-                            </span>
-                            <ul className="mt-1 pl-[10px]">
+                        <div
+                            className="
+                            size-64 bg-[rgba(255,255,255,0.9)] rounded text-main-dark p-[20px] flex flex-col items-start
+                            sm:h-2/3 sm:w-9/12
+                            lg:size-72
+                            "
+                        >
+                            <div className="flex flex-col items-start sm:max-lg:items-center sm:max-lg:w-1/2 sm:max-lg:mx-auto">
+                                <h2>Pro Plan:</h2>
+                                <span className="flex items-end justify-start gap-[10px]">
+                                    <h1 className="text-5xl mt-[15px]">$10</h1><p>/month</p>
+                                </span>
+                            </div>
+                            <ul className="pl-[10px] w-10/12 mt-4 mx-auto sm:flex lg:flex-col lg:gap-3 lg:mt-6">
                                 <li>All Free features plus</li>
                                 <li>Advanced analytics</li>
                                 <li>Customizable workflows</li>
                                 <li>Priority support</li>
                             </ul>
                         </div>
-                        <div className="price_card bg-[rgba(255,255,255,0.9)] rounded text-main-dark p-[20px] flex flex-col items-start">
-                            <h2>Premium Plan:</h2>
-                            <span className="flex items-end justify-start gap-[10px]">
-                                <h1 className="text-5xl mt-[15px]">$25</h1><p>/month</p>
-                            </span>
-                            <ul className="mt-1 pl-[10px]">
+                        <div
+                            className="
+                            size-64 bg-[rgba(255,255,255,0.9)] rounded text-main-dark p-[20px] flex flex-col items-start
+                            sm:h-2/3 sm:w-9/12
+                            lg:size-72
+                            "
+                        >
+                            <div className="flex flex-col items-start sm:max-lg:items-center sm:max-lg:w-1/2 sm:max-lg:mx-auto">
+                                <h2>Premium Plan:</h2>
+                                <span className="flex items-end justify-start gap-[10px]">
+                                    <h1 className="text-5xl mt-[15px]">$25</h1><p>/month</p>
+                                </span>
+                            </div>
+                            <ul className="pl-[10px] w-11/12 mt-2 mx-auto sm:flex lg:flex-col lg:gap-3 lg:mt-6">
                                 <li>All Pro features plus</li>
                                 <li>One-on-one career coaching</li>
                                 <li>Resume and cover letter reviews</li>
@@ -136,10 +280,11 @@ export default function LandingPage() {
                             </ul>
                         </div>
                     </div>
-                    <button className="bg-btn-main hover:bg-btn-main-hover" onClick={handleFutureFeatureClick}>Choose Your Plan</button>
+                    <button className="bg-btn-main hover:bg-btn-main-hover mt-8" onClick={handleFutureFeatureClick}>Choose Your Plan</button>
                 </div>
-                <div id="mission" className="flex justify-center items-center text-center">
-                    <p className="text-xl w-[55%]">ApplySage is dedicated to helping job seekers manage their applications with ease and efficiency.
+
+                <div className="flex justify-center items-center text-center py-4 md:py-4 transition-all">
+                    <p className="text-sm w-9/12 md:text-base lg:text-xl lg:w-7/12 transition-all">ApplySage is dedicated to helping job seekers manage their applications with ease and efficiency.
                         Our mission is to provide smart, insightful tools that support your career journey.</p>
                 </div>
             </>

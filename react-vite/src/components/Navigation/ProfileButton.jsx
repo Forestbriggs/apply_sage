@@ -48,11 +48,17 @@ function ProfileButton() {
         <>
             <FaUserCircle onClick={toggleMenu} className="text-4xl cursor-pointer" />
             {showMenu && (
-                <ul className="profile-dropdown top-24" ref={ulRef}>
+                <ul className="profile-dropdown top-16 sm:top-24" ref={ulRef}>
                     {user ? (
                         <>
                             <li className="not_link">{user.username}</li>
                             <li className="not_link">{user.email}</li>
+                            <NavLink
+                                className='sm:hidden'
+                                to={'/applications'}>Applications</NavLink>
+                            <NavLink
+                                className='sm:hidden'
+                                to={'/companies'}>Companies</NavLink>
                             <NavLink onClick={handleFutureFeatureClick} to={'/settings'}>Settings</NavLink>
                             <li>
                                 <button className="text-main-color bg-btn-main py-[.5px] px-2 hover:bg-btn-main-hover" onClick={logout}>Log Out</button>
