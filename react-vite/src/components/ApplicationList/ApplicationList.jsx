@@ -7,9 +7,6 @@ import './ApplicationList.css';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { FaCarrot, FaRegCaretSquareRight } from 'react-icons/fa';
-import { BiCaretRight } from 'react-icons/bi';
-import { FaCaretRight } from 'react-icons/fa6';
 import { PiCaretLeftLight, PiCaretRightLight } from 'react-icons/pi';
 
 
@@ -45,7 +42,7 @@ export default function ApplicationList() {
                 return navigate('/error-page')
             })
         }
-    }, [dispatch, isLoaded, navigate, sessionUser, page])
+    }, [dispatch, isLoaded, navigate, sessionUser, page, perPage])
 
     // * Saves page and perPage to session / local storage whenever they change
     useEffect(() => {
@@ -139,7 +136,7 @@ export default function ApplicationList() {
                             }
                         </div>
                         <div className='py-4 flex flex-col justify-start gap-2'>
-                            <div className='flex gap-2 items-center' l>
+                            <div className='flex gap-2 items-center'>
                                 <button
                                     onClick={handlePreviousPage} disabled={page === 1}
                                     className={`flex items-center bg-slate-300 py-0 px-2 rounded text-[#1F1F1F] ${page === 1 ? 'opacity-20' : ''}`}
@@ -149,7 +146,7 @@ export default function ApplicationList() {
                                 <span>Page {page} of {totalPages}</span>
                                 <button
                                     onClick={handleNextPage} disabled={page === totalPages}
-                                    className={`flex  items-center bg-slate-300 py-0 px-2 border rounded text-[#1F1F1F] ${page === totalPages ? 'opacity-20' : ''}`}
+                                    className={`flex items-center bg-slate-300 py-0 px-2 border rounded text-[#1F1F1F] ${page === totalPages ? 'opacity-20' : ''}`}
                                 >
                                     Next<PiCaretRightLight />
                                 </button>
