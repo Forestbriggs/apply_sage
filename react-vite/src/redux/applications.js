@@ -18,11 +18,12 @@ const removeApplication = (applicationId) => ({
     payload: applicationId
 })
 
-export const thunkGetUserApplications = () => async (dispatch) => {
+export const thunkGetUserApplications = (page) => async (dispatch) => {
     try {
-        const response = await axios.get('/api/applications');
+        const response = await axios.get(`/api/applications?page=${page}&per_page=10`);
         const data = response.data;
         dispatch(setApplications(data));
+        return data;
     } catch (error) {
         if (error.response) {
             throw error.response

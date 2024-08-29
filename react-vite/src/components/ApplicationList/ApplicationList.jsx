@@ -7,15 +7,21 @@ import './ApplicationList.css';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { FaCarrot, FaRegCaretSquareRight } from 'react-icons/fa';
+import { BiCaretRight } from 'react-icons/bi';
+import { FaCaretRight } from 'react-icons/fa6';
+import { PiCaretLeftLight, PiCaretRightLight } from 'react-icons/pi';
 
 
 
-// TODO add pagination
 export default function ApplicationList() {
     const sessionUser = useSelector(state => state.session.user);
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const applications = useSelector(state => state.applications);
+    const [totalApps, setTotalApps] = useState(0);
+    const [page, setPage] = useState(1);
+    const [totalPages, setTotalPages] = useState(0);
     const [isLoaded, setIsLoaded] = useState(false);
 
     useEffect(() => {
@@ -23,18 +29,37 @@ export default function ApplicationList() {
             return navigate('/');
         }
         if (!isLoaded) {
-            dispatch(thunkGetUserApplications()).then(() => {
+            dispatch(thunkGetUserApplications(page)).then((data) => {
+                setTotalApps(data.total);
+                setTotalPages(data.pages);
                 setIsLoaded(true);
             }).catch(() => {
-                toast('There was an error');
+                toast('There was an error fetching applications');
                 return navigate('/error-page')
             })
         }
-    }, [dispatch, isLoaded, navigate, sessionUser])
+    }, [dispatch, isLoaded, navigate, sessionUser, page])
+
+    const handleNextPage = () => {
+        if (page < totalPages) {
+            setPage(page + 1);
+            setIsLoaded(false);
+        }
+    }
+
+    const handlePreviousPage = () => {
+        if (page > 1) {
+            setPage(page - 1);
+            setIsLoaded(false)
+        }
+    }
 
     const handleAddClick = () => {
         navigate('/companies/select');
     }
+
+    const startApp = (page - 1) * 10 + 1;
+    const endApp = Math.min(page * 10, totalApps);
 
     return (
         <>
@@ -68,12 +93,26 @@ export default function ApplicationList() {
                                 </div>
                             }
                         </div>
-                        <div className='py-4'>
-                            {/* TODO update when pagination is added */}
-                            <p>Showing {applications.allIds.length} of {applications.allIds.length}</p>
+                        <div className='py-4 flex flex-col justify-start gap-2'>
+                            <div className='flex gap-2 items-center' l>
+                                <button
+                                    onClick={handlePreviousPage} disabled={page === 1}
+                                    className={`flex items-center bg-slate-300 py-0 px-2 rounded text-[#1F1F1F] ${page === 1 ? 'opacity-20' : ''}`}
+                                >
+                                    <PiCaretLeftLight />Prev
+                                </button>
+                                <span>Page {page} of {totalPages}</span>
+                                <button
+                                    onClick={handleNextPage} disabled={page === totalPages}
+                                    className={`flex  items-center bg-slate-300 py-0 px-2 border rounded text-[#1F1F1F] ${page === totalPages ? 'opacity-20' : ''}`}
+                                >
+                                    Next<PiCaretRightLight />
+                                </button>
+                            </div>
+                            <p className='text-sm'>{startApp} - {endApp} of {totalApps}</p>
                         </div>
                     </div>
-                </div>
+                </div >
             }
             {!isLoaded && <LoadingPage />}
         </>

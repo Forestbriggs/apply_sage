@@ -73,11 +73,14 @@ export default function ApplicationCard({ application }) {
             >
                 <div>
                     <p>Salary Range</p>
-                    <p>${Number(application.salary_min)
-                        .toLocaleString('en-US', { minimumFractionDigits: 0 })}
-                        {' '}-{' '}
-                        {Number(application.salary_max)
-                            .toLocaleString('en-US', { minimumFractionDigits: 0 })}</p>
+                    {application.salary_min && application.salary_max ?
+                        <p>${Number(application.salary_min)
+                            .toLocaleString('en-US', { minimumFractionDigits: 0 })}
+                            {' '}-{' '}
+                            {Number(application.salary_max)
+                                .toLocaleString('en-US', { minimumFractionDigits: 0 })}</p> :
+                        <p>Not Set</p>
+                    }
                 </div>
                 <div>
                     <p>Last Updated</p>
