@@ -1,5 +1,3 @@
-import plugin from 'tailwindcss';
-
 /** @type {import('tailwindcss').Config} */
 export default {
     content: [
@@ -13,7 +11,8 @@ export default {
                 'clamp-search': 'clamp(400px, 20dvw, 90dvw)'
             },
             minHeight: {
-                'main-container': 'calc(100dvh - 96px - 100px)',
+                'main-container': 'calc(100dvh - 64px - 64px)',
+                'main-container-sm': 'calc(100dvh - 96px - 100px)'
             },
             backgroundColor: {
                 'main': '#1F1F1F',

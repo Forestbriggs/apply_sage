@@ -11,8 +11,17 @@ application_routes = Blueprint('application', __name__)
 @application_routes.route('')
 @login_required
 def applications():
-    applications = Application.query.filter(Application.user_id==current_user.id)
-    return {'Applications': [app.to_dict() for app in applications]}
+    page = request.args.get('page', 1, type=int)
+    per_page = request.args.get('per_page', 10, type=int)
+    
+    applications = Application.query.filter(Application.user_id==current_user.id) \
+        .paginate(page=page, per_page=per_page, error_out=False)
+    return {
+        'Applications': [app.to_dict() for app in applications],
+        'total': applications.total,
+        'pages': applications.pages,
+        'current_page': applications.page
+        }
 
     
 @application_routes.route('/dashboard')

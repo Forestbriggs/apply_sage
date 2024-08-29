@@ -6,7 +6,6 @@ import OpenModalButton from '../OpenModalButton';
 import SignupFormModal from "../SignupFormModal";
 import LoadingPage from '../LoadingPage';
 import handleFutureFeatureClick from '../../utils/handleFutureFeatureClick';
-import './LandingPage.css';
 import { useNavigate } from "react-router-dom";
 import { FaProjectDiagram, FaChartBar, FaTasks, FaCalendarCheck } from "react-icons/fa";
 
@@ -39,6 +38,7 @@ export default function LandingPage() {
     if (!sessionUser) {
         content = (
             <>
+                {/* Hero */}
                 <div id="hero"
                     className="
                     flex justify-center items-center text-center h-fit py-6
@@ -98,6 +98,7 @@ export default function LandingPage() {
                     </div>
                 </div >
 
+                {/* Features */}
                 <div id="features"
                     className='
                     flex flex-col flex-1 bg-main items-center justify-around h-fit gap-4 py-8 px-4
@@ -166,6 +167,7 @@ export default function LandingPage() {
                     </div>
                 </div>
 
+                {/* Testimonies */}
                 <div id="testimonies"
                     className="
                     h-fit
@@ -209,6 +211,7 @@ export default function LandingPage() {
                     </div>
                 </div>
 
+                {/* Pricing */}
                 <div id="pricing"
                     className="
                     flex flex-col items-center bg-main h-fit py-8
@@ -224,7 +227,7 @@ export default function LandingPage() {
                             className="
                             size-64 bg-[rgba(255,255,255,0.9)] rounded text-main-dark p-[20px] flex flex-col items-start
                             sm:h-2/3 sm:w-9/12
-                            lg:size-72
+                            lg:size-72 sm:max-md:transition-all
                             "
                         >
                             <div className="flex flex-col items-start sm:max-lg:items-center sm:max-lg:w-1/2 sm:max-lg:mx-auto">
@@ -243,7 +246,7 @@ export default function LandingPage() {
                             className="
                             size-64 bg-[rgba(255,255,255,0.9)] rounded text-main-dark p-[20px] flex flex-col items-start
                             sm:h-2/3 sm:w-9/12
-                            lg:size-72
+                            lg:size-72 sm:max-md:transition-all
                             "
                         >
                             <div className="flex flex-col items-start sm:max-lg:items-center sm:max-lg:w-1/2 sm:max-lg:mx-auto">
@@ -263,7 +266,7 @@ export default function LandingPage() {
                             className="
                             size-64 bg-[rgba(255,255,255,0.9)] rounded text-main-dark p-[20px] flex flex-col items-start
                             sm:h-2/3 sm:w-9/12
-                            lg:size-72
+                            lg:size-72 sm:max-md:transition-all
                             "
                         >
                             <div className="flex flex-col items-start sm:max-lg:items-center sm:max-lg:w-1/2 sm:max-lg:mx-auto">
@@ -282,7 +285,7 @@ export default function LandingPage() {
                     </div>
                     <button className="bg-btn-main hover:bg-btn-main-hover mt-8" onClick={handleFutureFeatureClick}>Choose Your Plan</button>
                 </div>
-
+                {/* Mission */}
                 <div className="flex justify-center items-center text-center py-4 md:py-4 transition-all">
                     <p className="text-sm w-9/12 md:text-base lg:text-xl lg:w-7/12 transition-all">ApplySage is dedicated to helping job seekers manage their applications with ease and efficiency.
                         Our mission is to provide smart, insightful tools that support your career journey.</p>
@@ -291,29 +294,52 @@ export default function LandingPage() {
         )
     } else {
         content = (
-            // TODO Still needs tailwind conversion
             <>
-                <div id="hero_logged_in" className="flex flex-col justify-center items-center">
-                    <h1 className="text-3xl font-bold my-7">Hello {sessionUser.username}!</h1>
+                {/* Hero Unauth */}
+                <div
+                    className="
+                    flex flex-col justify-center items-center gap-6 py-6
+                    lg:py-8 lg:gap-8 transition-all
+                    "
+                >
+                    <h1 className="text-3xl font-bold">Hello {sessionUser.username}!</h1>
                     <input
-                        className="font-medium pl-5 bg-[rgb(255,255,255,0.87)]
-                            border border-solid border-gray-500 rounded
-                                w-clamp-search h-6 mt-0.5"
+                        className="
+                        font-medium pl-1 bg-[rgb(255,255,255,0.87)] w-8/12
+                        border border-solid border-gray-500 rounded h-6
+                        sm:w-clamp-search
+                        focus:outline-none focus:ring-0 focus:border-gray-900
+                        "
                         type="search"
                         placeholder="Search for applications" />
                     <button
                         onClick={handleNewApplicationClick}
-                        className="bg-btn-main mt-8 py-1 px-4
-                            hover:bg-btn-main-hover"
+                        className="
+                        bg-btn-main hover:bg-btn-main-hover
+                        "
                     >
                         Add Application
                     </button>
                 </div>
-                <div id="recent_apps" className="flex justify-around bg-main mt-6">
+
+                {/* Recent Apps */}
+                <div
+                    className="
+                    flex flex-col justify-around items-center bg-main py-8 gap-4
+                    sm:flex-row sm:gap-0
+                    transition-all
+                    "
+                >
                     <div className="flex justify-center items-center">
-                        <h2 className="text-3xl">Recent Applications</h2>
+                        <h2 className="text-2xl sm:text-2xl">Recent Applications</h2>
                     </div>
-                    <div id="app_card__container" className="flex justify-around text-center items-center">
+                    <div
+                        className="
+                        flex flex-col justify-around text-center items-center gap-2
+                        sm:flex-row sm:gap-4
+                        lg:w-4/12
+                        "
+                    >
                         {recent_applications.allIds.map((application_id) => {
                             const application = recent_applications.data[application_id];
                             return (
@@ -321,27 +347,36 @@ export default function LandingPage() {
                                     onClick={() => handleRecentAppClick(application_id)}
                                     key={`dash-app-${application_id}`}
                                     className="border border-solid border-alt 
-                                    cursor-pointer p-2.5 flex flex-col gap-3
-                                    rounded hover:border-[#606060]"
+                                    cursor-pointer p-2.5 flex flex-col w-full gap-3
+                                    rounded hover:border-[#606060]
+                                    sm:w-auto
+                                    "
                                 >
-                                    {/* <img src="/aa-favicon.ico" alt="" /> */}
                                     <h3 className="text-xl font-bold">{application.company.name}</h3>
-                                    <p>Position:</p>
-                                    <p>{application.title}</p>
-                                    <h2 className="text-xl font-bold">Submitted:</h2>
-                                    <h2 className="text-xl font-bold">{format(new Date(application.applied_date), 'M/d/yyyy')}</h2>
+                                    <div className="flex gap-4 sm:flex-col">
+                                        <div>
+                                            <p>Position:</p>
+                                            <p>{application.title}</p>
+                                        </div>
+                                        <div>
+                                            <h2 className="text-lg font-bold">Submitted:</h2>
+                                            <h2 className="text-lg font-bold">{format(new Date(application.applied_date), 'M/d/yyyy')}</h2>
+                                        </div>
+                                    </div>
                                 </div>
                             )
                         })}
                         {recent_applications.allIds.length === 0 &&
-                            <h2 className="text-2xl">Add some applications and they will show up here!</h2>
+                            <h2 className="text-xl w-9/12 lg:text-2xl">Add some applications and they will show up here!</h2>
                         }
                     </div>
-                </div>
-                <div id="app_metrics" className="text-center">
-                    <h2 className="text-3xl pt-5">Application Metrics</h2>
+                </div >
+
+                {/* Metrics */}
+                <div className="text-center py-8">
+                    <h2 className="text-2xl">Application Metrics</h2>
                     <div>
-                        <article className="text-2xl mt-12">Feature will be coming soon :)</article>
+                        <article className="text-xl mt-10">Feature will be coming soon :)</article>
                     </div>
                 </div>
             </>

@@ -4,6 +4,8 @@ import { useModal } from "../../context/Modal";
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
+import { ImSpinner2 } from "react-icons/im";
+import { useState } from "react";
 
 const schema = yup
     .object({
@@ -19,12 +21,13 @@ type LoginFormValues = {
 function LoginFormModal(): JSX.Element {
     const dispatch = useDispatch();
     const { closeModal } = useModal();
+    const [demoLoading, setDemoLoading] = useState(false);
 
     const {
         register,
         handleSubmit,
         // watch,
-        formState: { errors },
+        formState: { errors, isSubmitting },
         setError
     } = useForm<LoginFormValues>({
         resolver: yupResolver(schema)
@@ -46,12 +49,13 @@ function LoginFormModal(): JSX.Element {
     };
 
     const demoLogin = (e: any) => {
-        e.preventDefault()
+        e.preventDefault();
+        setDemoLoading(true);
         return dispatch(thunkLogin({
             email: 'demo@aa.io', password: 'password'
         })).then(() => {
             closeModal();
-        });
+        }).finally(() => setDemoLoading(false))
     }
 
     return (
@@ -86,8 +90,29 @@ function LoginFormModal(): JSX.Element {
                     aria-invalid={errors.password ? true : false}
                 />
                 <div className="flex gap-5">
-                    <button className="bg-btn-main hover:bg-btn-main-hover" type="submit" >Log In</button>
-                    <button className="bg-cancel-btn hover:bg-cancel-btn-hover" id="demo" onClick={demoLogin}>Demo Login</button>
+                    <button
+                        className="bg-btn-main hover:bg-btn-main-hover"
+                        type="submit"
+                        disabled={isSubmitting || demoLoading}
+                    >
+                        {
+                            isSubmitting ? (
+                                <div className="flex items-center gap-1.5"><ImSpinner2 className="animate-spin" /><p>Loading</p></div>
+                            ) : 'Log In'
+                        }
+                    </button>
+                    <button
+                        className="bg-cancel-btn hover:bg-cancel-btn-hover"
+                        id="demo"
+                        onClick={demoLogin}
+                        disabled={demoLoading || isSubmitting}
+                    >
+                        {
+                            demoLoading ? (
+                                <div className="flex items-center gap-1.5"><ImSpinner2 className="animate-spin" /><p>Loading</p></div>
+                            ) : 'Demo Login'
+                        }
+                    </button>
                 </div>
             </form>
         </div>
