@@ -1,3 +1,4 @@
+from time import sleep
 from flask import Blueprint, request
 from app.models import User, db
 from app.forms import LoginForm
@@ -22,6 +23,7 @@ def login():
     """
     Logs a user in
     """
+    sleep(2)
     form = LoginForm()
     # Get the csrf_token from the request cookie and put it into the
     # form manually to validate_on_submit can be used
