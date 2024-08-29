@@ -39,10 +39,18 @@ export default function ApplicationList() {
     return (
         <>
             {isLoaded &&
-                <div id='application_list'>
-                    <div id='application_list__container'>
-                        <h1 className='text-3xl font-bold py-2 pb-5'>Your Applications</h1>
-                        <div id='applications__container'>
+                <div>
+                    <div
+                        className='
+                        w-11/12 mx-auto pt-2.5
+                        '
+                    >
+                        <h1 className='text-2xl font-bold py-2 pb-5 sm:text-3xl'>Your Applications</h1>
+                        <div
+                            className='
+                            flex flex-col gap-4
+                            '
+                        >
                             {
                                 applications.allIds.map((application_id) => {
                                     const application = applications.data[application_id];
@@ -60,7 +68,7 @@ export default function ApplicationList() {
                                 </div>
                             }
                         </div>
-                        <div id='pagination'>
+                        <div className='py-4'>
                             {/* TODO update when pagination is added */}
                             <p>Showing {applications.allIds.length} of {applications.allIds.length}</p>
                         </div>

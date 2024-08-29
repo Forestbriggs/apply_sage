@@ -1,16 +1,4 @@
-#application_list__container {
-    margin: 0 auto;
-    width: var(--card-width);
-    padding-top: 10px;
-}
-
-#applications__container {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-}
-
-.application_card {
+/* .application_card {
     border: 1px solid rgb(255, 255, 255, 0.5);
     border-radius: .25rem;
     display: flex;
@@ -36,7 +24,7 @@
 
 .application_card>div:first-of-type {
     margin-left: 20px;
-}
+} */
 
 .applied {
     color: #00A3FF;

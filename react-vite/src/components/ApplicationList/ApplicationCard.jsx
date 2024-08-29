@@ -25,8 +25,20 @@ export default function ApplicationCard({ application }) {
     }
 
     return (
-        <div className="application_card p-2" onClick={handleClick}>
-            <div>
+        <div
+            className="
+            border border-[rgb(255,255,255,0.5)] rounded flex flex-col gap-3 items-center justify-around p-2
+            sm:flex-row
+            hover:border-[#1F1F1F] hover:cursor-pointer
+            "
+            onClick={handleClick}
+        >
+            <div
+                className='
+                flex gap-5 border-b border-[rgb(255,255,255,0.5)] pb-1
+                sm:flex-col sm:border-b-0 sm:border-r sm:gap-3 sm:w-8/12 sm:pb-0 sm:pr-1 sm:pl-4
+                '
+            >
                 <h3
                     className={`${verifyStringLength(application.title, 18) ?
                         '' : 'break-all'} font-bold`}
@@ -35,28 +47,42 @@ export default function ApplicationCard({ application }) {
                 </h3>
                 <p>{application.company.name}</p>
             </div>
-            <div>
-                <p>Status</p>
-                <p className={determineStatusClass(application.status.name)}>{application.status.name}</p>
+            <div
+                className='
+                flex items-start justify-between w-10/12
+                sm:flex-col sm:w-8/12 sm:gap-2 sm:pl-10
+                '
+            >
+                <div>
+                    <p>Status</p>
+                    <p className={determineStatusClass(application.status.name)}>{application.status.name}</p>
+                </div>
+                <div>
+                    <p>Date Applied</p>
+                    {appliedDate ?
+                        <p>{appliedDate}</p> :
+                        <p>Not Set</p>
+                    }
+                </div>
             </div>
-            <div>
-                <p>Date Applied</p>
-                {appliedDate ?
-                    <p>{appliedDate}</p> :
-                    <p>Not Set</p>
-                }
-            </div>
-            <div>
-                <p>Salary Range</p>
-                <p>${Number(application.salary_min)
-                    .toLocaleString('en-US', { minimumFractionDigits: 0 })}
-                    {' '}-{' '}
-                    {Number(application.salary_max)
-                        .toLocaleString('en-US', { minimumFractionDigits: 0 })}</p>
-            </div>
-            <div>
-                <p>Last Updated</p>
-                <p>{lastUpdated}</p>
+            <div
+                className='
+                flex items-start justify-between w-10/12
+                sm:flex-col sm:w-8/12 sm:gap-2
+                '
+            >
+                <div>
+                    <p>Salary Range</p>
+                    <p>${Number(application.salary_min)
+                        .toLocaleString('en-US', { minimumFractionDigits: 0 })}
+                        {' '}-{' '}
+                        {Number(application.salary_max)
+                            .toLocaleString('en-US', { minimumFractionDigits: 0 })}</p>
+                </div>
+                <div>
+                    <p>Last Updated</p>
+                    <p>{lastUpdated}</p>
+                </div>
             </div>
         </div >
     )
