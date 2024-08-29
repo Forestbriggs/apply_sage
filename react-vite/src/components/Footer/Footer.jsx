@@ -1,6 +1,11 @@
 export default function Footer() {
     return (
-        <div className='h-[100px] flex items-center justify-between px-[35px]'>
+        <div
+            className='
+            h-16 flex items-center justify-between px-[35px]
+            sm:h-[96px]
+            '
+        >
             <div>
                 <p>© 2024 ApplySage</p>
             </div>

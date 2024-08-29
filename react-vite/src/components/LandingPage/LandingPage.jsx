@@ -295,32 +295,52 @@ export default function LandingPage() {
         )
     } else {
         content = (
-            // TODO Still needs tailwind conversion
             <>
                 {/* Hero Unauth */}
-                <div id="hero_logged_in" className="flex flex-col justify-center items-center">
-                    <h1 className="text-3xl font-bold my-7">Hello {sessionUser.username}!</h1>
+                <div
+                    className="
+                    flex flex-col justify-center items-center gap-6 py-6
+                    lg:py-8 lg:gap-8 transition-all
+                    "
+                >
+                    <h1 className="text-3xl font-bold">Hello {sessionUser.username}!</h1>
                     <input
-                        className="font-medium pl-5 bg-[rgb(255,255,255,0.87)]
-                            border border-solid border-gray-500 rounded
-                                w-clamp-search h-6 mt-0.5"
+                        className="
+                        font-medium pl-1 bg-[rgb(255,255,255,0.87)] w-8/12
+                        border border-solid border-gray-500 rounded h-6
+                        sm:w-clamp-search
+                        focus:outline-none focus:ring-0 focus:border-gray-900
+                        "
                         type="search"
                         placeholder="Search for applications" />
                     <button
                         onClick={handleNewApplicationClick}
-                        className="bg-btn-main mt-8 py-1 px-4
-                            hover:bg-btn-main-hover"
+                        className="
+                        bg-btn-main hover:bg-btn-main-hover
+                        "
                     >
                         Add Application
                     </button>
                 </div>
 
                 {/* Recent Apps */}
-                <div id="recent_apps" className="flex justify-around bg-main mt-6">
+                <div
+                    className="
+                    flex flex-col justify-around items-center bg-main py-8 gap-4
+                    sm:flex-row sm:gap-0
+                    transition-all
+                    "
+                >
                     <div className="flex justify-center items-center">
-                        <h2 className="text-3xl">Recent Applications</h2>
+                        <h2 className="text-2xl sm:text-2xl">Recent Applications</h2>
                     </div>
-                    <div id="app_card__container" className="flex justify-around text-center items-center">
+                    <div
+                        className="
+                        flex flex-col justify-around text-center items-center gap-2
+                        sm:flex-row sm:gap-4
+                        lg:w-4/12
+                        "
+                    >
                         {recent_applications.allIds.map((application_id) => {
                             const application = recent_applications.data[application_id];
                             return (
@@ -328,29 +348,36 @@ export default function LandingPage() {
                                     onClick={() => handleRecentAppClick(application_id)}
                                     key={`dash-app-${application_id}`}
                                     className="border border-solid border-alt 
-                                    cursor-pointer p-2.5 flex flex-col gap-3
-                                    rounded hover:border-[#606060]"
+                                    cursor-pointer p-2.5 flex flex-col w-full gap-3
+                                    rounded hover:border-[#606060]
+                                    sm:w-auto
+                                    "
                                 >
-                                    {/* <img src="/aa-favicon.ico" alt="" /> */}
                                     <h3 className="text-xl font-bold">{application.company.name}</h3>
-                                    <p>Position:</p>
-                                    <p>{application.title}</p>
-                                    <h2 className="text-xl font-bold">Submitted:</h2>
-                                    <h2 className="text-xl font-bold">{format(new Date(application.applied_date), 'M/d/yyyy')}</h2>
+                                    <div className="flex gap-4 sm:flex-col">
+                                        <div>
+                                            <p>Position:</p>
+                                            <p>{application.title}</p>
+                                        </div>
+                                        <div>
+                                            <h2 className="text-lg font-bold">Submitted:</h2>
+                                            <h2 className="text-lg font-bold">{format(new Date(application.applied_date), 'M/d/yyyy')}</h2>
+                                        </div>
+                                    </div>
                                 </div>
                             )
                         })}
                         {recent_applications.allIds.length === 0 &&
-                            <h2 className="text-2xl">Add some applications and they will show up here!</h2>
+                            <h2 className="text-xl w-9/12 lg:text-2xl">Add some applications and they will show up here!</h2>
                         }
                     </div>
-                </div>
+                </div >
 
                 {/* Metrics */}
-                <div id="app_metrics" className="text-center">
-                    <h2 className="text-3xl pt-5">Application Metrics</h2>
+                <div className="text-center py-8">
+                    <h2 className="text-2xl">Application Metrics</h2>
                     <div>
-                        <article className="text-2xl mt-12">Feature will be coming soon :)</article>
+                        <article className="text-xl mt-10">Feature will be coming soon :)</article>
                     </div>
                 </div>
             </>
