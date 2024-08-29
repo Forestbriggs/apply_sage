@@ -70,7 +70,15 @@ export default function ApplicationList() {
                         w-11/12 mx-auto pt-2.5
                         '
                     >
-                        <h1 className='text-2xl font-bold py-2 pb-5 sm:text-3xl'>Your Applications</h1>
+                        <div className='flex items-center justify-between'>
+                            <h1 className='text-2xl font-bold py-2 pb-5 sm:text-3xl'>Your Applications</h1>
+                            <button
+                                className='bg-btn-main hover:bg-btn-main-hover'
+                                onClick={handleAddClick}
+                            >
+                                Add Application
+                            </button>
+                        </div>
                         <div
                             className='
                             flex flex-col gap-4
