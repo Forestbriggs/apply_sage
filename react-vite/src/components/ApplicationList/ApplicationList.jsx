@@ -20,7 +20,14 @@ export default function ApplicationList() {
     const navigate = useNavigate();
     const applications = useSelector(state => state.applications);
     const [totalApps, setTotalApps] = useState(0);
-    const [page, setPage] = useState(1);
+    const [page, setPage] = useState(() => {
+        const savedPage = sessionStorage.getItem('page');
+        return savedPage ? parseInt(savedPage, 10) : 1;
+    });
+    const [perPage, setPerPage] = useState(() => {
+        const savedPerPage = localStorage.getItem('perPage');
+        return savedPerPage ? parseInt(savedPerPage, 10) : 10;
+    });
     const [totalPages, setTotalPages] = useState(0);
     const [isLoaded, setIsLoaded] = useState(false);
 
@@ -29,7 +36,7 @@ export default function ApplicationList() {
             return navigate('/');
         }
         if (!isLoaded) {
-            dispatch(thunkGetUserApplications(page)).then((data) => {
+            dispatch(thunkGetUserApplications(page, perPage)).then((data) => {
                 setTotalApps(data.total);
                 setTotalPages(data.pages);
                 setIsLoaded(true);
@@ -39,6 +46,21 @@ export default function ApplicationList() {
             })
         }
     }, [dispatch, isLoaded, navigate, sessionUser, page])
+
+    // * Saves page and perPage to session / local storage whenever they change
+    useEffect(() => {
+        sessionStorage.setItem('page', page);
+        localStorage.setItem('perPage', perPage);
+    }, [page, perPage])
+
+    const handlePerPageChange = (e) => {
+        setPage(1)
+        setPerPage(e.target.value);
+        // TODO refine logic for when not to refresh, came up with at 1am smh
+        if (perPage > e.target.value || totalApps > e.target.value) {
+            setIsLoaded(false);
+        }
+    }
 
     const handleNextPage = () => {
         if (page < totalPages) {
@@ -58,8 +80,8 @@ export default function ApplicationList() {
         navigate('/companies/select');
     }
 
-    const startApp = (page - 1) * 10 + 1;
-    const endApp = Math.min(page * 10, totalApps);
+    const startApp = (page - 1) * perPage + 1;
+    const endApp = Math.min(page * perPage, totalApps);
 
     return (
         <>
@@ -72,12 +94,27 @@ export default function ApplicationList() {
                     >
                         <div className='flex items-center justify-between'>
                             <h1 className='text-2xl font-bold py-2 pb-5 sm:text-3xl'>Your Applications</h1>
-                            <button
-                                className='bg-btn-main hover:bg-btn-main-hover'
-                                onClick={handleAddClick}
-                            >
-                                Add Application
-                            </button>
+                            <div>
+
+                                <select
+                                    className='text-main-dark mr-4 rounded'
+                                    name="perPage"
+                                    id="perPage"
+                                    value={perPage}
+                                    onChange={handlePerPageChange}
+                                >
+                                    <option value={10}>10 per page</option>
+                                    <option value={20}>20 per page</option>
+                                    <option value={50}>50 per page</option>
+                                    <option value={100}>100 per page</option>
+                                </select>
+                                <button
+                                    className='bg-btn-main hover:bg-btn-main-hover'
+                                    onClick={handleAddClick}
+                                >
+                                    Add Application
+                                </button>
+                            </div>
                         </div>
                         <div
                             className='
