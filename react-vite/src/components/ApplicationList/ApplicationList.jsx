@@ -91,10 +91,9 @@ export default function ApplicationList() {
                     >
                         <div className='flex items-center justify-between'>
                             <h1 className='text-2xl font-bold py-2 pb-5 sm:text-3xl'>Your Applications</h1>
-                            <div>
-
+                            <div className='flex flex-col-reverse items-end gap-2'>
                                 <select
-                                    className='text-main-dark mr-4 rounded'
+                                    className='text-main-dark rounded mb-2'
                                     name="perPage"
                                     id="perPage"
                                     value={perPage}
@@ -115,7 +114,7 @@ export default function ApplicationList() {
                         </div>
                         <div
                             className='
-                            flex flex-col gap-4
+                            flex flex-col  gap-2
                             '
                         >
                             {
@@ -129,30 +128,32 @@ export default function ApplicationList() {
                                 })
                             }
                             {applications.allIds.length === 0 &&
-                                <div>
-                                    <h3>Add some applications and you will find them here!</h3>
-                                    <button onClick={handleAddClick} className='add_button'>Add Application</button>
+                                <div className='w-8/12 text-center mx-auto mt-4'>
+                                    <h3 className='text-xl'>Add some applications and you will find them here!</h3>
                                 </div>
                             }
                         </div>
-                        <div className='py-4 flex flex-col justify-start gap-2'>
-                            <div className='flex gap-2 items-center'>
-                                <button
-                                    onClick={handlePreviousPage} disabled={page === 1}
-                                    className={`flex items-center bg-slate-300 py-0 px-2 rounded text-[#1F1F1F] ${page === 1 ? 'opacity-20' : ''}`}
-                                >
-                                    <PiCaretLeftLight />Prev
-                                </button>
-                                <span>Page {page} of {totalPages}</span>
-                                <button
-                                    onClick={handleNextPage} disabled={page === totalPages}
-                                    className={`flex items-center bg-slate-300 py-0 px-2 border rounded text-[#1F1F1F] ${page === totalPages ? 'opacity-20' : ''}`}
-                                >
-                                    Next<PiCaretRightLight />
-                                </button>
+                        {
+                            totalApps > 0 &&
+                            <div className='py-4 flex flex-col justify-start gap-2'>
+                                <div className='flex gap-2 items-center'>
+                                    <button
+                                        onClick={handlePreviousPage} disabled={page === 1}
+                                        className={`flex items-center bg-slate-300 py-0 px-2 rounded text-[#1F1F1F] ${page === 1 ? 'opacity-20' : ''}`}
+                                    >
+                                        <PiCaretLeftLight />Prev
+                                    </button>
+                                    <span>Page {page} of {totalPages}</span>
+                                    <button
+                                        onClick={handleNextPage} disabled={page === totalPages}
+                                        className={`flex items-center bg-slate-300 py-0 px-2 border rounded text-[#1F1F1F] ${page === totalPages ? 'opacity-20' : ''}`}
+                                    >
+                                        Next<PiCaretRightLight />
+                                    </button>
+                                </div>
+                                <p className='text-sm'>{startApp} - {endApp} of {totalApps}</p>
                             </div>
-                            <p className='text-sm'>{startApp} - {endApp} of {totalApps}</p>
-                        </div>
+                        }
                     </div>
                 </div >
             }
