@@ -1,4 +1,4 @@
-export default function determineStatusClass(status) {
+export default function determineStatusClass(status: string):string {
     switch (status) {
         case 'Applied':
             return 'applied'
@@ -12,5 +12,7 @@ export default function determineStatusClass(status) {
             return 'rejected'
         case 'Withdrawn':
             return 'withdrawn'
+        default:
+            return 'applied'
     }
 }

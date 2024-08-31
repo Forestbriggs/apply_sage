@@ -15,6 +15,13 @@ const rootReducer = combineReducers({
     companies: companyReducer
 });
 
+// Fix for typescript error
+declare global {
+    interface Window {
+        __REDUX_DEVTOOLS_EXTENSION_COMPOSE__: any;
+    }
+}
+// Fix for typescript error
 let enhancer;
 if (import.meta.env.MODE === "production") {
     enhancer = applyMiddleware(thunk);
@@ -25,7 +32,7 @@ if (import.meta.env.MODE === "production") {
     enhancer = composeEnhancers(applyMiddleware(thunk, logger));
 }
 
-const configureStore = (preloadedState) => {
+const configureStore = (preloadedState: any) => {
     return createStore(rootReducer, preloadedState, enhancer);
 };
 
