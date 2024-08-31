@@ -32,13 +32,13 @@ export default function NewApplicationForm() {
             return navigate('/error-page')
         }
         if (company.user.id !== sessionUser?.id) {
-            return navigate('/')
+            return navigate('/unauthorized')
         }
     }, [companyId, sessionUser, navigate])
 
     useEffect(() => {
         if (!sessionUser) {
-            return navigate('/');
+            return navigate('/unauthorized');
         }
         if (!Number.isInteger(Number(companyId))) {
             return navigate('error-page')

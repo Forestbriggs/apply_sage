@@ -1,5 +1,14 @@
 import { useModal } from '../../context/Modal';
 
+interface OpenModalButtonProps {
+    modalComponent: JSX.Element;
+    buttonText: string;
+    onButtonClick?: () => void;
+    onModalClose?: () => void;
+    id?: string;
+    className?: string;
+}
+
 function OpenModalButton({
     modalComponent, // component to render inside the modal
     buttonText, // text of the button that opens the modal
@@ -7,7 +16,7 @@ function OpenModalButton({
     onModalClose, // optional: callback function that will be called once the modal is closed
     id,
     className
-}) {
+}: OpenModalButtonProps) {
     const { setModalContent, setOnModalClose } = useModal();
 
     const onClick = () => {

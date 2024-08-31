@@ -6,6 +6,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import { ImSpinner2 } from "react-icons/im";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const schema = yup
     .object({
@@ -20,6 +21,7 @@ type LoginFormValues = {
 
 function LoginFormModal(): JSX.Element {
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     const { closeModal } = useModal();
     const [demoLoading, setDemoLoading] = useState(false);
 
@@ -37,6 +39,7 @@ function LoginFormModal(): JSX.Element {
     const onSubmit: SubmitHandler<LoginFormValues> = async (data) => {
         return dispatch(thunkLogin(data)
         ).then(() => {
+            navigate('/');
             closeModal();
         }).catch((e: any) => {
             if (e.email) {
@@ -54,6 +57,7 @@ function LoginFormModal(): JSX.Element {
         return dispatch(thunkLogin({
             email: 'demo@aa.io', password: 'password'
         })).then(() => {
+            navigate('/');
             closeModal();
         }).finally(() => setDemoLoading(false))
     }

@@ -23,7 +23,7 @@ export default function ApplicationDetails() {
 
     useEffect(() => {
         if (!sessionUser) {
-            return navigate('/');
+            return navigate('/unauthorized');
         }
         if (!Number.isInteger(Number(applicationId))) {
             return navigate('/error-page');
@@ -31,7 +31,7 @@ export default function ApplicationDetails() {
         if (!isLoaded) {
             dispatch(thunkGetApplicationById(applicationId)).then((application) => {
                 if (sessionUser.id !== application.user_id) {
-                    return navigate('/');
+                    return navigate('/unauthorized');
                 }
                 setIsLoaded(true);
             }).catch(() => navigate('/error-page'));

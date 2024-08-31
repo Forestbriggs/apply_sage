@@ -20,7 +20,7 @@ export default function CompanyForm() {
 
     useEffect(() => {
         if (!sessionUser) {
-            return navigate('/');
+            return navigate('/unauthorized');
         }
         if (!isLoaded) {
             dispatch(thunkGetUserCompanies()).then((data) => {

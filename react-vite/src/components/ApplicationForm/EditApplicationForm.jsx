@@ -29,7 +29,7 @@ export default function EditApplicationForm() {
 
     useEffect(() => {
         if (!sessionUser) {
-            return navigate('/');
+            return navigate('/unauthorized');
         }
         if (!Number.isInteger(Number(applicationId))) {
             return navigate('/error-page');
@@ -42,7 +42,7 @@ export default function EditApplicationForm() {
                     return navigate('/error-page')
                 }
                 if (sessionUser.id !== app.user_id) {
-                    return navigate('/');
+                    return navigate('/unauthorized');
                 }
 
                 setTitle(app.title);

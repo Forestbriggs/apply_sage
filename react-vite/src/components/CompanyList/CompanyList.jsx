@@ -16,7 +16,7 @@ export default function CompanyList() {
 
     useEffect(() => {
         if (!sessionUser) {
-            return navigate('/');
+            return navigate('/unauthorized');
         }
         if (!isLoaded) {
             dispatch(thunkGetUserCompanies()).then(() => {
