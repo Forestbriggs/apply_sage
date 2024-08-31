@@ -15,7 +15,7 @@ def applications():
     per_page = request.args.get('per_page', 10, type=int)
     
     applications = Application.query.filter(Application.user_id==current_user.id) \
-        .paginate(page=page, per_page=per_page, error_out=False)
+        .order_by(Application.updated_at.desc()).paginate(page=page, per_page=per_page, error_out=False)
     return {
         'Applications': [app.to_dict() for app in applications],
         'total': applications.total,
