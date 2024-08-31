@@ -1,16 +1,21 @@
+import { JSX } from "react";
 import { useEffect, useState } from "react";
 import { Outlet } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useAppDispatch } from "../redux/hooks";
 import { ModalProvider, Modal } from "../context/Modal";
 import { thunkAuthenticate } from "../redux/session";
 import Navigation from "../components/Navigation";
 import Footer from "../components/Footer";
 
 export default function Layout(): JSX.Element {
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
     const [isLoaded, setIsLoaded] = useState(false);
+    async function authenticate() {
+        await dispatch(thunkAuthenticate());
+        setIsLoaded(true);
+    }
     useEffect(() => {
-        dispatch(thunkAuthenticate()).then(() => setIsLoaded(true));
+        authenticate();
     }, [dispatch]);
 
     return (

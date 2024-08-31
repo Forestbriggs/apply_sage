@@ -1,3 +1,4 @@
+import { JSX } from 'react';
 import { useModal } from '../../context/Modal';
 
 interface OpenModalButtonProps {

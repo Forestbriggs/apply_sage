@@ -9,6 +9,8 @@ import sessionReducer from "./session";
 import applicationReducer from "./applications";
 import companyReducer from "./companies";
 
+export type RootState = ReturnType<typeof rootReducer>;
+
 const rootReducer = combineReducers({
     session: sessionReducer,
     applications: applicationReducer,

@@ -1,5 +1,6 @@
+import { JSX } from "react";
 import { thunkLogin } from "../../redux/session";
-import { useDispatch } from "react-redux";
+import { useAppDispatch } from "../../redux/hooks";
 import { useModal } from "../../context/Modal";
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -20,7 +21,7 @@ type LoginFormValues = {
 }
 
 function LoginFormModal(): JSX.Element {
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
     const navigate = useNavigate();
     const { closeModal } = useModal();
     const [demoLoading, setDemoLoading] = useState(false);
@@ -37,29 +38,33 @@ function LoginFormModal(): JSX.Element {
     // console.log(watch())
 
     const onSubmit: SubmitHandler<LoginFormValues> = async (data) => {
-        return dispatch(thunkLogin(data)
-        ).then(() => {
+        try {
+            await dispatch(thunkLogin(data));
             navigate('/');
             closeModal();
-        }).catch((e: any) => {
+        } catch (e: any) {
             if (e.email) {
                 setError('email', { type: 'custom', message: e.email })
             }
             if (e.password) {
                 setError('password', { type: 'custom', message: e.password })
             }
-        })
+        }
     };
 
-    const demoLogin = (e: any) => {
+    const demoLogin = async (e: any) => {
         e.preventDefault();
         setDemoLoading(true);
-        return dispatch(thunkLogin({
-            email: 'demo@aa.io', password: 'password'
-        })).then(() => {
+        try {
+            await dispatch(thunkLogin({
+                email: 'demo@aa.io', password: 'password'
+            }));
             navigate('/');
             closeModal();
-        }).finally(() => setDemoLoading(false))
+        } finally {
+            setDemoLoading(false);
+        }
+
     }
 
     return (
