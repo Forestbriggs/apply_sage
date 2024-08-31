@@ -16,12 +16,12 @@ export default function EditCompanyForm() {
 
     useEffect(() => {
         if (!sessionUser) {
-            return navigate('/');
+            return navigate('/unauthorized');
         }
         if (!isLoaded) {
             dispatch(thunkGetCompanyById(companyId)).then((company) => {
                 if (company.user.id !== sessionUser.id) {
-                    return navigate('/');
+                    return navigate('/unauthorized');
                 }
                 setCompanyName(company.name);
                 if (company.website) setCompanyWebsite(company.website);

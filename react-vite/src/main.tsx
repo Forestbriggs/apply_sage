@@ -9,14 +9,22 @@ import * as sessionActions from "./redux/session";
 import './normalize.css';
 import "./index.css";
 
-const store = configureStore();
+export type AppDispatch = typeof store.dispatch;
+const store = configureStore({});
+
+declare global {
+    interface Window {
+        store: typeof store;
+        sessionActions: typeof sessionActions;
+    }
+}
 
 if (import.meta.env.MODE !== "production") {
     window.store = store;
     window.sessionActions = sessionActions;
 }
 
-ReactDOM.createRoot(document.getElementById("root")).render(
+ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
     <React.StrictMode>
         <ReduxProvider store={store}>
             <RouterProvider router={router} />

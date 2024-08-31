@@ -303,7 +303,7 @@ export default function LandingPage() {
                     "
                 >
                     <h1 className="text-3xl font-bold">Hello {sessionUser.username}!</h1>
-                    <input
+                    {/* <input
                         className="
                         font-medium pl-1 bg-[rgb(255,255,255,0.87)] w-8/12
                         border border-solid border-gray-500 rounded h-6
@@ -311,7 +311,9 @@ export default function LandingPage() {
                         focus:outline-none focus:ring-0 focus:border-gray-900
                         "
                         type="search"
-                        placeholder="Search for applications" />
+                        value={searchQuery}
+                        onChange={(e) => setSearchQuery(e.target.value)}
+                        placeholder="Search for applications" /> */}
                     <button
                         onClick={handleNewApplicationClick}
                         className="

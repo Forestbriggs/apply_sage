@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { FaUserCircle } from 'react-icons/fa';
 import { thunkLogout } from "../../redux/session";
 import { NavLink, useNavigate } from "react-router-dom";
@@ -7,15 +7,16 @@ import OpenModalMenuItem from "./OpenModalMenuItem";
 import LoginFormModal from "../LoginFormModal";
 import SignupFormModal from "../SignupFormModal";
 import handleFutureFeatureClick from '../../utils/handleFutureFeatureClick';
+import { toast } from "react-toastify";
 
 function ProfileButton() {
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
     const navigate = useNavigate();
-    const [showMenu, setShowMenu] = useState(false);
-    const user = useSelector((store) => store.session.user);
-    const ulRef = useRef();
+    const [showMenu, setShowMenu] = useState<boolean>(false);
+    const user = useAppSelector((store) => store.session.user);
+    const ulRef: any = useRef();
 
-    const toggleMenu = (e) => {
+    const toggleMenu = (e: MouseEvent) => {
         e.stopPropagation(); // Keep from bubbling up to document and triggering closeMenu
         setShowMenu(!showMenu);
     };
@@ -23,8 +24,8 @@ function ProfileButton() {
     useEffect(() => {
         if (!showMenu) return;
 
-        const closeMenu = (e) => {
-            if (ulRef.current && !ulRef.current.contains(e.target)) {
+        const closeMenu = (e: MouseEvent) => {
+            if (ulRef.current instanceof HTMLElement && !ulRef.current.contains(e.target)) {
                 setShowMenu(false);
             }
         };
@@ -36,17 +37,20 @@ function ProfileButton() {
 
     const closeMenu = () => setShowMenu(false);
 
-    const logout = (e) => {
+    const logout = async (e: MouseEvent) => {
         e.preventDefault();
-        dispatch(thunkLogout()).then(() => {
+        try {
+            await dispatch(thunkLogout());
             navigate('/');
-        })
+        } catch (e) {
+            toast.error('There was an error logging out');
+        }
         return closeMenu();
     };
 
     return (
         <>
-            <FaUserCircle onClick={toggleMenu} className="text-4xl cursor-pointer" />
+            <FaUserCircle onClick={toggleMenu} className="text-4xl cursor-pointer" aria-label="Profile" />
             {showMenu && (
                 <ul className="profile-dropdown top-16 sm:top-24" ref={ulRef}>
                     {user ? (

@@ -9,8 +9,8 @@ import EditApplicationForm from '../components/ApplicationForm/EditApplicationFo
 import CompanyList from '../components/CompanyList';
 import CompanyForm from '../components/CompanyForm/CompanyForm';
 import EditCompanyForm from '../components/CompanyForm/EditCompanyForm';
+import Unauthorized from '../components/Unauthorized/Unauthorized';
 
-// TODO add break-word to inputs to protect against bad actors, test inputs
 export const router = createBrowserRouter([
     {
         element: <Layout />,
@@ -70,6 +70,10 @@ export const router = createBrowserRouter([
                         ]
                     }
                 ]
+            },
+            {
+                path: "unauthorized",
+                element: <Unauthorized />,
             },
             {
                 path: "*",

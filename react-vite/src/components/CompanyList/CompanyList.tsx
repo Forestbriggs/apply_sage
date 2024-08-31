@@ -1,30 +1,38 @@
-import { useDispatch, useSelector } from 'react-redux';
 import LoadingPage from '../LoadingPage';
 import './CompanyList.css';
 import { useEffect, useState } from 'react';
 import { thunkGetUserCompanies } from '../../redux/companies';
 import CompanyCard from './CompanyCard';
 import { useNavigate } from 'react-router-dom';
+import { useAppSelector, useAppDispatch } from '../../redux/hooks';
+
+export interface Company {
+    id: number;
+    name: string;
+    website?: string;
+}
 
 // TODO add pagination
 export default function CompanyList() {
-    const sessionUser = useSelector(state => state.session.user);
-    const dispatch = useDispatch();
+    const sessionUser = useAppSelector(state => state.session.user);
+    const dispatch = useAppDispatch();
     const navigate = useNavigate();
-    const companies = useSelector(state => state.companies);
+    const companies = useAppSelector(state => state.companies);
     const [isLoaded, setIsLoaded] = useState(false);
 
     useEffect(() => {
         if (!sessionUser) {
-            return navigate('/');
+            return navigate('/unauthorized');
         }
         if (!isLoaded) {
-            dispatch(thunkGetUserCompanies()).then(() => {
+            const getUserCompanies = async () => {
+                await dispatch(thunkGetUserCompanies());
                 setIsLoaded(true);
-            })
+            };
+            getUserCompanies();
         }
 
-    }, [dispatch, isLoaded, navigate, sessionUser])
+    }, [dispatch, isLoaded, navigate, sessionUser]);
 
     const handleAddClick = () => {
         return navigate('/companies/select');
@@ -44,7 +52,7 @@ export default function CompanyList() {
                     }
                     <div id='company_grid'>
                         {companies.allIds.map((company_id) => {
-                            const company = companies.data[company_id];
+                            const company: Company = companies.data[company_id];
                             return (
                                 <CompanyCard
                                     key={company.id}

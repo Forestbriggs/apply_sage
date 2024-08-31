@@ -7,7 +7,8 @@ module.exports = {
         "plugin:react/jsx-runtime",
         "plugin:react-hooks/recommended",
     ],
-    parserOptions: { ecmaVersion: "latest", sourceType: "module" },
+    parser: "@typescript-eslint/parser",
+    parserOptions: { ecmaVersion: "latest", sourceType: "module", project: "./tsconfig.json" },
     settings: { react: { version: "18.2" } },
     plugins: ["react-refresh"],
     overrides: [
