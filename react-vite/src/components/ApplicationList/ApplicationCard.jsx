@@ -21,6 +21,7 @@ export default function ApplicationCard({ application }) {
     lastUpdated = formattedDate;
 
     const handleClick = () => {
+        sessionStorage.removeItem('app-page');
         return navigate(`${application.id}`)
     }
 

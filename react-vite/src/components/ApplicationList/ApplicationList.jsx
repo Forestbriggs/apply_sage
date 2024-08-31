@@ -18,11 +18,11 @@ export default function ApplicationList() {
     const applications = useSelector(state => state.applications);
     const [totalApps, setTotalApps] = useState(0);
     const [page, setPage] = useState(() => {
-        const savedPage = sessionStorage.getItem('page');
+        const savedPage = sessionStorage.getItem('app-page');
         return savedPage ? parseInt(savedPage, 10) : 1;
     });
     const [perPage, setPerPage] = useState(() => {
-        const savedPerPage = localStorage.getItem('perPage');
+        const savedPerPage = localStorage.getItem('app-perPage');
         return savedPerPage ? parseInt(savedPerPage, 10) : 10;
     });
     const [totalPages, setTotalPages] = useState(0);
@@ -46,8 +46,8 @@ export default function ApplicationList() {
 
     // * Saves page and perPage to session / local storage whenever they change
     useEffect(() => {
-        sessionStorage.setItem('page', page);
-        localStorage.setItem('perPage', perPage);
+        sessionStorage.setItem('app-page', page);
+        localStorage.setItem('app-perPage', perPage);
     }, [page, perPage])
 
     const handlePerPageChange = (e) => {
@@ -74,6 +74,7 @@ export default function ApplicationList() {
     }
 
     const handleAddClick = () => {
+        sessionStorage.removeItem('app-page');
         navigate('/companies/select');
     }
 

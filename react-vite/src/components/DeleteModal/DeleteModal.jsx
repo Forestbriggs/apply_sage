@@ -12,6 +12,7 @@ export default function DeleteModal({ typeId, navigateOnDelete, type }) {
         switch (type) {
             case 'application':
                 dispatch(thunkDeleteApplicationById(typeId)).then(() => {
+                    sessionStorage.removeItem('app-page');
                     navigateOnDelete();
                     return closeModal();
                 })
