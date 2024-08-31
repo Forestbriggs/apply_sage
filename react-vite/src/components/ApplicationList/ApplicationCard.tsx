@@ -2,8 +2,9 @@ import { format, parseISO } from 'date-fns';
 import { useNavigate } from 'react-router-dom';
 import determineStatusClass from '../../utils/determineStatusClass';
 import verifyStringLength from '../../utils/verifyStringLength';
+import { Application } from "./ApplicationList";
 
-export default function ApplicationCard({ application }) {
+export default function ApplicationCard({ application }: { application: Application }) {
     const navigate = useNavigate();
     let appliedDate = null;
     let lastUpdated;
@@ -15,7 +16,7 @@ export default function ApplicationCard({ application }) {
         appliedDate = formattedDate;
     }
 
-    const isoDateStr = new Date(application.updated_at).toISOString();
+    const isoDateStr = new Date(application.updated_at as string).toISOString();
     const parsedDate = parseISO(isoDateStr.split('T')[0])
     const formattedDate = format(parsedDate, 'M/d/yyyy');
     lastUpdated = formattedDate;

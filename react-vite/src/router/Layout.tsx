@@ -1,5 +1,5 @@
 import { JSX } from "react";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { Outlet } from "react-router-dom";
 import { useAppDispatch } from "../redux/hooks";
 import { ModalProvider, Modal } from "../context/Modal";
@@ -10,13 +10,14 @@ import Footer from "../components/Footer";
 export default function Layout(): JSX.Element {
     const dispatch = useAppDispatch();
     const [isLoaded, setIsLoaded] = useState(false);
-    async function authenticate() {
+
+    const authenticate = useCallback(async () => {
         await dispatch(thunkAuthenticate());
         setIsLoaded(true);
-    }
+    }, [dispatch]);
     useEffect(() => {
         authenticate();
-    }, [dispatch]);
+    }, [dispatch, authenticate]);
 
     return (
         <>

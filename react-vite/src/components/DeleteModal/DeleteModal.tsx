@@ -1,30 +1,42 @@
-import { useDispatch } from 'react-redux';
+import { useAppDispatch } from '../../redux/hooks';
 import { useModal } from '../../context/Modal';
 import './DeleteModal.css';
 import { thunkDeleteApplicationById } from '../../redux/applications';
 import { thunkDeleteCompanyById } from '../../redux/companies';
+import { toast } from 'react-toastify';
 
-export default function DeleteModal({ typeId, navigateOnDelete, type }) {
+type DeleteModalProps = {
+    typeId: number;
+    type: string;
+    navigateOnDelete?: () => void;
+}
+
+export default function DeleteModal({ typeId, navigateOnDelete, type }: DeleteModalProps) {
     const { closeModal } = useModal();
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
 
-    const confirmDelete = () => {
+    const confirmDelete = async () => {
         switch (type) {
             case 'application':
-                dispatch(thunkDeleteApplicationById(typeId)).then(() => {
+                try {
+                    await dispatch(thunkDeleteApplicationById(typeId));
                     sessionStorage.removeItem('app-page');
-                    navigateOnDelete();
-                    return closeModal();
-                })
+                    if (navigateOnDelete) navigateOnDelete();
+                    closeModal();
+                } catch (e) {
+                    toast.error('There was an error deleting the application');
+                }
                 break
             case 'company':
-                dispatch(thunkDeleteCompanyById(typeId)).then(() => {
+                try {
+                    await dispatch(thunkDeleteCompanyById(typeId));
                     closeModal();
-                    return;
-                })
+                } catch (e) {
+                    toast.error('There was an error deleting the company');
+                }
                 break
             default:
-                return closeModal();
+                closeModal();
         }
     }
 

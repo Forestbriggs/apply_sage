@@ -1,4 +1,4 @@
-import { useDispatch, useSelector } from 'react-redux';
+import { useAppSelector, useAppDispatch } from '../../redux/hooks';
 import ApplicationCard from './ApplicationCard';
 import { useEffect, useState } from 'react';
 import { thunkGetUserApplications } from '../../redux/applications';
@@ -9,13 +9,33 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { PiCaretLeftLight, PiCaretRightLight } from 'react-icons/pi';
 
-
+export type Application = {
+    id: number;
+    user_id: number;
+    title: string;
+    status: {
+        id: number;
+        name: string;
+    };
+    company: {
+        id: number;
+        name: string;
+        website?: string;
+    };
+    salary_min?: number;
+    salary_max?: number;
+    resume_id?: number;
+    cover_letter_id?: number;
+    applied_date?: string;
+    created_at: string;
+    updated_at: string;
+};
 
 export default function ApplicationList() {
-    const sessionUser = useSelector(state => state.session.user);
-    const dispatch = useDispatch();
+    const sessionUser = useAppSelector(state => state.session.user);
+    const dispatch = useAppDispatch();
     const navigate = useNavigate();
-    const applications = useSelector(state => state.applications);
+    const applications = useAppSelector(state => state.applications);
     const [totalApps, setTotalApps] = useState(0);
     const [page, setPage] = useState(() => {
         const savedPage = sessionStorage.getItem('app-page');
@@ -33,24 +53,28 @@ export default function ApplicationList() {
             return navigate('/');
         }
         if (!isLoaded) {
-            dispatch(thunkGetUserApplications(page, perPage)).then((data) => {
-                setTotalApps(data.total);
-                setTotalPages(data.pages);
-                setIsLoaded(true);
-            }).catch(() => {
-                toast('There was an error fetching applications');
-                return navigate('/error-page')
-            })
+            const getUserApplications = async () => {
+                try {
+                    const data = await dispatch(thunkGetUserApplications(page, perPage));
+                    setTotalApps(data.total);
+                    setTotalPages(data.pages);
+                    setIsLoaded(true);
+                } catch (e) {
+                    toast.error('There was an error fetching applications');
+                    return navigate('/error-page');
+                }
+            };
+            getUserApplications();
         }
-    }, [dispatch, isLoaded, navigate, sessionUser, page, perPage])
+    }, [dispatch, isLoaded, navigate, sessionUser, page, perPage]);
 
     // * Saves page and perPage to session / local storage whenever they change
     useEffect(() => {
-        sessionStorage.setItem('app-page', page);
-        localStorage.setItem('app-perPage', perPage);
+        sessionStorage.setItem('app-page', page.toString());
+        localStorage.setItem('app-perPage', perPage.toString());
     }, [page, perPage])
 
-    const handlePerPageChange = (e) => {
+    const handlePerPageChange = (e: any) => {
         setPage(1)
         setPerPage(e.target.value);
         // TODO refine logic for when not to refresh, came up with at 1am smh
@@ -120,7 +144,7 @@ export default function ApplicationList() {
                         >
                             {
                                 applications.allIds.map((application_id) => {
-                                    const application = applications.data[application_id];
+                                    const application: Application = applications.data[application_id];
                                     return (
                                         <div key={`application-${application.id}`}>
                                             <ApplicationCard application={application} />

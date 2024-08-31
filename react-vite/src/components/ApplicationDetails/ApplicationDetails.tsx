@@ -1,4 +1,4 @@
-import { useDispatch, useSelector } from 'react-redux';
+import { useAppSelector, useAppDispatch } from '../../redux/hooks';
 import { useNavigate, useParams } from 'react-router-dom';
 import { FaRegFile, FaRegFileAlt } from 'react-icons/fa';
 import { format, parseISO } from 'date-fns';
@@ -11,13 +11,14 @@ import handleFutureFeatureClick from '../../utils/handleFutureFeatureClick';
 import './ApplicationDetails.css';
 import DeleteModal from '../DeleteModal/DeleteModal';
 import verifyStringLength from '../../utils/verifyStringLength';
+import { toast } from 'react-toastify';
 
 export default function ApplicationDetails() {
-    const sessionUser = useSelector(state => state.session.user);
+    const sessionUser = useAppSelector(state => state.session.user);
     const { applicationId } = useParams();
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
     const navigate = useNavigate();
-    const application = useSelector(state => state.applications.data[applicationId]);
+    const application = useAppSelector(state => state.applications.data[applicationId]);
     const [isLoaded, setIsLoaded] = useState(false);
     let appliedDate;
 
@@ -29,14 +30,21 @@ export default function ApplicationDetails() {
             return navigate('/error-page');
         }
         if (!isLoaded) {
-            dispatch(thunkGetApplicationById(applicationId)).then((application) => {
-                if (sessionUser.id !== application.user_id) {
-                    return navigate('/unauthorized');
+            const getApplicationById = async () => {
+                try {
+                    const application = await dispatch(thunkGetApplicationById(applicationId));
+                    if (sessionUser.id !== application.user_id) {
+                        return navigate('/unauthorized');
+                    }
+                    setIsLoaded(true);
+                } catch (e) {
+                    toast.error('There was an error fetching the application');
+                    return navigate('/error-page');
                 }
-                setIsLoaded(true);
-            }).catch(() => navigate('/error-page'));
+            };
+            getApplicationById();
         }
-    }, [dispatch, isLoaded, applicationId, navigate, sessionUser])
+    }, [dispatch, isLoaded, applicationId, navigate, sessionUser]);
 
     if (isLoaded && application?.applied_date) {
         const isoDateStr = new Date(application.applied_date).toISOString();

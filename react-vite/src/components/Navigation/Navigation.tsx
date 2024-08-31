@@ -1,11 +1,11 @@
 import { NavLink, useNavigate } from "react-router-dom";
 import ProfileButton from "./ProfileButton";
 import "./Navigation.css";
-import { useSelector } from "react-redux";
+import { useAppSelector } from "../../redux/hooks";
 
 function Navigation() {
     const navigate = useNavigate();
-    const sessionUser = useSelector(state => state.session.user);
+    const sessionUser = useAppSelector(state => state.session.user);
 
     const handleClick = () => {
         window.scroll(0, 0);
@@ -41,6 +41,7 @@ function Navigation() {
                     sm:text-2xl
                     transition-all
                     '
+                    to={'/'}
                 >
                     ApplySage
                 </NavLink>
