@@ -65,21 +65,27 @@ export default function EditApplicationForm() {
     }, [isLoaded, sessionUser, dispatch, applicationId, navigate])
 
     const handleMinSalaryChange = (e) => {
-        const formattedVal = formatSalary(e);
-        if (formattedVal === '0') {
+        const cleanValue = cleanSalaryFormat(e.target.value);
+
+        if (!cleanValue) {
             setSalaryMin('');
-            return;
+            return
         }
-        setSalaryMin('$' + formattedVal);
-    }
+
+        const formattedVal = formatSalary(e);
+        setSalaryMin(cleanValue !== '0' ? '$' + formattedVal : '');
+    };
 
     const handleMaxSalaryChange = (e) => {
-        const formattedVal = formatSalary(e);
-        if (formattedVal === '0') {
+        const cleanValue = cleanSalaryFormat(e.target.value);
+
+        if (!cleanValue) {
             setSalaryMax('');
-            return;
+            return
         }
-        setSalaryMax('$' + formattedVal);
+
+        const formattedVal = formatSalary(e);
+        setSalaryMax(cleanValue !== '0' ? '$' + formattedVal : '');
     }
 
     const handleSubmit = (e) => {

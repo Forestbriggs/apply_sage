@@ -69,8 +69,8 @@ function SignupFormModal(): JSX.Element {
                     gap-2.5 text-lg"
                     onSubmit={handleSubmit(onSubmit)}
                 >
-                    <label htmlFor="email">Email <span className='required'>*</span></label>
-                    <div className="min-h-4">
+                    <div className="flex w-full justify-between items-center">
+                        <label htmlFor="email">Email <span className='required'>*</span></label>
                         {errors.email && <p className="text-sm text-red-500">{errors.email.message}</p>}
                     </div>
                     <input
@@ -81,8 +81,8 @@ function SignupFormModal(): JSX.Element {
                         {...register('email')}
                         aria-invalid={errors.email ? true : false}
                     />
-                    <label htmlFor="username">Username <span className='required'>*</span></label>
-                    <div className="min-h-4">
+                    <div className="flex w-full justify-between items-center">
+                        <label htmlFor="username">Username <span className='required'>*</span></label>
                         {errors.username && <p className="text-sm text-red-500">{errors.username.message}</p>}
                     </div>
                     <input
@@ -93,20 +93,20 @@ function SignupFormModal(): JSX.Element {
                         {...register('username')}
                         aria-invalid={errors.username ? true : false}
                     />
-                    <label htmlFor="password">Password <span className='required'>*</span></label>
-                    <div className="min-h-4">
+                    <div className="flex w-full justify-between items-center">
+                        <label htmlFor="password">Password <span className='required'>*</span></label>
                         {errors.password && <p className="text-sm text-red-500">{errors.password.message}</p>}
                     </div>
                     <input
                         id="password"
-                        className="text-md rounded border border-gray-50 
+                        className="text-md rounded border border-gray-50
                         border-solid h-6 w-clamp-input"
                         type="password"
                         {...register('password')}
                         aria-invalid={errors.password ? true : false}
                     />
-                    <label htmlFor="confirm-password">Confirm Password <span className='required'>*</span></label>
-                    <div className="min-h-4">
+                    <div className="flex w-full justify-between items-center">
+                        <label htmlFor="confirm-password">Confirm Password <span className='required'>*</span></label>
                         {errors.confirmPassword && <p className="text-sm text-red-500">{errors.confirmPassword.message}</p>}
                     </div>
                     <input
@@ -117,7 +117,7 @@ function SignupFormModal(): JSX.Element {
                         {...register('confirmPassword')}
                         aria-invalid={errors.confirmPassword ? true : false}
                     />
-                    <button className="bg-btn-main hover:bg-btn-main-hover" type="submit" disabled={isSubmitting}>
+                    <button className="bg-btn-main hover:bg-btn-main-hover mt-2" type="submit" disabled={isSubmitting}>
                         {
                             isSubmitting ? (
                                 <div className="flex items-center gap-1.5"><ImSpinner2 className="animate-spin" /><p>Loading</p></div>

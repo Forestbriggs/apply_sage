@@ -4,9 +4,12 @@ export function cleanSalaryFormat(val:string):string {
     return rawVal;
 }
 
-export function formatSalary(e:Event):string {
+export function formatSalary(e: Event):string {
     const target = e.target as HTMLInputElement;
     const rawVal = parseInt(cleanSalaryFormat(target.value), 10);
+    if (isNaN(rawVal)) {
+        return '';
+    }
     const formattedVal = new Intl.NumberFormat().format(rawVal);
     return formattedVal;
 }
