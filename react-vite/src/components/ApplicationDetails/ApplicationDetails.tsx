@@ -1,7 +1,6 @@
 import { useAppSelector, useAppDispatch } from '../../redux/hooks';
 import { useNavigate, useParams } from 'react-router-dom';
 import { FaRegFile, FaRegFileAlt } from 'react-icons/fa';
-import { format, parseISO } from 'date-fns';
 import { useEffect, useState } from 'react';
 import { thunkGetApplicationById } from '../../redux/applications';
 import OpenModalButton from '../OpenModalButton';
@@ -12,6 +11,8 @@ import './ApplicationDetails.css';
 import DeleteModal from '../DeleteModal/DeleteModal';
 import verifyStringLength from '../../utils/verifyStringLength';
 import { toast } from 'react-toastify';
+import StatusHistoryCard from './StatusHistoryCard';
+import formatDate from '../../utils/formatDate';
 
 export default function ApplicationDetails() {
     const sessionUser = useAppSelector(state => state.session.user);
@@ -47,10 +48,7 @@ export default function ApplicationDetails() {
     }, [dispatch, isLoaded, applicationId, navigate, sessionUser]);
 
     if (isLoaded && application?.applied_date) {
-        const isoDateStr = new Date(application.applied_date).toISOString();
-        const parsedDate = parseISO(isoDateStr.split('T')[0])
-        const formattedDate = format(parsedDate, 'M/d/yyyy');
-        appliedDate = formattedDate;
+        appliedDate = formatDate(application.applied_date);
     }
 
     const handleBackClick = () => {
@@ -119,7 +117,7 @@ export default function ApplicationDetails() {
                                     className={'delete_button'}
                                     modalComponent={
                                         <DeleteModal
-                                            typeId={applicationId}
+                                            typeId={Number(applicationId)}
                                             navigateOnDelete={navigateOnDelete}
                                             type={'application'}
                                         />
@@ -164,25 +162,20 @@ export default function ApplicationDetails() {
                             </div>
                             <div>
                                 <h2 className='text-2xl font-bold py-2'>Application Status History:</h2>
-                                <div id='app_status_history'>
+                                <div className='flex gap-2 mb-1'>
                                     <h3>Feature coming soon...</h3>
                                     <h4>Example below (Not actual data)</h4>
-                                    <div>
-                                        <p>Offer Received:</p>
-                                        <p>11/7/24</p>
-                                    </div>
-                                    <div>
-                                        <p>Second Interview:</p>
-                                        <p>11/3/24</p>
-                                    </div>
-                                    <div>
-                                        <p>First Interview:</p>
-                                        <p>10/27/24</p>
-                                    </div>
-                                    <div>
-                                        <p>Applied:</p>
-                                        <p>10/20/24</p>
-                                    </div>
+                                </div>
+                                <div
+                                    className=' scrollable-div
+                                    border border-solid border-[#484848] rounded p-2
+                                    flex flex-col gap-2 h-32 overflow-y-scroll
+                                    '
+                                >
+                                    <StatusHistoryCard status='Offer Received' date={new Date(2024, 10, 7)} />
+                                    <StatusHistoryCard status='Second Interview' date={new Date(2024, 10, 3)} />
+                                    <StatusHistoryCard status='First Interview' date={new Date(2024, 10, 1)} />
+                                    <StatusHistoryCard status='Applied' date={new Date(2024, 9, 24)} />
                                     {/* TODO add recent history and link to history page */}
                                 </div>
                             </div>
@@ -210,7 +203,7 @@ export default function ApplicationDetails() {
                         </div>
                         <div id='main_right'>
                             <div>
-                                <h2 className='text-2xl font-bold py-2'>Attachments:</h2>
+                                <h2 className='text-2xl font-bold py-2'>Documents:</h2>
                                 <div id='resume_cv'>
                                     <div>
                                         <h3>Resume:</h3>

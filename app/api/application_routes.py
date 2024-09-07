@@ -1,9 +1,11 @@
+from time import sleep
 from flask import Blueprint, request
 from app.models import Application, db
 from app.forms import ApplicationForm
 from flask_login import current_user, login_required
 from app.models.application_status import ApplicationStatus
 from datetime import datetime
+import pandas as pd
 
 application_routes = Blueprint('application', __name__)
 
@@ -29,7 +31,30 @@ def applications():
 def dashboard():
     recent_applications = Application.query.filter(Application.user_id==current_user.id) \
         .order_by(Application.applied_date.desc()).limit(2).all()
-    return {'Applications': [app.to_dict() for app in recent_applications]}
+        
+    return {
+        'Applications': [app.to_dict() for app in recent_applications]
+        }
+    
+
+@application_routes.route('/dashboard/analytics')
+@login_required
+def dashboard_analytics():
+    # sleep(2)
+    all_applications = Application.query.filter(Application.user_id==current_user.id).all()
+    app_data = [app.to_dict_analytics() for app in all_applications]
+    df = pd.DataFrame(app_data)
+    apps_per_company = df.groupby('company_name')['id'].count().to_dict();
+    apps_by_status = df.groupby('status_name')['id'].count().to_dict();
+    avg_salary_min = df['salary_min'].mean()
+    avg_salary_max = df['salary_max'].mean()
+        
+    return {
+        'apps_per_company': apps_per_company,
+        'apps_by_status': apps_by_status,
+        'avg_salary_min': avg_salary_min,
+        'avg_salary_max': avg_salary_max
+        }
 
 
 @application_routes.route('/<int:application_id>')

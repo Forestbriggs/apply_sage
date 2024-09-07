@@ -71,6 +71,10 @@ export default function CompanyForm() {
         }).catch((e) => setErrors(e))
     }
 
+    const handleToggle = () => {
+        setNewCompany(!newCompany);
+    }
+
     return (
         <>
             {isLoaded &&
@@ -78,7 +82,7 @@ export default function CompanyForm() {
                     <div id='company_form'>
                         <h1 className='text-3xl font-bold py-4'>What Company is This Application For?</h1>
                         {companies.allIds.length > 0 &&
-                            <div>
+                            <div className='flex gap-1 items-center'>
                                 <select
                                     name="company"
                                     id="company_select"
@@ -100,7 +104,7 @@ export default function CompanyForm() {
                                 </select>
                                 <span> </span>
                                 {!newCompany && <span className='required'>*</span>}
-                                <span className='errors'> {errors.company}</span>
+                                <span className='errors ml-1'> {!newCompany && errors.company}</span>
                             </div>
                         }
                         <div id='not_in_list'>
@@ -111,14 +115,14 @@ export default function CompanyForm() {
                                     name="newCompany"
                                     id="new_company_checkbox"
                                     value={newCompany}
-                                    onChange={() => setNewCompany(!newCompany)}
+                                    onChange={handleToggle}
                                 />
                             }
                         </div>
                         <div id='new_company_form'>
                             <div>
                                 <label>Company Name: {newCompany && <span className='required'>*</span>}
-                                    <span className='errors'>  {errors.name}</span>
+                                    <span className='errors'>  {newCompany && errors.name}</span>
                                 </label>
                                 <input
                                     required
@@ -129,7 +133,7 @@ export default function CompanyForm() {
                                 />
                             </div>
                             <div>
-                                <label>Career Page Link <span className='errors'>{errors.website}</span></label>
+                                <label>Career Page Link <span className='errors'>{newCompany && errors.website}</span></label>
                                 <input
                                     disabled={!newCompany}
                                     type="text"

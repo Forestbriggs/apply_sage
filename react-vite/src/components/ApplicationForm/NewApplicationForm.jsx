@@ -48,25 +48,31 @@ export default function NewApplicationForm() {
     }, [navigate, sessionUser, verifyCompanyOwnership, companyId])
 
     const handleMinSalaryChange = (e) => {
-        const formattedVal = formatSalary(e);
-        if (formattedVal === '0') {
+        const cleanValue = cleanSalaryFormat(e.target.value);
+
+        if (!cleanValue) {
             setSalaryMin('');
-            return;
+            return
         }
-        setSalaryMin('$' + formattedVal);
-    }
+
+        const formattedVal = formatSalary(e);
+        setSalaryMin(cleanValue !== '0' ? '$' + formattedVal : '');
+    };
 
     const handleMaxSalaryChange = (e) => {
-        const formattedVal = formatSalary(e);
-        if (formattedVal === '0') {
+        const cleanValue = cleanSalaryFormat(e.target.value);
+
+        if (!cleanValue) {
             setSalaryMax('');
-            return;
+            return
         }
-        setSalaryMax('$' + formattedVal);
+
+        const formattedVal = formatSalary(e);
+        setSalaryMax(cleanValue !== '0' ? '$' + formattedVal : '');
     }
 
     const handleSubmit = (e) => {
-        e.preventDefault()
+        e.preventDefault();
         const [y, m, d] = appliedDate.split('-');
         const applied_date = new Date(y, parseInt(m, 10) - 1, d);
         setErrors({});

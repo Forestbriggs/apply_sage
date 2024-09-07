@@ -71,13 +71,13 @@ function LoginFormModal(): JSX.Element {
         <div className="text-center">
             <h1 className="text-3xl mb-2" >Log In</h1>
             <form
-                className="flex flex-col justify-start items-center
+                className="flex flex-col justify-start items-start
                             gap-2.5 text-lg"
                 onSubmit={handleSubmit(onSubmit)}
             >
-                <label htmlFor="email">Email</label>
-                <div className="min-h-4" >
-                    {errors.email && <p className="text-sm text-red-500">{errors.email.message}</p>}
+                <div className="flex w-full justify-between items-center">
+                    <label htmlFor="email">Email</label>
+                    {errors.email && <p className="text-sm text-red-500 m-0">{errors.email.message}</p>}
                 </div>
                 <input
                     className="text-md rounded border border-gray-50
@@ -86,8 +86,8 @@ function LoginFormModal(): JSX.Element {
                     {...register('email')}
                     aria-invalid={errors.email ? true : false}
                 />
-                <label htmlFor="password">Password</label>
-                <div className="min-h-4">
+                <div className="flex w-full justify-between items-center">
+                    <label htmlFor="password">Password</label>
                     {errors.password && <p className="text-sm text-red-500">{errors.password.message}</p>}
                 </div>
                 <input
@@ -98,7 +98,7 @@ function LoginFormModal(): JSX.Element {
                     {...register('password')}
                     aria-invalid={errors.password ? true : false}
                 />
-                <div className="flex gap-5">
+                <div className="flex gap-5 self-center mt-3">
                     <button
                         className="bg-btn-main hover:bg-btn-main-hover"
                         type="submit"
