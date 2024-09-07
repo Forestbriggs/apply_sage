@@ -5,6 +5,7 @@ import { format } from "date-fns";
 import OpenModalButton from '../OpenModalButton';
 import SignupFormModal from "../SignupFormModal";
 import LoadingPage from '../LoadingPage';
+import Metrics from './Metrics';
 import handleFutureFeatureClick from '../../utils/handleFutureFeatureClick';
 import { useNavigate } from "react-router-dom";
 import { FaProjectDiagram, FaChartBar, FaTasks, FaCalendarCheck } from "react-icons/fa";
@@ -377,9 +378,7 @@ export default function LandingPage() {
                 {/* Metrics */}
                 <div className="text-center py-8">
                     <h2 className="text-2xl">Application Metrics</h2>
-                    <div>
-                        <article className="text-xl mt-10">Feature will be coming soon :)</article>
-                    </div>
+                    <Metrics />
                 </div>
             </>
         )

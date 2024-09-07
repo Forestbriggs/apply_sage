@@ -39,6 +39,9 @@ class Application(db.Model):
         return {
             'id': self.id,
             'user_id': self.user_id,
+            'company_id': self.company_id,
+            'category_id': self.category_id,
+            'status_id': self.status_id,
             'title': self.title,
             'status': self.status.to_dict(),
             'company': self.company.to_dict_app_details(),
@@ -59,6 +62,25 @@ class Application(db.Model):
             'status': self.status.to_dict(),
             'category': self.category.to_dict() if self.category is not None else None,
             'company': self.company.to_dict_app_details() if self.company is not None else None,
+            'salary_min': self.salary_min,
+            'salary_max': self.salary_max,
+            'resume_id': self.resume_id,
+            'cover_letter_id': self.cover_letter_id,
+            'applied_date': self.applied_date,
+            'created_at': self.created_at,
+            'updated_at': self.updated_at
+        }
+
+    def to_dict_analytics(self):
+        return {
+            'id': self.id,
+            'user_id': self.user_id,
+            'company_id': self.company_id,
+            'company_name': self.company.name if self.company else None,
+            'category_id': self.category_id,
+            'status_id': self.status_id,
+            'status_name': self.status.name,
+            'title': self.title,
             'salary_min': self.salary_min,
             'salary_max': self.salary_max,
             'resume_id': self.resume_id,
