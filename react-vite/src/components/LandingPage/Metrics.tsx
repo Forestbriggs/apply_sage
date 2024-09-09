@@ -66,6 +66,7 @@ export default function Metrics(): JSX.Element {
                         'rgba(153, 102, 255, 0.5)',
                         'rgba(255, 159, 64, 0.5)',
                     ],
+                    borderRadius: 10,
                 },
             ],
         };
@@ -76,10 +77,6 @@ export default function Metrics(): JSX.Element {
                 legend: {
                     position: 'top' as const,
                 },
-                title: {
-                    display: true,
-                    text: 'Applications Per Company',
-                },
             },
             scales: {
                 x: {
@@ -89,11 +86,11 @@ export default function Metrics(): JSX.Element {
                     },
                 },
                 y: {
-                    title: {
-                        display: true,
-                        text: 'Number of Applications',
-                    },
-                },
+                    beginAtZero: true,
+                    ticks: {
+                        stepSize: 1,
+                    }
+                }
             },
         };
     }
@@ -113,6 +110,7 @@ export default function Metrics(): JSX.Element {
                         'rgba(153, 102, 255, 0.5)',
                         'rgba(255, 159, 64, 0.5)',
                     ],
+                    borderRadius: 10,
                 },
             ],
         };
@@ -123,10 +121,6 @@ export default function Metrics(): JSX.Element {
                 legend: {
                     position: 'top' as const,
                 },
-                title: {
-                    display: true,
-                    text: 'Applications By Status',
-                },
             },
             scales: {
                 x: {
@@ -136,22 +130,22 @@ export default function Metrics(): JSX.Element {
                     },
                 },
                 y: {
-                    title: {
-                        display: true,
-                        text: 'Number of Applications',
-                    },
-                },
+                    beginAtZero: true,
+                    ticks: {
+                        stepSize: 1,
+                    }
+                }
             },
         };
     }
 
     return (
-        <div className="flex flex-col xl:flex-row">
-            <div className="w-full xl:w-1/2">
+        <div className="flex flex-col xl:flex-row xl:justify-around">
+            <div className="w-full xl:w-5/12">
                 <h2>Applications Per Company</h2>
                 <MyChart data={company_data} options={company_options} />
             </div>
-            <div className="w-full xl:w-1/2">
+            <div className="w-full xl:w-5/12">
                 <h2>Applications By Status</h2>
                 <MyChart data={status_data} options={status_options} />
             </div>
