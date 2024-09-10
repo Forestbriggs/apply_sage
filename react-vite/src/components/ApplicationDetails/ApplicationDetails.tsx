@@ -21,9 +21,13 @@ export default function ApplicationDetails() {
     const navigate = useNavigate();
     const application = useAppSelector(state => state.applications.data[applicationId]);
     const [isLoaded, setIsLoaded] = useState(false);
+    const [pendingDelete, setPendingDelete] = useState(false);
     let appliedDate;
 
     useEffect(() => {
+        if (pendingDelete) {
+            return;
+        }
         if (!sessionUser) {
             return navigate('/unauthorized');
         }
@@ -45,7 +49,7 @@ export default function ApplicationDetails() {
             };
             getApplicationById();
         }
-    }, [dispatch, isLoaded, applicationId, navigate, sessionUser]);
+    }, [dispatch, isLoaded, applicationId, navigate, sessionUser, pendingDelete]);
 
     if (isLoaded && application?.applied_date) {
         appliedDate = formatDate(application.applied_date);
@@ -120,6 +124,8 @@ export default function ApplicationDetails() {
                                             typeId={Number(applicationId)}
                                             navigateOnDelete={navigateOnDelete}
                                             type={'application'}
+                                            setIsLoaded={setIsLoaded}
+                                            setPendingDelete={setPendingDelete}
                                         />
                                     }
                                 />

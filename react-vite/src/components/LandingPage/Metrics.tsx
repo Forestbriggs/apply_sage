@@ -1,5 +1,6 @@
 import axios from "axios"
 import { JSX, useEffect, useState } from "react";
+import { useMediaQuery } from 'react-responsive';
 import MyChart from "./MyChart";
 import { toast } from "react-toastify";
 
@@ -19,6 +20,7 @@ export default function Metrics(): JSX.Element {
     });
     const [isLoaded, setIsLoaded] = useState(false);
     const [isError, setIsError] = useState(false);
+    const isMobile = useMediaQuery({ query: '(max-width: 768px)' });
 
 
     useEffect(() => {
@@ -66,6 +68,7 @@ export default function Metrics(): JSX.Element {
                         'rgba(153, 102, 255, 0.5)',
                         'rgba(255, 159, 64, 0.5)',
                     ],
+                    borderRadius: 10,
                 },
             ],
         };
@@ -76,10 +79,6 @@ export default function Metrics(): JSX.Element {
                 legend: {
                     position: 'top' as const,
                 },
-                title: {
-                    display: true,
-                    text: 'Applications Per Company',
-                },
             },
             scales: {
                 x: {
@@ -89,12 +88,13 @@ export default function Metrics(): JSX.Element {
                     },
                 },
                 y: {
-                    title: {
-                        display: true,
-                        text: 'Number of Applications',
-                    },
-                },
+                    beginAtZero: true,
+                    ticks: {
+                        stepSize: 1,
+                    }
+                }
             },
+            indexAxis: isMobile ? 'y' : 'x',
         };
     }
 
@@ -113,6 +113,7 @@ export default function Metrics(): JSX.Element {
                         'rgba(153, 102, 255, 0.5)',
                         'rgba(255, 159, 64, 0.5)',
                     ],
+                    borderRadius: 10,
                 },
             ],
         };
@@ -123,10 +124,6 @@ export default function Metrics(): JSX.Element {
                 legend: {
                     position: 'top' as const,
                 },
-                title: {
-                    display: true,
-                    text: 'Applications By Status',
-                },
             },
             scales: {
                 x: {
@@ -136,22 +133,23 @@ export default function Metrics(): JSX.Element {
                     },
                 },
                 y: {
-                    title: {
-                        display: true,
-                        text: 'Number of Applications',
-                    },
-                },
+                    beginAtZero: true,
+                    ticks: {
+                        stepSize: 1,
+                    }
+                }
             },
+            indexAxis: isMobile ? 'y' : 'x',
         };
     }
 
     return (
-        <div className="flex flex-col xl:flex-row">
-            <div className="w-full xl:w-1/2">
+        <div className="flex flex-col xl:flex-row xl:justify-around">
+            <div className="w-full xl:w-5/12">
                 <h2>Applications Per Company</h2>
                 <MyChart data={company_data} options={company_options} />
             </div>
-            <div className="w-full xl:w-1/2">
+            <div className="w-full xl:w-5/12">
                 <h2>Applications By Status</h2>
                 <MyChart data={status_data} options={status_options} />
             </div>

@@ -12,7 +12,7 @@ const MyChart = ({ data, options }: { data: any; options: any }) => {
         };
     }, []);
 
-    return <Bar id="myChartId" data={data} options={options} />;
+    return <Bar id="myChartId" className='bg-main mt-3 px-5 rounded-md' data={data} options={options} />;
 };
 
 export default MyChart;
