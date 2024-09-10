@@ -1,5 +1,6 @@
 import axios from "axios"
 import { JSX, useEffect, useState } from "react";
+import { useMediaQuery } from 'react-responsive';
 import MyChart from "./MyChart";
 import { toast } from "react-toastify";
 
@@ -19,6 +20,7 @@ export default function Metrics(): JSX.Element {
     });
     const [isLoaded, setIsLoaded] = useState(false);
     const [isError, setIsError] = useState(false);
+    const isMobile = useMediaQuery({ query: '(max-width: 768px)' });
 
 
     useEffect(() => {
@@ -92,6 +94,7 @@ export default function Metrics(): JSX.Element {
                     }
                 }
             },
+            indexAxis: isMobile ? 'y' : 'x',
         };
     }
 
@@ -136,6 +139,7 @@ export default function Metrics(): JSX.Element {
                     }
                 }
             },
+            indexAxis: isMobile ? 'y' : 'x',
         };
     }
 

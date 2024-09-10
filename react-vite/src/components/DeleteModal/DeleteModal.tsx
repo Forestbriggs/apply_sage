@@ -9,9 +9,11 @@ type DeleteModalProps = {
     typeId: number;
     type: string;
     navigateOnDelete?: () => void;
+    setIsLoaded?: React.Dispatch<React.SetStateAction<boolean>>;
+    setPendingDelete?: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export default function DeleteModal({ typeId, navigateOnDelete, type }: DeleteModalProps) {
+export default function DeleteModal({ typeId, navigateOnDelete, type, setIsLoaded, setPendingDelete }: DeleteModalProps) {
     const { closeModal } = useModal();
     const dispatch = useAppDispatch();
 
@@ -19,8 +21,10 @@ export default function DeleteModal({ typeId, navigateOnDelete, type }: DeleteMo
         switch (type) {
             case 'application':
                 try {
-                    await dispatch(thunkDeleteApplicationById(typeId));
                     sessionStorage.removeItem('app-page');
+                    if (setPendingDelete) setPendingDelete(true);
+                    if (setIsLoaded) setIsLoaded(false);
+                    await dispatch(thunkDeleteApplicationById(typeId));
                     if (navigateOnDelete) navigateOnDelete();
                     closeModal();
                 } catch (e) {
