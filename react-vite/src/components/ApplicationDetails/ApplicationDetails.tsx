@@ -71,8 +71,17 @@ export default function ApplicationDetails() {
         <>
             {isLoaded &&
 
-                <div className='my-0 mx-auto pt-2.5'>
-                    <div className='py-0 px-[150px] border-b border-solid border-[#484848] flex justify-between pb-[10px]'>
+                <div
+                    className='my-0 mx-auto pt-2.5'
+                >
+                    {/* Header */}
+                    <div
+                        className='
+                        flex flex-col gap-2 px-4 border-b border-solid border-[#484848] pb-2.5
+                        md:flex-row md:justify-between md:gap-0
+                        '
+                    // py-0 px-[150px] border-b border-solid border-[#484848] flex justify-between pb-[10px]
+                    >
                         <div>
                             <span onClick={handleBackClick} id='back_button'><div>{'<'}</div><p>Back to applications</p></span>
                             <h1
@@ -93,7 +102,12 @@ export default function ApplicationDetails() {
                                 }
                             </div>
                         </div>
-                        <div className='min-w-56 text-end flex flex-col gap-4'>
+                        <div
+                            className='
+                            min-w-56 text-end flex flex-row-reverse justify-between items-center
+                            md:flex-col md:gap-4 md:items-end
+                            '
+                        >
                             <h2 className={`${determineStatusClass(application.status.name)}
                                             text-xl`}
                             >
@@ -132,9 +146,13 @@ export default function ApplicationDetails() {
                             </div>
                         </div>
                     </div>
-                    <div id='main_section'>
-                        <div id='main_left'>
-                            <div>
+
+                    {/* <div id='main_section'> */}
+
+                    {/* <div id='main_left'> */}
+
+                    {/* App Details */}
+                    {/* <div>
                                 <h2 className='text-2xl font-bold py-2'>Job Application Details:</h2>
                                 <div id='app_details'>
                                     <div>
@@ -165,8 +183,9 @@ export default function ApplicationDetails() {
                                         }
                                     </div>
                                 </div>
-                            </div>
-                            <div>
+                            </div> */}
+                    {/* Application Status History */}
+                    {/* <div>
                                 <h2 className='text-2xl font-bold py-2'>Application Status History:</h2>
                                 <div className='flex gap-2 mb-1'>
                                     <h3>Feature coming soon...</h3>
@@ -182,10 +201,11 @@ export default function ApplicationDetails() {
                                     <StatusHistoryCard status='Second Interview' date={new Date(2024, 10, 3)} />
                                     <StatusHistoryCard status='First Interview' date={new Date(2024, 10, 1)} />
                                     <StatusHistoryCard status='Applied' date={new Date(2024, 9, 24)} />
-                                    {/* TODO add recent history and link to history page */}
+                                    // {/* TODO add recent history and link to history page
                                 </div>
-                            </div>
-                            <div>
+                            </div> */}
+                    {/* Reminders */}
+                    {/* <div>
                                 <h2 className='text-2xl font-bold py-2'>Reminders:</h2>
                                 <div id='app_reminders'>
                                     <h3>Feature coming soon...</h3>
@@ -193,22 +213,25 @@ export default function ApplicationDetails() {
                                     <div id='reminder__container'>
                                         <div className='reminder_card'>
                                             <div><p>10:00 am 11/10/24</p> <p>Negotiation</p></div>
-                                            {/* TODO OpenModalButton for details modal */}
-                                            <button onClick={handleFutureFeatureClick} className='edit_button'>edit</button>
-                                            <button onClick={handleFutureFeatureClick} className='delete_button'>delete</button>
-                                        </div>
-                                        <div className='reminder_card'>
-                                            <div><p>10:00 am 11/10/24</p> <p>Negotiation</p></div>
-                                            {/* TODO OpenModalButton for details modal */}
+                                            {/* TODO OpenModalButton for details modal
+                            <button onClick={handleFutureFeatureClick} className='edit_button'>edit</button>
+                            <button onClick={handleFutureFeatureClick} className='delete_button'>delete</button>
+                        </div>
+                        <div className='reminder_card'>
+                            <div><p>10:00 am 11/10/24</p> <p>Negotiation</p></div>
+                            {/* TODO OpenModalButton for details modal
                                             <button onClick={handleFutureFeatureClick} className='edit_button'>edit</button>
                                             <button onClick={handleFutureFeatureClick} className='delete_button'>delete</button>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
-                        <div id='main_right'>
-                            <div>
+                            </div> */}
+
+                    {/* </div> */}
+
+                    {/* // <div id='main_right'> */}
+                    {/* Documents */}
+                    {/* <div>
                                 <h2 className='text-2xl font-bold py-2'>Documents:</h2>
                                 <div id='resume_cv'>
                                     <div>
@@ -217,7 +240,7 @@ export default function ApplicationDetails() {
                                             <FaRegFile fontSize={80} />
                                         </div>
                                         <div className='resume_cv_buttons'>
-                                            {/* TODO View button */}
+                                            {/* TODO View button
                                             <button onClick={handleFutureFeatureClick} className='edit_button'>edit</button>
                                             <button onClick={handleFutureFeatureClick} className='delete_button'>delete</button>
                                         </div>
@@ -228,14 +251,15 @@ export default function ApplicationDetails() {
                                             <FaRegFileAlt fontSize={80} />
                                         </div>
                                         <div className='resume_cv_buttons'>
-                                            {/* TODO view button */}
+                                            {/* TODO view button
                                             <button onClick={handleFutureFeatureClick} className='edit_button'>edit</button>
                                             <button onClick={handleFutureFeatureClick} className='delete_button'>delete</button>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div>
+                            </div> */}
+                    {/* Notes */}
+                    {/* <div>
                                 <h2 className='text-2xl font-bold py-2'>Notes:</h2>
                                 <div id='app_notes'>
                                     <h3>Feature coming soon...</h3>
@@ -257,9 +281,10 @@ export default function ApplicationDetails() {
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
-                    </div>
+                            </div> */}
+                    {/* </div> */}
+                    {/* </div> */}
+
                 </div >
             }
             {!isLoaded && <LoadingPage />}
