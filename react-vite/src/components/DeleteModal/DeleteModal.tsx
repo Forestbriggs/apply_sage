@@ -1,3 +1,4 @@
+import React from 'react';
 import { useAppDispatch } from '../../redux/hooks';
 import { useModal } from '../../context/Modal';
 import './DeleteModal.css';
