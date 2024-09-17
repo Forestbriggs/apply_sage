@@ -147,22 +147,22 @@ export default function ApplicationDetails() {
                         </div>
                     </div>
 
-                    {/* <div id='main_section'> */}
+                    <div id='main_section' className='flex px-4'>
 
-                    {/* <div id='main_left'> */}
+                        <div id='main_left'>
 
-                    {/* App Details */}
-                    {/* <div>
+                            {/* App Details */}
+                            <div>
                                 <h2 className='text-2xl font-bold py-2'>Job Application Details:</h2>
-                                <div id='app_details'>
-                                    <div>
+                                <div className='flex flex-col rounded items-start pl-4 border border-solid border-[#484848]'>
+                                    <div className='flex items-center justify-around'>
                                         <p>Category:</p>
                                         {application?.category?.name ?
                                             <p>{application?.category?.name}</p> :
                                             <p>Not Set</p>
                                         }
                                     </div>
-                                    <div>
+                                    <div className='flex items-center justify-around'>
                                         <p>Salary Range:</p>
                                         {
                                             application.salary_min && application.salary_max ?
@@ -174,7 +174,7 @@ export default function ApplicationDetails() {
                                                 <p>Not Set</p>
                                         }
                                     </div>
-                                    <div>
+                                    <div className='flex items-center justify-around'>
                                         <p>Application Date:</p>
                                         {
                                             application.applied_date ?
@@ -183,9 +183,9 @@ export default function ApplicationDetails() {
                                         }
                                     </div>
                                 </div>
-                            </div> */}
-                    {/* Application Status History */}
-                    {/* <div>
+                            </div>
+                            {/* Application Status History */}
+                            {/* <div>
                                 <h2 className='text-2xl font-bold py-2'>Application Status History:</h2>
                                 <div className='flex gap-2 mb-1'>
                                     <h3>Feature coming soon...</h3>
@@ -204,8 +204,8 @@ export default function ApplicationDetails() {
                                     // {/* TODO add recent history and link to history page
                                 </div>
                             </div> */}
-                    {/* Reminders */}
-                    {/* <div>
+                            {/* Reminders */}
+                            {/* <div>
                                 <h2 className='text-2xl font-bold py-2'>Reminders:</h2>
                                 <div id='app_reminders'>
                                     <h3>Feature coming soon...</h3>
@@ -227,11 +227,11 @@ export default function ApplicationDetails() {
                                 </div>
                             </div> */}
 
-                    {/* </div> */}
+                        </div>
 
-                    {/* // <div id='main_right'> */}
-                    {/* Documents */}
-                    {/* <div>
+                        {/* // <div id='main_right'> */}
+                        {/* Documents */}
+                        {/* <div>
                                 <h2 className='text-2xl font-bold py-2'>Documents:</h2>
                                 <div id='resume_cv'>
                                     <div>
@@ -258,8 +258,8 @@ export default function ApplicationDetails() {
                                     </div>
                                 </div>
                             </div> */}
-                    {/* Notes */}
-                    {/* <div>
+                        {/* Notes */}
+                        {/* <div>
                                 <h2 className='text-2xl font-bold py-2'>Notes:</h2>
                                 <div id='app_notes'>
                                     <h3>Feature coming soon...</h3>
@@ -282,8 +282,8 @@ export default function ApplicationDetails() {
                                     </div>
                                 </div>
                             </div> */}
-                    {/* </div> */}
-                    {/* </div> */}
+                        {/* </div> */}
+                    </div>
 
                 </div >
             }
