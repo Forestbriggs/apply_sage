@@ -17,7 +17,6 @@ import './ApplicationDetails.css';
 
 export default function ApplicationDetails({ tab }: { tab: string }) {
     const { applicationId } = useParams();
-    console.log(tab);
     const sessionUser = useAppSelector(state => state.session.user);
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
