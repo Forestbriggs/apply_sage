@@ -31,7 +31,15 @@ export const router = createBrowserRouter([
                         children: [
                             {
                                 index: true,
-                                element: <ApplicationDetails />
+                                element: <ApplicationDetails tab='overview' />,
+                            },
+                            {
+                                path: 'notes-and-reminders',
+                                element: <ApplicationDetails tab='notes-and-reminders' />
+                            },
+                            {
+                                path: 'documents',
+                                element: <ApplicationDetails tab='documents' />
                             },
                             {
                                 path: 'edit',

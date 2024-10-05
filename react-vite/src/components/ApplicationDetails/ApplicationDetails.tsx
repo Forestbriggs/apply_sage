@@ -1,22 +1,24 @@
 import { useAppSelector, useAppDispatch } from '../../redux/hooks';
 import { useNavigate, useParams } from 'react-router-dom';
-import { FaRegFile, FaRegFileAlt } from 'react-icons/fa';
 import { useEffect, useState } from 'react';
 import { thunkGetApplicationById } from '../../redux/applications';
 import OpenModalButton from '../OpenModalButton';
 import LoadingPage from '../LoadingPage';
+import DeleteModal from '../DeleteModal/DeleteModal';
+import Overview from './Overview';
+import NotesReminders from './NotesReminders';
+import Documents from './Documents';
+import { toast } from 'react-toastify';
 import determineStatusClass from '../../utils/determineStatusClass';
 import handleFutureFeatureClick from '../../utils/handleFutureFeatureClick';
-import './ApplicationDetails.css';
-import DeleteModal from '../DeleteModal/DeleteModal';
-import verifyStringLength from '../../utils/verifyStringLength';
-import { toast } from 'react-toastify';
-import StatusHistoryCard from './StatusHistoryCard';
 import formatDate from '../../utils/formatDate';
+import verifyStringLength from '../../utils/verifyStringLength';
+import './ApplicationDetails.css';
 
-export default function ApplicationDetails() {
-    const sessionUser = useAppSelector(state => state.session.user);
+export default function ApplicationDetails({ tab }: { tab: string }) {
     const { applicationId } = useParams();
+    console.log(tab);
+    const sessionUser = useAppSelector(state => state.session.user);
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
     const application = useAppSelector(state => state.applications.data[applicationId]);
@@ -67,6 +69,17 @@ export default function ApplicationDetails() {
         return navigate('/applications');
     }
 
+    const determineTabClass = (currTab: string) => {
+        if (currTab === tab) {
+            return 'tab-btn bg-tab-btn-active hover:bg-tab-btn-hover text-sm';
+        }
+        return 'tab-btn bg-tab-btn hover:bg-tab-btn-hover text-sm';
+    }
+
+    const navigateTab = (newTab: string) => {
+        return navigate(`/applications/${applicationId}/${newTab}`);
+    }
+
     return (
         <>
             {isLoaded &&
@@ -77,7 +90,7 @@ export default function ApplicationDetails() {
                     {/* Header */}
                     <div
                         className='
-                        flex flex-col gap-2 px-4 border-b border-solid border-[#484848] pb-2.5
+                        flex flex-col gap-2 px-4 border-b border-solid border-[#484848]
                         md:flex-row md:justify-between md:gap-0
                         '
                     // py-0 px-[150px] border-b border-solid border-[#484848] flex justify-between pb-[10px]
@@ -104,186 +117,83 @@ export default function ApplicationDetails() {
                         </div>
                         <div
                             className='
-                            min-w-56 text-end flex flex-row-reverse justify-between items-center
-                            md:flex-col md:gap-4 md:items-end
+                            text-end flex flex-col items-end gap-2 -mt-9
+                            md:gap-4 md:items-end md:mt-0
                             '
                         >
-                            <h2 className={`${determineStatusClass(application.status.name)}
+                            <div className='flex flex-col gap-2'>
+
+                                <h2 className={`${determineStatusClass(application.status.name)}
                                             text-xl`}
-                            >
-                                {application.status.name}
-                            </h2>
-                            <div
-                                id='detail_button__container'
-                                className='border border-solid border-[#484848] 
-                                rounded p-2.5 flex gap-2.5'
-                            >
-                                <button
-                                    onClick={handleEditClick}
-                                    className='bg-edit-btn hover:bg-edit-btn-hover'
                                 >
-                                    Edit
-                                </button>
-                                <button
-                                    onClick={handleFutureFeatureClick}
-                                    id='archive_button'
-                                >
-                                    Archive
-                                </button>
-                                <OpenModalButton
-                                    buttonText={'Delete'}
-                                    className={'delete_button'}
-                                    modalComponent={
-                                        <DeleteModal
-                                            typeId={Number(applicationId)}
-                                            navigateOnDelete={navigateOnDelete}
-                                            type={'application'}
-                                            setIsLoaded={setIsLoaded}
-                                            setPendingDelete={setPendingDelete}
-                                        />
-                                    }
-                                />
-                            </div>
-                        </div>
-                    </div>
-
-                    <div id='main_section' className='flex px-4'>
-
-                        <div id='main_left'>
-
-                            {/* App Details */}
-                            <div>
-                                <h2 className='text-2xl font-bold py-2'>Job Application Details:</h2>
-                                <div className='flex flex-col rounded items-start pl-4 border border-solid border-[#484848]'>
-                                    <div className='flex items-center justify-around'>
-                                        <p>Category:</p>
-                                        {application?.category?.name ?
-                                            <p>{application?.category?.name}</p> :
-                                            <p>Not Set</p>
-                                        }
-                                    </div>
-                                    <div className='flex items-center justify-around'>
-                                        <p>Salary Range:</p>
-                                        {
-                                            application.salary_min && application.salary_max ?
-                                                <p>${Number(application.salary_min)
-                                                    .toLocaleString('en-US', { minimumFractionDigits: 0 })}
-                                                    {' '}-{' '}
-                                                    {Number(application.salary_max)
-                                                        .toLocaleString('en-US', { minimumFractionDigits: 0 })}</p> :
-                                                <p>Not Set</p>
-                                        }
-                                    </div>
-                                    <div className='flex items-center justify-around'>
-                                        <p>Application Date:</p>
-                                        {
-                                            application.applied_date ?
-                                                <p>{appliedDate}</p> :
-                                                <p>Not Set</p>
-                                        }
-                                    </div>
-                                </div>
-                            </div>
-                            {/* Application Status History */}
-                            {/* <div>
-                                <h2 className='text-2xl font-bold py-2'>Application Status History:</h2>
-                                <div className='flex gap-2 mb-1'>
-                                    <h3>Feature coming soon...</h3>
-                                    <h4>Example below (Not actual data)</h4>
-                                </div>
+                                    {application.status.name}
+                                </h2>
                                 <div
-                                    className=' scrollable-div
-                                    border border-solid border-[#484848] rounded p-2
-                                    flex flex-col gap-2 h-32 overflow-y-scroll
-                                    '
+                                    id='detail_button__container'
+                                    className='border border-solid border-[#484848] 
+                                rounded p-2.5 flex gap-2.5'
                                 >
-                                    <StatusHistoryCard status='Offer Received' date={new Date(2024, 10, 7)} />
-                                    <StatusHistoryCard status='Second Interview' date={new Date(2024, 10, 3)} />
-                                    <StatusHistoryCard status='First Interview' date={new Date(2024, 10, 1)} />
-                                    <StatusHistoryCard status='Applied' date={new Date(2024, 9, 24)} />
-                                    // {/* TODO add recent history and link to history page
+                                    <button
+                                        onClick={handleEditClick}
+                                        className='bg-edit-btn hover:bg-edit-btn-hover'
+                                    >
+                                        Edit
+                                    </button>
+                                    <button
+                                        onClick={handleFutureFeatureClick}
+                                        id='archive_button'
+                                    >
+                                        Archive
+                                    </button>
+                                    <OpenModalButton
+                                        buttonText={'Delete'}
+                                        className={'delete_button'}
+                                        modalComponent={
+                                            <DeleteModal
+                                                typeId={Number(applicationId)}
+                                                navigateOnDelete={navigateOnDelete}
+                                                type={'application'}
+                                                setIsLoaded={setIsLoaded}
+                                                setPendingDelete={setPendingDelete}
+                                            />
+                                        }
+                                    />
                                 </div>
-                            </div> */}
-                            {/* Reminders */}
-                            {/* <div>
-                                <h2 className='text-2xl font-bold py-2'>Reminders:</h2>
-                                <div id='app_reminders'>
-                                    <h3>Feature coming soon...</h3>
-                                    <h4>Example below (Not actual data)</h4>
-                                    <div id='reminder__container'>
-                                        <div className='reminder_card'>
-                                            <div><p>10:00 am 11/10/24</p> <p>Negotiation</p></div>
-                                            {/* TODO OpenModalButton for details modal
-                            <button onClick={handleFutureFeatureClick} className='edit_button'>edit</button>
-                            <button onClick={handleFutureFeatureClick} className='delete_button'>delete</button>
+                            </div>
+                            <div>
+                                {/* Tabs */}
+                                <div className='flex items-center gap-2 -mb-0.25'>
+                                    <button
+                                        onClick={() => navigateTab('')}
+                                        className={`${determineTabClass('overview')}`}
+                                    >
+                                        Overview
+                                    </button>
+                                    <button
+                                        onClick={() => navigateTab('notes-and-reminders')}
+                                        className={`${determineTabClass('notes-and-reminders')}`}
+                                    >
+                                        Notes and Reminders
+                                    </button>
+                                    <button
+                                        onClick={() => navigateTab('documents')}
+                                        className={`${determineTabClass('documents')}`}
+                                    >
+                                        Documents
+                                    </button>
+                                </div>
+                            </div>
                         </div>
-                        <div className='reminder_card'>
-                            <div><p>10:00 am 11/10/24</p> <p>Negotiation</p></div>
-                            {/* TODO OpenModalButton for details modal
-                                            <button onClick={handleFutureFeatureClick} className='edit_button'>edit</button>
-                                            <button onClick={handleFutureFeatureClick} className='delete_button'>delete</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div> */}
-
-                        </div>
-
-                        {/* // <div id='main_right'> */}
-                        {/* Documents */}
-                        {/* <div>
-                                <h2 className='text-2xl font-bold py-2'>Documents:</h2>
-                                <div id='resume_cv'>
-                                    <div>
-                                        <h3>Resume:</h3>
-                                        <div>
-                                            <FaRegFile fontSize={80} />
-                                        </div>
-                                        <div className='resume_cv_buttons'>
-                                            {/* TODO View button
-                                            <button onClick={handleFutureFeatureClick} className='edit_button'>edit</button>
-                                            <button onClick={handleFutureFeatureClick} className='delete_button'>delete</button>
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <h3>Cover Letter:</h3>
-                                        <div>
-                                            <FaRegFileAlt fontSize={80} />
-                                        </div>
-                                        <div className='resume_cv_buttons'>
-                                            {/* TODO view button
-                                            <button onClick={handleFutureFeatureClick} className='edit_button'>edit</button>
-                                            <button onClick={handleFutureFeatureClick} className='delete_button'>delete</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div> */}
-                        {/* Notes */}
-                        {/* <div>
-                                <h2 className='text-2xl font-bold py-2'>Notes:</h2>
-                                <div id='app_notes'>
-                                    <h3>Feature coming soon...</h3>
-                                    <h4>Example below</h4>
-                                    <div className='note_card__container'>
-                                        <div>
-                                            <div className='note_card'>
-                                                <p>Note about job application</p>
-                                            </div>
-                                            <button onClick={handleFutureFeatureClick} className='edit_button'>edit</button>
-                                            <button onClick={handleFutureFeatureClick} className='delete_button'>delete</button>
-                                        </div>
-                                        <div>
-                                            <div className='note_card'>
-                                                <p>Note about job application</p>
-                                            </div>
-                                            <button onClick={handleFutureFeatureClick} className='edit_button'>edit</button>
-                                            <button onClick={handleFutureFeatureClick} className='delete_button'>delete</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div> */}
-                        {/* </div> */}
                     </div>
+
+                    <div>
+                        {tab === 'overview' && <Overview application={application} appliedDate={appliedDate!} />}
+                        {tab === 'notes-and-reminders' && <NotesReminders />}
+                        {tab === 'documents' && <Documents />}
+                    </div>
+
+
+
 
                 </div >
             }
