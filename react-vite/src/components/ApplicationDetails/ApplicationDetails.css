@@ -34,7 +34,7 @@
 
 #main_section {
     display: flex;
-    padding: 0 150px;
+    /* padding: 0 150px; */
     gap: 50px;
 }
 
@@ -53,17 +53,17 @@
 }
 
 #app_details {
-    border: 1px solid #484848;
-    border-radius: .3rem;
-    display: flex;
+    /* border: 1px solid #484848; */
+    /* border-radius: .3rem; */
+    /* display: flex; */
     /* margin-right: 75px; */
-    justify-content: space-around;
+    /* justify-content: space-around; */
 }
 
 #app_details>div {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    /* display: flex; */
+    /* flex-direction: column; */
+    /* align-items: center; */
 }
 
 #app_status_history {
