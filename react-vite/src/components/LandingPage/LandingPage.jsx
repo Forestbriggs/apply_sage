@@ -6,7 +6,7 @@ import OpenModalButton from '../OpenModalButton';
 import SignupFormModal from "../SignupFormModal";
 import LoadingPage from '../LoadingPage';
 import Metrics from './Metrics';
-import handleFutureFeatureClick from '../../utils/handleFutureFeatureClick';
+import handleFutureFeatureClick from '../../utils/handleFutureFeatureClick/handleFutureFeatureClick';
 import { useNavigate } from "react-router-dom";
 import { FaProjectDiagram, FaChartBar, FaTasks, FaCalendarCheck } from "react-icons/fa";
 

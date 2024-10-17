@@ -1,4 +1,4 @@
-import formatDate from '../../utils/formatDate';
+import formatDate from '../../utils/formatDate/formatDate';
 
 export default function StatusHistoryCard({ status, date }: { status: string, date: Date }) {
     return (
