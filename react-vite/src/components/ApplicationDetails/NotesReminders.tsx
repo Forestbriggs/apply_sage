@@ -1,4 +1,4 @@
-import handleFutureFeatureClick from '../../utils/handleFutureFeatureClick';
+import handleFutureFeatureClick from '../../utils/handleFutureFeatureClick/handleFutureFeatureClick';
 
 export default function NotesReminders() {
     return (

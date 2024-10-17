@@ -1,7 +1,7 @@
 import { format, parseISO } from 'date-fns';
 import { useNavigate } from 'react-router-dom';
-import determineStatusClass from '../../utils/determineStatusClass';
-import verifyStringLength from '../../utils/verifyStringLength';
+import determineStatusClass from '../../utils/determineStatusClass/determineStatusClass';
+import verifyStringLength from '../../utils/verifyStringLength/verifyStringLength';
 import { Application } from "./ApplicationList";
 
 export default function ApplicationCard({ application }: { application: Application }) {

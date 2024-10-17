@@ -5,6 +5,7 @@
     "compilerOptions": {
         "target": "ES2020",
         "useDefineForClassFields": true,
+        "esModuleInterop": true,
         "lib": [
             "ES2020",
             "DOM",
@@ -20,6 +21,9 @@
         "noEmit": true,
         "jsx": "react-jsx",
         "types": [
+            "jest",
+            "@testing-library/react",
+            "@testing-library/react-hooks",
             "vite/client"
         ],
         /* Linting */

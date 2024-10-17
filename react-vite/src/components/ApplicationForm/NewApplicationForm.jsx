@@ -2,7 +2,7 @@ import { isFuture, format } from 'date-fns';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useEffect, useState, useCallback } from 'react';
-import { formatSalary, cleanSalaryFormat } from '../../utils/formatSalary';
+import { formatSalary, cleanSalaryFormat } from '../../utils/formatSalary/formatSalary';
 import { thunkCreateApplication } from '../../redux/applications';
 import ApplicationForm from "./ApplicationForm";
 

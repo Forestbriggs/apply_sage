@@ -1,4 +1,4 @@
-import handleFutureFeatureClick from '../../utils/handleFutureFeatureClick';
+import handleFutureFeatureClick from '../../utils/handleFutureFeatureClick/handleFutureFeatureClick';
 import { FaRegFile, FaRegFileAlt } from 'react-icons/fa';
 export default function Documents() {
     return (
