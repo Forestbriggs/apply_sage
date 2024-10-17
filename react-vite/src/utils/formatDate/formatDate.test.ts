@@ -45,6 +45,6 @@ describe('formatDate', () => {
 
     // Test case: Invalid date
     it('should throw an error for invalid date input', () => {
-        expect(() => formatDate(new Date('invalid-date'))).toThrowError();
+        expect(() => formatDate(new Date('invalid-date'))).toThrow();
     });
 });
