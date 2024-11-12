@@ -9,15 +9,14 @@ import Overview from './Overview';
 import NotesReminders from './NotesReminders';
 import Documents from './Documents';
 import { toast } from 'react-toastify';
-import determineStatusClass from '../../utils/determineStatusClass';
-import handleFutureFeatureClick from '../../utils/handleFutureFeatureClick';
-import formatDate from '../../utils/formatDate';
-import verifyStringLength from '../../utils/verifyStringLength';
+import determineStatusClass from '../../utils/determineStatusClass/determineStatusClass';
+import handleFutureFeatureClick from '../../utils/handleFutureFeatureClick/handleFutureFeatureClick';
+import formatDate from '../../utils/formatDate/formatDate';
+import verifyStringLength from '../../utils/verifyStringLength/verifyStringLength';
 import './ApplicationDetails.css';
 
 export default function ApplicationDetails({ tab }: { tab: string }) {
     const { applicationId } = useParams();
-    console.log(tab);
     const sessionUser = useAppSelector(state => state.session.user);
     const dispatch = useAppDispatch();
     const navigate = useNavigate();

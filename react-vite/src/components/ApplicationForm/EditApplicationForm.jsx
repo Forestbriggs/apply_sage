@@ -1,5 +1,5 @@
 import { format, isFuture, parseISO } from "date-fns";
-import { cleanSalaryFormat, formatSalary } from "../../utils/formatSalary";
+import { cleanSalaryFormat, formatSalary } from "../../utils/formatSalary/formatSalary";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
